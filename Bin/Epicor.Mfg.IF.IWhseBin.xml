@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epicor.Mfg.IF.IWhseBin</name>
+    </assembly>
+    <members>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet.WhseBinDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet.WhseBinAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet.WhseBinRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet.WhseBinAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet.WhseBinRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinDataSet.WhseBinAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.IF.IWhseBin">
+            <summary> Warehouse Bin
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GetNewWhseBin(Epicor.Mfg.BO.WhseBinDataSet,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GetNewWhseBinAttch(Epicor.Mfg.BO.WhseBinDataSet,System.String,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.DeleteByID(System.String,System.String)">
+            <summary>
+            Deletes a row given its ID.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GetByID(System.String,System.String)">
+            <summary>
+            Returns a DataSet given the primary key.
+            </summary>
+            <returns>The DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GetList(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a list of rows that satisfy the where clause.
+            </summary>
+            <param name="whereClause">An expression used to filter the rows. Can be left blank for all rows.</param>
+            <param name="pageSize">The maximum number of rows to return. Leave as zero for no maximum.</param>
+            <param name="absolutePage">Page of rows to return.</param>
+            <param name="morePages">Whether there are more pages of rows available.</param>
+            <returns>The list DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GetRows(System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a dataset containing all rows that satisfy the where clauses.
+            </summary>
+            <returns>The full DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.Update(Epicor.Mfg.BO.WhseBinDataSet)">
+            <summary>
+            Commits the DataSet changes to the data store.
+            </summary>
+            <param name="ds">The full DataSet.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.UpdateExt(Epicor.Mfg.BO.UpdExtWhseBinDataSet,System.Boolean,System.Boolean,System.Boolean@)">
+            <summary>
+            Apply input data to BO by calling GetByID/GetNew/Update methods.
+            </summary>
+            <returns>The dataset with list of errors occured during update process.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.AddNewWhseBinFormat(Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Add a New record in WhseBinFormat table
+            </summary>
+            <param name="ds">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.CommitGeneratedBins(Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Commit to database the proposed Bin Numbers selected
+            </summary>
+            <param name="ds">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GenerateBinFormat(Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Generates the Bin format according to the segments defined
+            </summary>
+            <param name="ds">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.GenerateBins(System.Int32,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Create Bin numbers according to the specified format
+            </summary>
+            <param name="totalBins">Number of Bin Numbers to be generated</param>
+            <param name="ds">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangeCustID(System.String,Epicor.Mfg.BO.WhseBinDataSet)">
+            <summary>
+            OnChangeCustId
+            </summary>
+            <param name="newCustID">Customer.CustID</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinDataSet">The WhseBin data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangeSuppID(System.String,Epicor.Mfg.BO.WhseBinDataSet)">
+            <summary>
+            OnChangeSuppId
+            </summary>
+            <param name="newVendorID">Vendor.VendorID</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinDataSet">The WhseBin data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangeWhseBinWizardCustId(System.String,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            OnChangeWhseBinWizardCustId
+            </summary>
+            <param name="newCustID">Customer.CustID</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinWizardDataSet">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangeWhseBinWizardSuppId(System.String,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            OnChangeWhseBinWizardSuppId
+            </summary>
+            <param name="newVendorID">Vendor.VendorID</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinWizardDataSet">The WhseBin data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangingSegmentMaximum(System.Int32,System.String,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Execute necessary modifications when Maximum value is changed for the segment
+            </summary>
+            <param name="iSegment">Segment that is being modified</param>
+            <param name="newValue">New Maximum value</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinWizardDataSet">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangingSegmentMinimum(System.Int32,System.String,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Execute necessary modifications when Minimum value is changed for the segment
+            </summary>
+            <param name="iSegment">Segment that is being modified</param>
+            <param name="newValue">New Minimum value</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinWizardDataSet">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangingSegmentPositions(System.Int32,System.Int32,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Execute necessary modifications when Number of Positions is changed for the Segment
+            </summary>
+            <param name="iSegment">Segment that is being modified</param>
+            <param name="newValue">New Positions value</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinWizardDataSet">The WhseBinWizard data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IWhseBin.OnChangingSegmentType(System.Int32,System.String,Epicor.Mfg.BO.WhseBinWizardDataSet)">
+            <summary>
+            Execute necessary modifications when Segment Type is changed
+            </summary>
+            <param name="iSegment">Segment that is being modified</param>
+            <param name="newValue">New Type value</param>
+            <param name="ds" type="Epicor.Mfg.BO.WhseBinWizardDataSet">The WhseBinWizard data set </param>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinListDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinListDataSet.WhseBinListDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinListDataSet.WhseBinListRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinListDataSet.WhseBinListRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet.WhseBinDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet.WhseBinAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet.WhseBinRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet.WhseBinAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet.WhseBinRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtWhseBinDataSet.WhseBinAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet.WhseBinFormatDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet.WhseBinWizardDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet.WhseBinFormatRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet.WhseBinWizardRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet.WhseBinFormatRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.WhseBinWizardDataSet.WhseBinWizardRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+    </members>
+</doc>

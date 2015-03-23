@@ -1,0 +1,328 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epicor.Mfg.BO.EmpBasic</name>
+    </assembly>
+    <members>
+        <member name="T:Epicor.Mfg.BO.EmpBasic">
+            <summary>
+            Client side business object for EmpBasic.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.Proxy.EmpBasicImpl">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.#ctor(Epicor.Mfg.Core.BLConnectionPool)">
+            <summary>
+            Proxy constructor
+            </summary>
+            <param name="connPool">Connection pool</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewEmpBasic(Epicor.Mfg.BO.EmpBasicDataSet)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewEmpBasicAttch(Epicor.Mfg.BO.EmpBasicDataSet,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewEmpCal(Epicor.Mfg.BO.EmpBasicDataSet,System.String,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewResourceCal(Epicor.Mfg.BO.EmpBasicDataSet,System.String,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewEmpRole(Epicor.Mfg.BO.EmpBasicDataSet,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewEntityGLC(Epicor.Mfg.BO.EmpBasicDataSet,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetNewEmpRoleRt(Epicor.Mfg.BO.EmpBasicDataSet,System.String,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.DeleteByID(System.String)">
+            <summary>
+            Deletes a row given its ID.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetByID(System.String)">
+            <summary>
+            Returns a DataSet given the primary key.
+            </summary>
+            <returns>The DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetList(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a list of rows that satisfy the where clause.
+            </summary>
+            <param name="whereClause">An expression used to filter the rows. Can be left blank for all rows.</param>
+            <param name="pageSize">The maximum number of rows to return. Leave as zero for no maximum.</param>
+            <param name="absolutePage">Page of rows to return.</param>
+            <param name="morePages">Whether there are more pages of rows available.</param>
+            <returns>The list DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetRows(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a dataset containing all rows that satisfy the where clauses.
+            </summary>
+            <returns>The full DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.Update(Epicor.Mfg.BO.EmpBasicDataSet)">
+            <summary>
+            Commits the DataSet changes to the data store.
+            </summary>
+            <param name="ds">The full DataSet.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.UpdateExt(Epicor.Mfg.BO.UpdExtEmpBasicDataSet,System.Boolean,System.Boolean,System.Boolean@)">
+            <summary>
+            Apply input data to BO by calling GetByID/GetNew/Update methods.
+            </summary>
+            <returns>The dataset with list of errors occured during update process.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetCodeDescList(System.String,System.String)">
+            <summary>
+            To return the CodeDescriptionList values of a given table.field.
+            </summary>
+            <param name="tableName"></param>
+            <param name="fieldName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.CheckShift(System.String,System.Int32,System.String@)">
+            <summary>
+            Check shift
+            </summary>
+            <param name="ipEmpID">Employee ID</param>
+            <param name="ipLaborShift">Labor Shift</param>
+            <param name="opMessage">Output Message</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.ClockIn(System.String,System.Int32)">
+            <summary>
+            Clock In
+            </summary>
+            <param name="employeeID">Employee ID</param>
+            <param name="shift">Labor Shift</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.ClockOut(System.String@)">
+            <summary>
+            Clock Out
+            </summary>
+            <param name="employeeID">Employee ID</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.CustomizeResourceCal(System.String,System.Nullable{System.DateTime},Epicor.Mfg.BO.EmpBasicDataSet)">
+            <summary>
+            This method will get a current ResourceCal record or create a temporary
+            ResourceCal record to be modified for a Employee. The ProdHours will be
+            defaulted from the weekday of the selected date. If any changes are made
+            to the ttResourceCal record, the UpdateResourceCal method will have to be
+            called to write the temporary ResourceCal record to the database.
+            </summary>
+            <param name="ipEmpID">The current Employee ID </param>
+            <param name="ipDate">The selected date to be customized </param>
+            <param name="ds" type="Epicor.Mfg.BO.EmpBasicDataSet">The Employee data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetByIDForTE(System.String)">
+            <summary>
+            Returns a DataSet given the primary key. Contains special processing for
+            Time and Expense Entry.
+            </summary>
+            <returns>The DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetDefaultEmpID(System.String@)">
+            <summary>
+            Get Defaults Emp ID
+            </summary>
+            <param name="defaultEmpID">default EmpID</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetListExpEmployees(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Called to retrieve employees that can have expenses entered for them
+            </summary>
+            <param name="whereClause">Whereclause for EmpBasic table.</param>
+            <returns type="Epicor.Mfg.BO.EmpBasicListDataSet">Epicor.Mfg.BO.EmpBasicListDataSet</returns>
+            <param name="pageSize">Page size.</param>
+            <param name="absolutePage">Absolute page.</param>
+            <param name="morePages">More pages.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetListForTE(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Called to retrieve employees for Time and Expense Entry
+            </summary>
+            <param name="whereClause">Whereclause for EmpBasic table.</param>
+            <returns type="Epicor.Mfg.BO.EmpBasicListDataSet">Epicor.Mfg.BO.EmpBasicListDataSet</returns>
+            <param name="pageSize">Page size.</param>
+            <param name="absolutePage">Absolute page.</param>
+            <param name="morePages">More pages.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetPerConData(System.Int32,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <summary>
+            Used to validate the PerCon.
+            </summary>
+            <param name="perConID">Proposed PerConID.</param>
+            <param name="ds" type="Epicor.Mfg.BO.EmpBasicDataSet">EmpBasic data set.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetRowsFromList(Epicor.Mfg.BO.EmpBasicListDataSet)">
+            <summary>
+            Get rows from list dataset
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.EmpBasicListDataSet">Whereclause for EmpBasicAttch table.</param>
+            <returns type="Epicor.Mfg.BO.EmpBasicDataSet">Epicor.Mfg.BO.EmpBasicDataSet</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.GetRowsWhoIsNotHere(System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Calls the normal GetRows method and then screens out only those employees who should be here but are not.
+            </summary>
+            <param name="whereClauseEmpBasic">Whereclause for EmpBasic table.</param>
+            <param name="whereClauseEmpBasicAttch">Whereclause for EmpBasicAttch table.</param>
+            <returns type="Epicor.Mfg.BO.EmpBasicDataSet">Epicor.Mfg.BO.EmpBasicDataSet</returns>
+            <param name="pageSize">Page size.</param>
+            <param name="absolutePage">Absolute page.</param>
+            <param name="morePages">More pages.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.OnChangeCalendarID(System.String,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeCurrencyCode(System.String,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.OnChangeExpenseAllowed(System.Boolean,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.OnChangeExpenseAutoApprove(System.Boolean,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeExpenseVendor(System.String,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeRateEffectiveDate(System.Nullable{System.DateTime},Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeRateEndDate(System.Nullable{System.DateTime},Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeResource(System.String,System.String@,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeResourceGrp(System.String,System.String@,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeRoleCd(System.String,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.OnChangeTimeAutoApprove(System.Boolean,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.onChangeTimeTypeCode(System.String,Epicor.Mfg.BO.EmpBasicDataSet)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.EmpBasicImpl.UpdateResourceCal(Epicor.Mfg.BO.EmpBasicDataSet)">
+            <summary>
+            This method will check to see if the current ttResourceCal record was modified.
+            If it is a special working day or non-working day then it save the ttResourceCal
+            record to the database.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.EmpBasicDataSet">The Employee data set</param>
+        </member>
+        <member name="P:Epicor.Mfg.Proxy.EmpBasicImpl.CallContext">
+            <summary>
+            Call context dataset
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.BO.EmpBasic.#ctor(Epicor.Mfg.Core.BLConnectionPool)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="connPool">Connection pool</param>
+        </member>
+    </members>
+</doc>

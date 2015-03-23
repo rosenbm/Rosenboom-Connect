@@ -1,0 +1,155 @@
+<%@ Master Language="VB" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Untitled Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+    <link rel="shortcut icon" href="images/lightning-6.ico" />
+    <style type="text/css">
+        .buffer
+        {
+            height: 26px;
+        }
+    </style>
+</head>
+<body id="top">
+        <form id="form1" runat="server">
+            <div class="test">
+              <div id="header">
+              <div class="logo"><img src="/Images/lightning-6.jpg" id="mainlogo"/></div>
+              <div class="buffer">&nbsp;</div>
+              <div class="title">&nbsp;Rosenboom Connect</div>
+              
+              
+              </div>       
+                     
+                     
+                     
+                     
+            <br class="clear" />
+        </div>
+    </div>
+    <div class="wrapper col2">
+        <div id="topbar">
+            <div id="topnav">
+                <ul>
+                    <li id="hometab" runat=server><a href="/Default.aspx">Home</a></li>         
+                    <li id="reportstab" runat=server><a href="/Reports/Main.aspx">Reports</a>
+                        <ul>
+                            <li><a href="/Reports/viewreport.aspx?folder=mtlandpur&report=SEOI.rpt">Short End Index</a></li>
+                            <li><a href="/Reports/Main.aspx?folder=earnedhours">Earned Hours Report</a></li>
+                            <li><a href="/Reports/viewreport.aspx?folder=production&report=Updated Throughput Units v1.rpt">Supervisor Report</a></li>
+                            <li><a href="/Reports/viewreport.aspx?folder=production&report=Priority Dispatch - Mtls Available.rpt">Priority Dispatch</a></li>
+                            </ul>
+                    </li>
+                    <li id="dashboardstab" runat="server"><a href="http://rosenboomdashboards:8080/idashboards/">Dashboards</a></li>
+                    <li id="mestab" runat="server"><a href="/MES/main.aspx">MES</a></li>
+                    <li id="feedbacktab" runat="server"><a href="/EFS/main.aspx">Feedback</a><ul>
+                    <li><a href="/EFS/materialissues.aspx">Material Issues</a></li>
+                    <li><a href="/EFS/processupdates.aspx">Process Updates</a></li></ul></li>
+                    <li id="linkstab" runat="server"><a href="#">Links</a>
+                    <ul><li><a href="http://poseidon">Team Website</a></li>
+                    <li><a href="http://www.rosenboom.com">Official Website</a></li>
+                    </ul></li>
+                    <li id="importtab" runat="server"><a href="#">Import</a>
+                        <ul><li><a href="/Import/ForecastImport.aspx">Customer Forecast</a></li>
+                            <li><a href="/Import/PartPlantParameters.aspx">Part Plant Parameters</a></li>
+                            <li><a href="/Import/PartsRoomShortages.aspx">Parts Room Shortages</a></li>
+                        </ul>
+                    </li>
+                    <li id="admintab" runat="server"><a href="#">Admin</a>
+                    <ul><li><a href="#">Deviation</a></li>
+                    <li><a href="/EFS/material-admin.aspx">Material Issues</a></li>
+                    <li><a href="#">Process Updates</a></li>
+                    <li><a href="/Admin/SLStartupMeetingNotes.aspx">SL Startup Meeting Notes</a></li></ul></li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        </form>
+ 
+    <br class="clear" />
+    <div class="wrapper col6">
+        <div id="footer">
+            <div id="login">
+                <h2>
+                    MES</h2>
+                <p>
+                   </p>
+               
+               
+                    
+                    <div class="fl_left">
+                        <li><a href="/MES/Main.aspx">Clock In</a></li>
+                        <li><a href="/MES/Main.aspx">Clock Out</a></li>
+                        <li><a href="/MES/StartActivity.aspx">Start Activity</a></li>
+                        <li><a href="/MES/EndActivity.aspx">End Activity</a></li>
+                    </div>
+                    <div class="fl_right">
+                        <li><a href="/MES/IssueMaterialToJob.aspx">Issue Mtl to Job</a></li>
+                        <li><a href="/MES/FLIP.aspx">Record FLIP</a></li>
+                    </div>
+               
+                
+                <p>
+                    </p>
+            </div>
+
+            <div class="footbox">
+                <h2>
+                    Links</h2>
+                <ul>
+                    <li><a href="http://poseidon">Team Website</a></li>
+                    <li><a href="http://www.rosenboom.com">Official Site</a></li>
+                    <li><a href="#">&nbsp</a></li>
+                    <li><a href="#">&nbsp</a></li>
+                    <li class="last"><a href="#">&nbsp</a></li>
+                </ul>
+            </div>
+            <div class="footbox">
+                <h2>
+                    Reports</h2>
+                <ul>
+                    <li><a href="/Reports/viewreport.aspx?folder=mtlandpur&report=SEOI.rpt">Short Ends Index</a></li>
+                    <li><a href="/Reports/Main.aspx?folder=earnedhours">Earned Hours Report</a></li>
+                    <li><a href="/Reports/viewreport.aspx?folder=production&report=Updated Throughput Units v1.rpt">Supervisor Report</a></li>
+                    <li><a href="#">&nbsp</a></li>
+                    <li class="last"><a href="#">&nbsp</a></li>
+                </ul>
+            </div>
+                        <div class="footbox">
+                <h2>
+                   Submit Feedback</h2>
+                <ul>
+                    <li><a href="#">&nbsp</a></li>
+                    <li><a href="#">&nbsp</a></li>
+                    <li><a href="#">&nbsp</a></li>
+                    <li><a href="#">&nbsp</a></li>
+                    <li class="last"><a href="#">&nbsp</a></li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+    <div class="wrapper col7">
+        <div id="copyright">
+            <p class="fl_left">
+                Copyright &copy; 2012-2014 All Rights Reserved - Rosenboom</p>
+            <br class="clear" />
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿	#main{
+    width:7.75in;}
+    
+    #main div
+    {float:left;
+     font-family:Arial;}
+     
+    #main div.header-one-third
+    {background-color:#3399CC;
+     -webkit-print-color-adjust:exact;
+     font-weight:bold;
+     width:2.3in;
+     border: solid 2px black;
+     height:.3in;
+     text-align:center;}
+     
+    #main div.cell-one-third
+    {width:2.3in;
+     text-align:center;
+     border: solid 2px black;
+     height:.3in;}
+     
+    #main div.header-two-thirds
+    {background-color:#3399CC;
+     -webkit-print-color-adjust:exact;
+     font-weight:bold;
+     width:4.642in;
+     border: solid 2px black;
+     height:.3in;
+     text-align:center;}
+     
+    #main div.cell-two-thirds
+    {width:4.642in;
+     text-align:center;
+     border: solid 2px black;
+     height:.3in;}
+     
+    #main div.header-one-hundred
+    {background-color:#3399CC;
+     -webkit-print-color-adjust:exact;
+     font-weight:bold;
+     width:6.98in;
+     border: solid 2px black;
+     height:.3in;
+     text-align:center;}
+    	
+    #main div.cell-one-hundred
+    {width:6.98in;
+     border: solid 2px black;
+     height: .8in;}
+     
+    #main div.title
+    {width: 6.98in;
+     text-align:center;
+     height:.5in;
+     font-weight:bold;
+     font-size:larger;}

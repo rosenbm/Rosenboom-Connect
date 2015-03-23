@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="ISO8859-1"?>
+<ExportQuery>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/21/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[SYM23965 COMPLETED IN CELL 8/13 COULD WE ISSUE PARTS]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[SHE01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/22/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[found about 75 rods not showing in inventory please verify and correct this part number 118-84293530. this will also affect 118-84293528]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/22/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Other]]></UD02_Key4>
+    <UD02_Character01><![CDATA[JOB SYM27433 1505 CLAIMED COMPLETE 996 REC'D]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[KNO04]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/23/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[PLEASE VERIFY 118-84233223 STILL NEED TO ISSUE TO REWORK JOB SY31913]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/23/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[DEWAYNE J KNODE]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Transaction Timeliness]]></UD02_Key4>
+    <UD02_Character01><![CDATA[016ZZ0179 HAS 145 IN TRANSIT FROM SHELDON SINCE 8/9.  TO 019662]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[KNO04]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/23/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[SY32165 IS A REWORK JOB SHOWS COMPLETED ON 8/10.DO WE HAVE THEM?]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/23/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[FABCO KITS AFTER THE KITS THAT SHIPPED THIS WEEK WE SHOULD STILL HAVE ABOUT  100 OF EACH.DO THESE EXISTS? NEED TO KNOW WHEN TO FIRM UP NEXT JOBS. PART NUMBERS ARE 118-NP87455459 NEED TO RECEIVE IN 84 FROM SY32304 AND 118-NP87455458 NEED TO RECEIVE IN 82 FROM SY32302]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/24/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[DEWAYNE J KNODE]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Other]]></UD02_Key4>
+    <UD02_Character01><![CDATA[SYM24256 328 CLAIMED COMPLETE 324 REC'D.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[KNO04]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/24/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[PLEASE CLEAN UP THE 430-AH231754 OPEN JOBS TO RECEIVE AND ISSUE]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/27/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[DEWAYNE J KNODE]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Transaction Timeliness]]></UD02_Key4>
+    <UD02_Character01><![CDATA[118-1543069C1 56 SHIPPED 56 RETURNED 8/2 0 REC'D]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[KNO04]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/27/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S01]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[VERIFY COUNT ON 113-118115A2]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/27/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[DEWAYNE J KNODE]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Transaction Timeliness]]></UD02_Key4>
+    <UD02_Character01><![CDATA[080CN0002  WE HAVE HAD 37 IN TRANSIT SINCE 8/8.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[KNO04]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[ERIN L SCHROEDER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S01]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Transaction Timeliness]]></UD02_Key4>
+    <UD02_Character01><![CDATA[080BC0009-FC in transit from Sheldon on 8/19.  Shows on the truck load list for 8/16.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[sch37]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[ERIN L SCHROEDER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S01]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Material Shortage]]></UD02_Key4>
+    <UD02_Character01><![CDATA[080DC0010-FC intransit from Sheldon since 4/6 the transfer order number is 017331 and 017283]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[sch37]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[SHAELA E GROSS]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[221AL0006- Shows in transit since 7/9.  Did we recieve this material? I am being told we are short material and am getting no suggestion to buy because the 7/9 transfer.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[GRO14]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[please verify 118-84296084-sw. i could only find five and there are two open jobs]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[CATHERINE K DILLINGER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S02]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[PLEASE VERIFY COUNT ON 118-84371656-SW]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[she01]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[ERIN L SCHROEDER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S01]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[430-HC10229 there are 4 left to receive in from SYM34920.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[sch37]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[ERIN L SCHROEDER]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S01]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Inventory Verification]]></UD02_Key4>
+    <UD02_Character01><![CDATA[430-H232378 SYM33423 has 17pcs left to receive in.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Derek Bailey]]></UD02_Key3>
+    <UD02_Key5><![CDATA[sch37]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[DANIEL J. MOLENDORP]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S618]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Material Shortage]]></UD02_Key4>
+    <UD02_Character01><![CDATA[Can not find material 316BD0011 (2 5/8" OD x 1/2" wall) I need 19.0 feet]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Dan Molendorp]]></UD02_Key3>
+    <UD02_Key5><![CDATA[mol02]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[BRENT A. HAUGE]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S612]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Material Shortage]]></UD02_Key4>
+    <UD02_Character01><![CDATA[261AK0006 is short for SYM35864.  70 pcs are cut out of 74.  File still shows 4.33' on hand.  No more found  no PO.]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Brent Hauge]]></UD02_Key3>
+    <UD02_Key5><![CDATA[HAU02]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+  <RMT_SubmitMtlIssue>
+    <UD02_Date01><![CDATA[08/28/12]]></UD02_Date01>
+    <UD02_Character02><![CDATA[BRENT A. HAUGE]]></UD02_Character02>
+    <UD02_Key2><![CDATA[S612]]></UD02_Key2>
+    <UD02_Key4><![CDATA[Material Shortage]]></UD02_Key4>
+    <UD02_Character01><![CDATA[]]></UD02_Character01>
+    <UD02_Key3><![CDATA[Brent Hauge]]></UD02_Key3>
+    <UD02_Key5><![CDATA[HAU02]]></UD02_Key5>
+    <UD02_Character03><![CDATA[]]></UD02_Character03>
+    <UD02_Character04><![CDATA[]]></UD02_Character04>
+    <UD02_CheckBox01><![CDATA[N]]></UD02_CheckBox01>
+    <UD02_Date02><![CDATA[]]></UD02_Date02>
+  </RMT_SubmitMtlIssue>
+</ExportQuery>

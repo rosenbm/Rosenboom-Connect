@@ -1,0 +1,388 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epicor.Mfg.BO.IssueReturn</name>
+    </assembly>
+    <members>
+        <member name="T:Epicor.Mfg.BO.IssueReturn">
+            <summary>
+            Client side business object for IssueReturn.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.Proxy.IssueReturnImpl">
+            <summary>
+            Use this function to enter inventory issues or returns.
+            1) [Hold] Special public methods for DDSLs FromWhse and ToWhse as they have special conditions.
+            2) [ FYI ]This procedure gets called from lots of other program too -
+            im/ime20.w flmenu.w am/ame10.w am/ame20-am.p am/ame20-aw.p am/ame20-mm.p am/ame20-mw.p
+            Only am/ame20-dg.w uses MtlQueue functionality
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.#ctor(Epicor.Mfg.Core.BLConnectionPool)">
+            <summary>
+            Proxy constructor
+            </summary>
+            <param name="connPool">Connection pool</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.NegativeInventoryTest(System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.String@,System.String@)">
+            <summary>
+            To test on hand quantity of the bin - i.e. whether it will go negative.
+            Call this method on change of Quantity.
+            </summary>
+            <param name="pcPartNum">Part Number</param>
+            <param name="pcWhseCode">Warehouse Code</param>
+            <param name="pcBinNum">Bin Number</param>
+            <param name="pcLotNum">Lot Number</param>
+            <param name="pcDimCode">From UNIT OF MEASURE (old Dimension Code)</param>
+            <param name="pdDimConvFactor">Obsolete Dimension Conversion Factor</param>
+            <param name="pdTranQty">Quantity (in stocking uom)</param>
+            <param name="pcNeqQtyAction">Valid values are STOP, NONE or ASK User. If Ask User, the user can decide to go ahead with the update even if the qty is negative</param>
+            <param name="pcMessage">Error message passed back from the business logic.</param>
+            <returns>pcNeqQtyAction</returns>
+            <returns>pcMessage</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetAvailTranDocTypes(System.String@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetList(System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            List of jobs that can be selected for Mass Issue.
+            </summary>
+            <param name="whereClauseJobHead">Where condition without the where word</param>
+            <param name="whereClauseJobAsmbl">Where condition without the where word</param>
+            <returns>Returns Epicor.Mfg.BO.IssueReturnJobAsmblDataSet</returns>
+            <param name="pageSize"># of records returned. 0 means all</param>
+            <param name="absolutePage"></param>
+            <param name="morePages">Are there more pages ? Yes/No</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetListJobs(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            List of jobs that can be selected for Mass Issue.
+            </summary>
+            <param name="whereClauseJobHead">Where condition without the where word</param>
+            <returns>Returns Epicor.Mfg.BO.IssueReturnJobListDataSet</returns>
+            <param name="pageSize"># of records returned. 0 means all</param>
+            <param name="absolutePage"></param>
+            <param name="morePages">Are there more pages ? Yes/No</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewIssueReturn(System.String,System.String,System.String,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method to create a new Epicor.Mfg.BO.IssueReturnDataSet with
+            default values.
+            </summary>
+            <param name="pcTranType">Material movement type XXX-XXX e.g STK-MTL. It can be blank when a valid MtlQueue RowIdent is passed.</param>
+            <param name="pcMtlQueueRowID">Progress database RowId of MtlQueue record</param>
+            <param name="pCallProcess">Calling Process</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewIssueReturnFromJob(System.String,System.Int32,System.String,System.String,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method to create a new Epicor.Mfg.BO.IssueReturnDataSet with
+            default values.
+            </summary>
+            <param name="pcFromJobNum">From Job number.</param>
+            <param name="piFromAssemblySeq">From Assembly Seq.</param>
+            <param name="pcTranType">Material movement type XXX-XXX e.g STK-MTL</param>
+            <param name="pcMtlQueueRowID">Progress database rowid for MtlQueue record</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewIssueReturnToJob(System.String,System.Int32,System.String,System.String,System.String@,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method to create a new Epicor.Mfg.BO.IssueReturnDataSet with
+            default values.
+            </summary>
+            <param name="pcToJobNum">To Job number.</param>
+            <param name="piToAssemblySeq">To Assembly Seq.</param>
+            <param name="pcTranType">Material movement type XXX-XXX e.g STK-MTL</param>
+            <param name="pcMtlQueueRowID">Progress database rowid for MtlQueue record</param>
+            <param name="pcMessage">Non-Error, informational message</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewJobAsmblMultiple(System.String,System.String,System.String,Epicor.Mfg.BO.SelectedJobAsmblDataSet,System.String@)">
+            <summary>
+            This method creates multiple IssueReturnJobs rows using IssueReturnJobSearch dataset.
+            </summary>
+            <param name="pcTranType">Material movement type XXX-XXX e.g STK-MTL</param>
+            <param name="pcMtlQueueRowID">Progress database rowid for MtlQueue record</param>
+            <param name="pCallProcess">Calling Process</param>
+            <param name="ds">SelectedJobAsmblDataSet</param>
+            <param name="pcMessage">Non-Error, informational message</param>
+            <returns>IssueReturnDataSet</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewJobAsmblSearch(Epicor.Mfg.BO.SelectedJobAsmblDataSet)">
+            <summary>
+            This method creates a new ttSelectedJobAsmbl row entry.
+            </summary>
+            <param name="ds">SelectedJobAsmblDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewPartMultiple(System.String,System.String,Epicor.Mfg.BO.SelectedPartDataSet,System.String@)">
+            <summary>
+            This method creates multiple IssueReturnJobs rows using IssueReturnJobSearch dataset.
+            </summary>
+            <param name="pcTranType">Material movement type XXX-XXX e.g STK-MTL</param>
+            <param name="pcMtlQueueRowID">Progress database rowid for MtlQueue record</param>
+            <param name="ds">SelectedPartDataSet</param>
+            <param name="pcMessage">Non-Error, informational message</param>
+            <returns>IssueReturnDataSet</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewPartNum(System.String,System.String,System.String,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method to create a new Epicor.Mfg.BO.IssueReturnDataSet with
+            Part#.
+            </summary>
+            <param name="pcPartNum">Part number</param>
+            <param name="pcTranType">Material movement type XXX-XXX e.g STK-UKN</param>
+            <param name="pcMtlQueueRowID">Progress database rowid for MtlQueue record</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetNewPartSearch(Epicor.Mfg.BO.SelectedPartDataSet)">
+            <summary>
+            This method creates a new ttSelectedParts row entry.
+            </summary>
+            <param name="ds">SelectedPartDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetRows(System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            List of jobs that can be selected for Mass Issue.
+            </summary>
+            <param name="whereClauseJobHead">Where condition without the where word</param>
+            <param name="whereClauseJobAsmbl">Where condition without the where word</param>
+            <returns>Returns Epicor.Mfg.BO.IssueReturnJobAsmblDataSet</returns>
+            <param name="pageSize"># of records returned. 0 means all</param>
+            <param name="absolutePage"></param>
+            <param name="morePages">Are there more pages ? Yes/No</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetSelectSerialNumbersParams(Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Gets parameters required for launching Select Serial Numbers
+            </summary>
+            <param name="ds">Issue Return data set</param>
+            <returns>The SelectSerialNumbersParams dataset</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetUnissuedQty(Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method to set the Qty to the remaining unissued amount.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.GetUnpickSettings(Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Sets ttIssueReturn fields for Unpick
+            </summary>
+            <param name="ds">Issue Return data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.IsValidAssembly(System.String,System.Int32,System.Boolean@)">
+            <summary>
+            Validate if an assembly is valid for a job. if not returns false,
+            otherwise returns true.
+            </summary>
+            <param name="pcJobNum">Job Number</param>
+            <param name="piAssemblySeq">A sequence number that uniquely
+            identifies the JobAsmbl record within the JobNum.</param>
+            <param name="plFound">Found or not</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.JobExists(System.String,System.Boolean@,System.Boolean@,System.Boolean@)">
+            <summary>
+            Check JobNum and return JobRelease and JobClosed
+            </summary>
+            <param name="ipJobNum">JobNum which should check</param>
+            <param name="opJobReleased">Job Released</param>
+            <param name="opJobClosed">Job Closed</param>
+            <param name="opJobExists">Job exists</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeFromAssemblySeq(System.Int32,Epicor.Mfg.BO.IssueReturnDataSet,System.String)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.FromAssemblySeq changes.
+            </summary>
+            <param name="piFromAssemblySeq">From Assembly Seq</param>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeFromBinNum(System.Boolean,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.FromBinNum changes.
+            </summary>
+            <param name="plOverrideBinChange">User said yes to bin changing msg</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeFromJobNum(System.String,Epicor.Mfg.BO.IssueReturnDataSet,System.String)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.FromJobNum changes.
+            </summary>
+            <param name="pcFromJobNum">From Job Number</param>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeFromJobSeq(Epicor.Mfg.BO.IssueReturnDataSet,System.String,System.String@)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.FromJobNum changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+            <param name="pcMessage">Non-error, informational message</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.onChangeFromWarehouse(Epicor.Mfg.BO.IssueReturnDataSet,System.String)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.PartNum changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeLotNum(System.String,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.LotNum changes.
+            </summary>
+            <param name="pcLotNum">Proposed LotNum value</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangePartNum(Epicor.Mfg.BO.IssueReturnDataSet,System.String)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.PartNum changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeToAssemblySeq(Epicor.Mfg.BO.IssueReturnDataSet,System.String)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.ToAssemblySeq changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeToJobNum(Epicor.Mfg.BO.IssueReturnDataSet,System.String,System.String@)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.ToJobNum changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+            <param name="pcMessage">Non-Error, informational message</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeToJobSeq(Epicor.Mfg.BO.IssueReturnDataSet,System.String,System.String@)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.ToJobSeq changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+            <param name="pcMessage">Non-Error, informational message</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.onChangeToWarehouse(Epicor.Mfg.BO.IssueReturnDataSet,System.String)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.PartNum changes.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pCallProcess">Calling Process value</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeTranQty(System.Decimal,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.TranQty changes.
+            This method performs validation on TranQty and sets the Issued Complete flag.
+            </summary>
+            <param name="pdTranQty">Transaction Qty</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangeUM(System.String,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.UM changes.
+            </summary>
+            <param name="pUM">Transaction UOM</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangingFromBinNum(Epicor.Mfg.BO.IssueReturnDataSet,System.String@)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.FromBinNum is changing.
+            </summary>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="pcMessage"> Warning if serial numbers have already been selected for another bin.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangingJobSeq(System.Int32,System.String,System.String,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSetjobseq (either to or from is changing)
+            </summary>
+            <param name="piJobSeq">JobSeq</param>
+            <param name="pcDirection">Direction</param>
+            <param name="pCallProcess">Calling Process value</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.OnChangingToJobSeq(System.Int32,Epicor.Mfg.BO.IssueReturnDataSet)">
+            <summary>
+            Call this method when the value of Epicor.Mfg.BO.IssueReturnDataSet.ToJobSeq is changing.
+            </summary>
+            <param name="piToJobSeq"> Propose ToJobSeq value.</param>
+            <param name="ds">IssueReturnDataSet</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.PerformMaterialMovement(System.Boolean,Epicor.Mfg.BO.IssueReturnDataSet,System.String@,System.String@)">
+            <summary>
+            Perform Material Movement.
+            </summary>
+            <param name="plNegQtyAction">when TranQty changes, perform NegativeInventoryTest. Provide the answer of that test here.</param>
+            <param name="ds">IssueReturnDataSet</param>
+            <param name="legalNumberMessage">The legal number message. Can be blank.</param>
+            <param name="partTranPKs">The PartTran primary keys.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.PreGetNewIssueReturn(System.String,System.String@,System.String@,System.Decimal@)">
+            <summary>
+            This method will check, depending on the Tran Type, if the available quantity
+            has been reduced before the creation of the issue return.
+            </summary>
+            <param name="pcMtlQueueRowID">Progress database RowId of MtlQueue record</param>
+            <param name="pcAction">The action to be taken.</param>
+            <param name="pcMessage">Error message passed back from the business logic.</param>
+            <param name="pdQtyAvailable">The on hand qty for the part bin specified in the material queue.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.PrePerformMaterialMovement(Epicor.Mfg.BO.IssueReturnDataSet,System.Boolean@)">
+            <summary>
+            This method will return a record in the LegalNumGenOpts datatable if
+            a legal number is required for this transaction. The RequiresUserInput
+            flag will indicate if this legal number requires input from the user. If
+            it does, the LegalNumberPrompt business objects needs to be called to
+            gather that information. This method should be called when the user
+            saves the record but before the Update method is called.
+            </summary>
+            <param name="ds">Issue Return data set</param>
+            <param name="requiresUserInput">Indicates if the legal number requires user input</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.setQuantity">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.ValidateSN(Epicor.Mfg.BO.IssueReturnDataSet,System.String,System.Boolean@)">
+            <summary>
+            Validates that a single serial number is valid for this transaction
+            </summary>
+            <param name="ds">Issue Return data set</param>
+            <param name="serialNumber">Serial number to validate.</param>
+            <param name="isVoided">Serial Number Voided flag</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.IssueReturnImpl.validUOM(System.String,System.String)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="P:Epicor.Mfg.Proxy.IssueReturnImpl.CallContext">
+            <summary>
+            Call context dataset
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.BO.IssueReturn.#ctor(Epicor.Mfg.Core.BLConnectionPool)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="connPool">Connection pool</param>
+        </member>
+    </members>
+</doc>

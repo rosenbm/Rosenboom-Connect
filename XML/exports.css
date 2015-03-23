@@ -1,0 +1,28 @@
+ BODY            { font-family: verdana,tahoma,arial; }
+
+
+ A:link          { font-family: verdana,tahoma,arial; }
+ A:visited       { font-family: verdana,tahoma,arial; }
+ A:hover         { font-family: verdana,tahoma,arial; color: red; }
+
+ .label          { font-family: verdana,tahoma,arial; font-size: 8pt; font-weight: bold; text-align: right;}
+ .search	 { font-family: verdana,tahoma,arial; font-size: 8pt; }
+
+ .searchtable { border: none }
+ .datatable { border: thin solid #C0C0C0; border-collapse: collapse }
+ 
+H1 {font-size: 14pt; font-weight: bold;}
+H2 {font-size: 13pt; font-weight: bold;}
+H3 {font-size: 12pt; font-weight: bold;}
+H4 {font-size: 10pt; font-weight: bold;}
+H5 {font-size: 9pt; font-weight: bold;}
+H6 {font-size: 8pt; font-weight: bold;}
+A  {color: #0000cc; font-family: arial; font-size: 10pt;}
+
+.columnhdrsortlink {font-weight: bold; font-size: 10pt; color: #000000; text-decoration: none;}
+.columnheader 	{color: #ffffff; background-color: #99CCFF; font-weight: bold; font-size: 12pt; text-align: left; border: thin solid #C0C0C0;}
+.columnheadernumeric 	{color: #000000; background-color: #99CCFF; font-weight: bold; font-size: 12pt; text-align: right; border: thin solid #C0C0C0;}
+.datacell 		{text-align: left; border: thin solid #C0C0C0; font-family: verdana,tahoma,arial; font-size: 10pt;}
+.datacellnumeric 	{text-align: right; border: thin solid #C0C0C0; font-family: verdana,tahoma,arial; font-size: 10pt;}
+
+

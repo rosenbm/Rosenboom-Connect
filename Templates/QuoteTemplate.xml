@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<QuoteHeader>
+  <QuoteNum>15280</QuoteNum>
+  <CustomerNum>337</CustomerNum>
+  <EntryDate>2012-02-01T00:00:00</EntryDate>
+  <DueDate>2012-05-01T00:00:00</DueDate>
+  <QuoteLine>
+    <QuoteLineNum>1</QuoteLineNum>
+    <PartNum>016ZZ0553</PartNum>
+    <QuoteQty>
+      <UnitPrice>16.54</UnitPrice>
+      <Qty>10</Qty>
+    </QuoteQty>
+    <QuoteQty>
+      <UnitPrice>16.54</UnitPrice>
+      <Qty>10</Qty>
+    </QuoteQty>
+  </QuoteLine>
+</QuoteHeader>
