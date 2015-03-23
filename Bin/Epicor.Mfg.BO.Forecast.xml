@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epicor.Mfg.BO.Forecast</name>
+    </assembly>
+    <members>
+        <member name="T:Epicor.Mfg.BO.Forecast">
+            <summary>
+            Client side business object for Forecast.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.Proxy.ForecastImpl">
+             <summary>A forecast stores the anticipated quantity of sales for a given combination of
+            Company, Plant, Part, Date and Customer. The amount of a given forecast that is "consumed"
+            by a matching sales order is also stored here, but this number is not entered by the user, it
+            is maintained by the system.
+            The user interface for maintenance and export of forecasts is supported by the base methods.
+            
+            For importing forecasts from a file, such as a spreadsheet saved in "comma separated value"
+            format (.csv), the ImportForecasts method has been provided. ImportForecasts will take in
+            a ForecastImportExportDataSet, and the user choice of import mode (Clear-Reload, Add-Replace, AddNew),
+            and report the reason for any failures or skipped records in the ImportErrorMsg field.
+            
+             See note on ExportForecasts() regarding use of ForecastImportExport as
+             a way to send lists of Parts, Plants, and CustIDs to export.
+            
+            The Smart Export function provides Sales History derived from invoice data, consolidated by
+            month. The user interface for this function is supported by the method GetSalesHistory.
+            The format of the file to deliver to the user has a variable number of columns: the
+            first column contains a PartNum, followed by one column for each month in the user-entered
+            date range. Since the Business Layer can only provide fixed-format datasets, providing the
+            this format will require the user interface programmer to "reshape" the data: each record in
+            the data from the Business Layer will have to be converted to a column (or "cell") in a row
+            of the export file. Likewise for the Smart Import, a quantity shown in a column/cell will
+            require creating a whole row in the ForecastDataSet to be sent to ImportForecasts.
+            
+            Global Forecasts: Forecast records may come into existence through the inter-company PO-SO
+            mechanism. In a nutshell, from the purchasing company's PO Suggestions the user can "Send Forecasts"
+            to the producing company; this results GlbForecast records in the producing company. These
+            GlbForecast records can be reviewed and "accepted", which turns the GlbForecast records into
+            Forecast records. This is done by the GlbForecast BO, in the AcceptGlbForecasts method.
+             </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.#ctor(Epicor.Mfg.Core.BLConnectionPool)">
+            <summary>
+            Proxy constructor
+            </summary>
+            <param name="connPool">Connection pool</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetNewForecast(Epicor.Mfg.BO.ForecastDataSet,System.String,System.String,System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetNewForecastAttch(Epicor.Mfg.BO.ForecastDataSet,System.String,System.String,System.Int32,System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.DeleteByID(System.String,System.String,System.Int32,System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Deletes a row given its ID.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetByID(System.String,System.String,System.Int32,System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Returns a DataSet given the primary key.
+            </summary>
+            <returns>The DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetList(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a list of rows that satisfy the where clause.
+            </summary>
+            <param name="whereClause">An expression used to filter the rows. Can be left blank for all rows.</param>
+            <param name="pageSize">The maximum number of rows to return. Leave as zero for no maximum.</param>
+            <param name="absolutePage">Page of rows to return.</param>
+            <param name="morePages">Whether there are more pages of rows available.</param>
+            <returns>The list DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetRows(System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a dataset containing all rows that satisfy the where clauses.
+            </summary>
+            <returns>The full DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.Update(Epicor.Mfg.BO.ForecastDataSet)">
+            <summary>
+            Commits the DataSet changes to the data store.
+            </summary>
+            <param name="ds">The full DataSet.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.UpdateExt(Epicor.Mfg.BO.UpdExtForecastDataSet,System.Boolean,System.Boolean,System.Boolean@)">
+            <summary>
+            Apply input data to BO by calling GetByID/GetNew/Update methods.
+            </summary>
+            <returns>The dataset with list of errors occured during update process.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.ClearForecasts(System.Boolean,System.Nullable{System.DateTime})">
+            <summary>
+            This method deletes all Forecast records for the Current Plant, or all Plants, with two exceptions:
+            - Forecasts for Global Parts are not deleted
+            - Forecasts marked as autoTransfer are not deleted.
+            </summary>
+            <param name="plAllPlants">If TRUE, clear all plants; if FALSE, clear Current Plant.</param>
+            <param name="pdFromDate">Only Forecast records on or after the given date will be deleted.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.ExportForecasts(Epicor.Mfg.BO.ForecastImportExportDataSet,System.String,System.Nullable{System.DateTime},System.Int32,System.Int32,System.Boolean@)">
+             <summary>
+             This method exports all Forecast records for the current company, after the given date.
+            
+             If ForecastImportExport records are present as input, they are used to build the following
+             lists for selection of records:
+             PlantList
+             PartList
+             CustNumList
+             If a record in the input dataset:
+             1) has a value for Plant, PartNum, or CustID and blank values for the other two, and
+             2) blank values for the fields ImportErrorMsg and ForeQty,
+             then the value in Plant, PartNum, or CustID will be added to the respective
+             list.
+             If a record has a value in more than one of these fields, it will be ignored.
+            
+             After the above lists have been constructed, the record selection will use the lists as follows:
+             - if a list is non-empty, only records whose corresponding field value appears in the list
+             will be a candidate for being included in the returned dataset, subject to the other conditions
+             - if a list is empty, no filtering will occur on the values for that field, except possibly
+             conditions in the "whereClauseForecast" parameter.
+             </summary>
+             <param name="ds">ForecastImportExport dataset.</param>
+             <param name="whereClauseForecast">(optional)Additional Where conditions for Forecast table.</param>
+             <param name="pdFromDate">(optional)Only records on or after the given date will be considered for import.</param>
+             <param name="pageSize">For future use.</param>
+             <param name="absolutePage">For future use.</param>
+             <param name="morePages">For future use.</param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetForecastDays(System.Int32@,System.Int32@)">
+            <summary>
+            To retrieve the ForecastDaysBefore and ForecastDaysAfter from the JC system settings.
+            </summary>
+            <param name="piDaysBefore"> Days before </param>
+            <param name="piDaysAfter"> Days after </param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetNewForecastImportExport(Epicor.Mfg.BO.ForecastImportExportDataSet)">
+            <summary>
+            This method creates a new ForecastImportExport dataset row.
+            </summary>
+            <param name="ds"></param>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.GetSalesHistory(System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+             <summary>
+             This method provides a ForecastSalesHistory dataset filled with Sales History data. This can
+             be used as the basis of the External Forecast Export.
+            
+             Notes: taken from mre10-sm-ex-dg.w (PROCEDURE Export-Forecast)
+             </summary>
+             <param name="pdBeginDate">Begin Date of Sales to extract.</param>
+             <param name="pdEndDate">End Date of Sales to extract.</param>
+             <param name="pcCustList">Tilde-delimited list of Customer Numbers for Sales extract. Blank means all.</param>
+             <param name="pcCustGrpList">Tilde-delimited list of Customer Group Codes for Sales extract. Blank means all.</param>
+             <param name="pcPartList">Tilde-delimited list of Part Numbers for Sales extract. Blank means all.</param>
+             <param name="pcProdGrpList">Tilde-delimited list of Product Group Codes for Sales extract. Blank means all.</param>
+             <param name="pcPlantList">Tilde-delimited list of Plants for Sales extract. Blank means all.</param>
+             <param name="pcOutputFile">Export file path.</param>
+             <param name="pcOutputFormat">Export output format.</param>
+             <returns>ForecastSalesHistory dataset; derived from invoice data.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.ImportExternalForecast(System.String,System.String)">
+            <summary>
+            This method populates the ttForecastImportExport dataset with forecast data.
+            </summary>
+            <param name="pcImportFormat">Import file format.</param>
+            <param name="pcImportFile">Import file path.</param>
+            <returns>ForecastImportExport dataset</returns>
+        </member>
+        <member name="M:Epicor.Mfg.Proxy.ForecastImpl.ImportForecasts(Epicor.Mfg.BO.ForecastImportExportDataSet,System.String,System.Boolean,System.Nullable{System.DateTime})">
+            <summary>
+            This method conditionally adds/overwrites Forecast records using the same logic as
+            the Vantage Forecast Import screen.
+            </summary>
+            <param name="ds">ForecastImportExport Dataset of candidates for import.</param>
+            <param name="pcImportOptions">Valid choices are "A"=Add+Replace, "C"=Clear+Reload, "N"=New.</param>
+            <param name="plAllPlants">If TRUE, clear all plants; if FALSE, clear Current Plant.</param>
+            <param name="pdFromDate">Only records on or after the given date will be considered for import.</param>
+        </member>
+        <member name="P:Epicor.Mfg.Proxy.ForecastImpl.CallContext">
+            <summary>
+            Call context dataset
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.BO.Forecast.#ctor(Epicor.Mfg.Core.BLConnectionPool)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="connPool">Connection pool</param>
+        </member>
+    </members>
+</doc>

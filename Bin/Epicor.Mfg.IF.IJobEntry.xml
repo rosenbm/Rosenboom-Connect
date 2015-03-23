@@ -1,0 +1,2721 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epicor.Mfg.IF.IJobEntry</name>
+    </assembly>
+    <members>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobHeadDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobHeadAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblInspDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlInspDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRefDesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRestrictionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRestrictSubstDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperInspDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOpDtlDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobResourcesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRestrictionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRestrictSubstDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRestrictionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRestrictSubstDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmRefDesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAuditDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobPartDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobProdDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobHeadRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobHeadAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblInspRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlInspRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRefDesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRestrictionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRestrictSubstRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperInspRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOpDtlRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobResourcesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRestrictionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRestrictSubstRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRestrictionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRestrictSubstRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmRefDesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAuditRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobPartRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobProdRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobHeadRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobHeadAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblInspRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlInspRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRefDesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRestrictionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobMtlRestrictSubstRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperInspRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOpDtlRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobResourcesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRestrictionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobOperRestrictSubstRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRestrictionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmblRestrictSubstRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAsmRefDesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobAuditRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobPartRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobEntryDataSet.JobProdRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.IF.IJobEntry">
+            <summary>
+            The Job Entry Business Object
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobHead(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobHeadAttch(Epicor.Mfg.BO.JobEntryDataSet,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAsmbl(Epicor.Mfg.BO.JobEntryDataSet,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAsmblAttch(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAsmblInsp(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobMtl(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobMtlAttch(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobMtlInsp(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobMtlRefDes(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobMtlRestriction(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobMtlRestrictSubst(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobOper(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobOperAttch(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobOperInsp(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobOpDtl(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobOperRestriction(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobOperRestrictSubst(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAsmblRestriction(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAsmblRestrictSubst(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAsmRefDes(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobAudit(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobPart(Epicor.Mfg.BO.JobEntryDataSet,System.String)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNewJobProd(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.String,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            Inserts a new row in the DataSet with defaults populated.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.DeleteByID(System.String)">
+            <summary>
+            Deletes a row given its ID.
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetByID(System.String)">
+            <summary>
+            Returns a DataSet given the primary key.
+            </summary>
+            <returns>The DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetList(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a list of rows that satisfy the where clause.
+            </summary>
+            <param name="whereClause">An expression used to filter the rows. Can be left blank for all rows.</param>
+            <param name="pageSize">The maximum number of rows to return. Leave as zero for no maximum.</param>
+            <param name="absolutePage">Page of rows to return.</param>
+            <param name="morePages">Whether there are more pages of rows available.</param>
+            <returns>The list DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetRows(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            Returns a dataset containing all rows that satisfy the where clauses.
+            </summary>
+            <returns>The full DataSet.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.Update(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Commits the DataSet changes to the data store.
+            </summary>
+            <param name="ds">The full DataSet.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.UpdateExt(Epicor.Mfg.BO.UpdExtJobEntryDataSet,System.Boolean,System.Boolean,System.Boolean@)">
+            <summary>
+            Apply input data to BO by calling GetByID/GetNew/Update methods.
+            </summary>
+            <returns>The dataset with list of errors occured during update process.</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetCodeDescList(System.String,System.String)">
+            <summary>
+            To return the CodeDescriptionList values of a given table.field.
+            </summary>
+            <param name="tableName"></param>
+            <param name="fieldName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.NegativeInventoryTest(System.String,System.String,System.String,System.String,System.String,System.Decimal,System.Decimal,System.String@,System.String@)">
+            <summary>
+            To test on hand quantity of the bin - i.e. whether it will go negative.
+            Call this method on change of Quantity.
+            </summary>
+            <param name="pcPartNum">Part Number</param>
+            <param name="pcWhseCode">Warehouse Code</param>
+            <param name="pcBinNum">Bin Number</param>
+            <param name="pcLotNum">Lot Number</param>
+            <param name="pcDimCode">From UNIT OF MEASURE (old Dimension Code)</param>
+            <param name="pdDimConvFactor">Obsolete Dimension Conversion Factor</param>
+            <param name="pdTranQty">Quantity (in stocking uom)</param>
+            <param name="pcNeqQtyAction">Valid values are STOP, NONE or ASK User. If Ask User, the user can decide to go ahead with the update even if the qty is negative</param>
+            <param name="pcMessage">Error message passed back from the business logic.</param>
+            <returns>pcNeqQtyAction</returns>
+            <returns>pcMessage</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.FindPartAndGetRowID(System.String,System.String@,System.String@,System.String@,System.String@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.FindFirstPart(System.String,System.Int32,System.String@,System.String@,System.String@,System.String@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetPartFromRowID(System.String,System.String,System.String@,System.String@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetCustNumFromRowID(System.String,System.String,System.String@,System.Int32@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetMfgPartFromRowID(System.String,System.String,System.String@,System.Int32@,System.String@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.AddOperation(System.String,System.String,System.Int32,System.Boolean,System.Boolean@)">
+            <summary>
+            THIS METHOD NEEDS TO BE PUBLIC - CALLED FROM bo/Project/Project.p
+            </summary>
+            <param name="ipJobAsmblRowID"></param>
+            <param name="ipOPCode"></param>
+            <param name="ipNewOprSeq"></param>
+            <param name="ipReturn"></param>
+            <param name="opShowmsg"></param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.AddRefDesRange(System.String,System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Creates new JobMtlRefDes records based on the JobMtl dataset fields.
+            </summary>
+            <param name="ipJobNum">The Job Number</param>
+            <param name="ipAsmSeq">The Job Assembly</param>
+            <param name="ipMtlSeq">The Job Material Seq</param>
+            <param name="ipPrefix">The Prefix to be used to create Reference Designators</param>
+            <param name="ipStartNum">The Starting Number to create Reference Designators</param>
+            <param name="ipEndNum">The Ending Number to create Reference Designators</param>
+            <param name="ipSuffix">The Suffix to be used to create Reference Designators</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.AllowJobCosts">
+            <summary>
+            This method exists solely for the purpose of allowing security for
+            unchecking the AllowJobCosts flag
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.AppendDetails(Epicor.Mfg.BO.JbAppendDataSet,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            This method takes the records built in BuildAppendDetails that are marked as append
+            and writes them to the database. It will return the updated dataset.
+            </summary>
+            <param name="ds">Temporary tables for Append details</param>
+            <param name="targetJob"> Target Job Number</param>
+            <param name="targetAsm"> Target Job AssemblySeq </param>
+            <param name="sourceFile"> Indicates where the details are being appended from. Either Quote,
+            Job or Method</param>
+            <param name="keyOne">Unique key field one for Quote or Method source </param>
+            <param name="keyTwo">Unique key field two for Quote or Method source </param>
+            <param name="keyThree">Unique key field three for Method source (is blank for quote source) </param>
+            <param name="errorList">Returns a message listing any parts in error</param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.BuildAppendDetails(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            This method returns the information that can be appened for approval
+            </summary>
+            <param name="sourceFile">Source of the append details, Quote, Job or Method </param>
+            <param name="keyOne">First key field of source </param>
+            <param name="keyTwo">Second key field of source </param>
+            <param name="keyThree">Third key field of source </param>
+            <param name="targetJob"> Target Job Num </param>
+            <param name="targetAsm">Target Assembly </param>
+            <returns>Temporary tables for Append details</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.BuildWhseLinkList(System.String,System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods builds a list of linked warehouses for the jobprod records.
+            </summary>
+            <param name="ipJobProdRowid">The rowid of the JobProd record to build the warehouses for</param>
+            <param name="opWhseList">The resulting warehouse list</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CalcJobMtlEstMtlBurUnitCost(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the calculation for the Estimated Material Burden Unit Cost,
+            (JobMtl.EstMtlBurUnitCost) field.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeEquipID(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should be invoked when the Equip ID changes.
+            Validates the EQUIPID and refreshes linked fields.
+            </summary>
+            <param name="equipID">Proposed equipment id</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job Entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeIssueTopics(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should be invoked when the IssueTopics changes.
+            Validates and sets the individual IssueTopic fields.
+            </summary>
+            <param name="topics">Proposed topics string id</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job Entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblDirect(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method is called when the user has changed the JobAsmbl.Direct field.
+            This methods is currently not working. This method needs to check for a remote
+            warehouse, if errors then set the JobAsmbl.Direct flag to true and then set the warehouse.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblEstSplitCosts(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the Estimated Unit Cost and Material Burden Unit Cost.
+            This method is called when the user has changed one of the Unit Cost Breakdown
+            fields: JobAsmbl.EstMtlUnitCost/EstLbrUnitCost/EstBurUnitCost/EstSubUnitCost.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblEstUnitCost(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the Estimated Material Burden Unit Cost.
+            This method is called when the user has changed the JobAsmbl.EstUnitCost field.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblMtlBurRate(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobAsmbl Material Burden Rate.
+            This method should run when the JobAsmbl.MtlBurRate changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblOpr(System.Int32,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobAsmbl Related Operation Description.
+            This method should run when the JobAsmbl.RelatedOperation field changes.
+            </summary>
+            <param name="iProposedRelatedOperation">The new proposed JobAsmbl.RelatedOperation value</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblOverRunQty(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobAsmbl Required Quantity.
+            This method should run when the JobAsmbl.OverRunQty field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblParent(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the new Parent field and populates defaults assoicated witht the Parent.
+            This method should run when the JobAsmbl.Parent field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblPartNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobAsmbl.PartNum and defaults fields associated with the partnum.
+            This method should run when the JobAsmbl.PartNum field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblQtyPer(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobAsmbl Required Quantity.
+            This method should run when the JobAsmbl.QtyPer field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblReassignSNAsm(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Checks if there is any other JobMtl or JobAsmbl records with ReassignSNAsm flag before enabling
+            this flag for a specific JobAsmbl.
+            </summary>
+            <param name="proposedReassignSNAsm">The new proposed JobAsmbl.ReassignSNAsm value</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblRevisionNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobAsmbl Drawing Number and creates drawing records.
+            This method should run when the JobAsmbl.OverRunQty field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblValRefDes(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Verify that there are no other JobMtlRefDes records in the assembly having
+            the same RefDes value if the JobAsmbl.ValRefDes = true. This method should
+            run before changing the JobAsmbl.ValRefDes.
+            </summary>
+            <param name="ipProposedValResDes">The new proposed JobAsmbl.ValRefDes value</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmblWarehouseCode(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobAsmbl Available Quantity.
+            This method should run when the JobAsmbl.WarehouseCode field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmReqRefDes(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns JobAsmbl.RDEndNum field when JobAsmbl.ReqRefDes changes.
+            This method should run when the JobAsmbl.ReqRefDes changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">Job Entry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmRestriction(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when JobAsmblRestriction.RestrictionTypeID changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmRestrictManual(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Called when the user changes the Manual field at the Job Assembly Restriction.
+            </summary>
+            <param name="checkManual">Indicates if the Restriction is Manual Compliant</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobAsmSubstance(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when JobAsmblRestrictSubst.SubstanceID changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadJobEngineered(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method potentially updates the JobHead.JobReleased field and the ttJobHead.EnableJobFirm
+            This method should run when the JobHead.JobEngineered field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadJobReleased(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method potentially updates the JobHead.JobEngineered field and the ttJobHead.EnableJobFirm
+            This method should run when the JobHead.JobReleased field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadPartNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobHead.PartNum and defaults fields associated with the partnum.
+            This method should run when the JobHead.PartNum field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadPersonID(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobHead.PersonID field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadPhaseID(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobHead Required Due Date field
+            This method should run when the JobHead.PhaseID field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadProdCode(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobHead.ProdCode field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadProdTeamID(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobHead.ProdTeamID field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadProjectID(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobHead.ProjectID field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobHeadRevisionNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobHead Drawing number and creates drawing records.
+            This method should run when the JobHead.RevisionNum field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlBackflush(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates fields associated with the JobMtl.Backflush field
+            This method should run when the JobMtl.Backflush field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlBillable(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobMtl Unit Price.
+            This method should run when the JobMtl.Billable field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlBuyIt(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates numerous fields associated with the JobMtl.BuyIt field
+            This method should run when the JobMtl.BuyIt field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlCurrencySwitch(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method changes the display unit prices based on the flipping of the JobMtl.CurrencySwitch field
+            This method should run when the JobMtl.CurrencySwitch external field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlDirect(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates fields associated with the JobMtl direct flag.
+            This method should run when the JobMtl.Direct field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlDisplayUnitPrice(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the db unit price fields when the external display unit price changes.
+            This method should run when the JobMtl.DisplayUnitPrice field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlEstSalSplitCosts(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the Estimated Salvage Unit Credit and Salvage Material
+            Burden Unit Credit.
+            This method is called when the user has changed one of the Salvage Unit Credit
+            Breakdown fields: JobMtl.SalvageEstMtlUnitCredit/SalvageEstLbrUnitCredit/
+            SalvageEstBurUnitCredit/SalvageEstSubUnitCredit.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlEstScrap(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobMtl Required Quantity and price breaks
+            This method should run when the JobMtl.EstScrap field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlEstScrapType(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobMtl Required Quantity and price breaks
+            This method should run when the JobMtl.EstScrapType field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlEstSplitCosts(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the Estimated Unit Cost and Material Burden Unit Cost.
+            This method is called when the user has changed one of the Unit Cost Breakdown
+            fields: JobMtl.EstMtlUnitCost/EstLbrUnitCost/EstBurUnitCost/EstSubUnitCost.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlFixedQty(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobMtl Required Quantity and price breaks
+            and if FixedQty is true then JobMtl.EstScrap = 0
+            This method should run when the JobMtl.FixedQty field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlIUM(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            procedure for changing JobMtl.IUM field
+            </summary>
+            <param name="ipProposedIUM">The proposed IUM.</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlMiscCharge(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates if transaction exists and updates fields based on value of Misc. Charge flag.
+            This method should run when the JobMtl.MiscCharge field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlMtlBurRate(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the JobMtl.EstMtlBurUnitCost
+            This method should run when the JobMtl.MtlBurRate field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlPartNum(Epicor.Mfg.BO.JobEntryDataSet,System.Boolean,System.String@,System.String,System.String,System.String,System.String@,System.Boolean@,System.String@,System.Boolean@,System.Boolean@)">
+            <summary>
+            This method validates the JobMtl.PartNum and defaults fields associated with the partnum.
+            This method should run when the JobMtl.PartNum field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+            <param name="ipValidatePart">Flag to indicate if the part validations are required (used only after multiple match resolved)</param>
+            <param name="ipPartNum">The input-output part number to validate and it gets returned</param>
+            <param name="sysRowID">SysRowID (used only after multiple match resolved)</param>
+            <param name="xrefPartNum">XRef Part Number (used only after multiple match resolved)</param>
+            <param name="xrefPartType">XRef Part Type (used only after multiple match resolved)</param>
+            <param name="vMsgText">Potential message to return, will be blank</param>
+            <param name="vSubAvail">Returned flag stating if substitutes exist for this part</param>
+            <param name="vMsgType">Type of message returned.
+            Values can be; "Question" (asking if they want to use the substitute part)
+            "Warning" (Warns them that a part is onhold or runout).
+            "Error" (Part in Inactive, or Onhold/Runout parts are not accepted in this case) .
+            "Question" is asking if they want to use the substitute part. </param>
+            <param name="multipleMatch">Multiple matches were found. </param>
+            <param name="opPartChgCompleted">Flag to indicate the part change was fully processed.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlPlant(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobMtl.Plant field changes.
+            This method determines the default JobMtl.WarehouseCode associated with the new JobMtl.Plant.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlPricePerCode(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates the JobMtl Display Extended Price
+            This method should run when the JobMtl.PricePerCode field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlPurPoint(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs vendor price break logic and sets RcvInspectionReq when JobMtl.PurPoint changes
+            This method should run when the JobMtl.PurPoint field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlQtyPer(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the JobMtl Required Quantity when the JobMtl Quantity Per changes.
+            This method should run when the JobMtl.QtyPer field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlRcvInspectionReq(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method checks the vendor and partclass to see if inspection is required
+            This method should run when the JobMtl.RcvInspectionReq field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlReassignSNAsm(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Checks if there is any other JobMtl or JobAsmbl records with ReassignSNAsm flag before enabling
+            this flag for a specific JobMtl.
+            </summary>
+            <param name="proposedReassignSNAsm">The new proposed JobMtl.ReassignSNAsm value</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlRelatedOperation(System.Int32,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobMtl Related Operation field, sets the Estimated Scrap,
+            and calculates the Required Quantity.
+            This method should run when the JobMtl.RelatedOperation field changes.
+            </summary>
+            <param name="iProposedRelatedOperation">The new proposed JobMtl.RelatedOperation value</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlReqRefDes(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns JobMtl.RDEndNum field when JobMtl.ReqRefDes changes.
+            This method should run when the JobMtl.ReqRefDes changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">Job Entry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlRestriction(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when JobMtlRestriction.RestrictionTypeID changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlSalvageMtlBurRate(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods updates the JobMtl Salvage Est Material Burden Unit Credit.
+            This method should run when the JobMtl.SalvageMtlBurRate changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlSalvagePartNum(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when ECOMtl.SalvagePartNum changes.
+            This method should run when the ECOMtl.SalvagePartNum changes.
+            </summary>
+            <param name="ipProposedSalvagePartNum">The new proposed ECOMtl.SalvagePartNum value </param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlSalvageUnitCredit(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the Salvage Estimated Material Burden Unit Credit.
+            This method is called when the user has changed the JobMtl.SalvageUnitCredit field.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlSubstance(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when JobMtlRestrictSubst.SubstanceID changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobMtlVendorNumVendorID(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs vendor price break logic and sets RcvInspectionReq when JobMtl.VendorNumVendorID changes
+            and validates the jobmtl.vendornumvendorid and assigns the associated fields.
+            This method should run when the JobMtl.VendorNumVendorID field changes.
+            </summary>
+            <param name="ipProposedVendorNumVendorID">The proposed supplier id.</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlCapability(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Method to call when changing the Capability ID. This method will update JobOpDtl
+            to see if the labor and burden rates need to be reset. Blank is a valid entry for
+            Capability ID.
+            </summary>
+            <param name="proposedCapID">The proposed Capability ID </param>
+            <param name="ds">The JobEntry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlEstSetHoursPerMch(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates the Estimated Setup Hours when Estimated Setup Hours Per Machine changes.
+            This method should run when the JobOpDtl.EstSetHoursPerMch field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlOpsPerPart(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates Estimated Production Hours when the OpsPerPart field changes.
+            This method should run when the JobOpDtl.OpsPerPart field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlOverrideRates(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Method to call when changing the Override Rates Flag. This method will update
+            JobOpDtl with the default labor and burden rates from the appropriate resource
+            or resource group if the JobOpDtl.OverrideRates is set to false.
+            </summary>
+            <param name="ds">The JobEntry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlProdStandard(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates the Estimated Production Hours when ProdStandard changes.
+            This method should run when the JobOpDtl.ProdStandard field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlResourceGrpID(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Method to call when changing the Resource Group ID. This method will update JobOpDtl
+            with the default labor and burden rates from the new resource group. Blank is a valid
+            entry for Resource Group ID.
+            </summary>
+            <param name="proposedResGrpID">The proposed Resource Group ID </param>
+            <param name="ds">The Job Entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlResourceID(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Method to call when changing the Resource ID. This method will update JobOpDtl
+            with the default labor and burden rates from the new resource. Blank is a valid
+            entry for Resource ID.
+            </summary>
+            <param name="proposedResourceID">The proposed Resource ID </param>
+            <param name="ds">The JobEntry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlStdBasis(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates the Estimated Production Hours when StdBasis changes.
+            This method should run when the JobOpDtl.StdBasis field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOpDtlStdFormat(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates the Estimated Production Hours when StdFormat changes.
+            This method should run when the JobOpDtl.StdFormat field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperAutoReceive(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <param name="ipProposedAutoReceive">The new proposed JobOper.AutoReceive value</param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperBillable(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the Labor Rate and Unit Price when the Billable flag changes.
+            This method should run when the JobOper.Billable field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperCurrencySwitch(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method changes the display unit prices based on the flipping of the JobOPer.CurrencySwitch field
+            This method should run when the JobOper.CurrencySwitch external field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperDisplayUnitPrice(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to calculate the doc price fields and the display extended price.
+            This method should run when the JobOper.UnitPrice field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperDocUnitPrice(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates Unit Price and Billable Unit Price when Doc Unit Price changes.
+            This method should run when the JobOper.DocUnitPrice field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperEstLabHours(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the Estimated Production Hours, rate fields, and Production Standard along with others.
+            This method should run when the JobOper.EstLabHours field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperEstScrap(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates Production and Scrap Quantities and estimate producition hours.
+            This method should run when the JobOper.EstScrap field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperEstScrapType(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates Production and Scrap Quantities and estimate producition hours.
+            This method should run when the JobOper.EstScrapType field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperEstSetHoursPerMch(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the estimated labor hours when Job Type = "SRV" and
+            update the display fields for service amount and labor amount.
+            This method should run when the JobOper.EstSetHoursPerMch field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperIUM(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            procedure for changing JobOper.IUM field
+            </summary>
+            <param name="ipProposedIUM">The proposed IUM.</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperLaborEntryMethod(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Will default the necessary fields when changing the LaborEntryMethod field
+            </summary>
+            <param name="iLaborEntryMethod">Proposed value for LaborEntryMethod field </param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperMachines(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method updates the fields associated with the changing of the machines,
+            EstLabHours should change.
+            This method should run when the JobOper.Machines field changes.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperOpCode(System.String,System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method sets Labor Rates when the JobOper.OpCode changes.
+            This method should run when the JobOper.OpCode field changes.
+            </summary>
+            <param name="proposedOpCode">The proposed Operation Code </param>
+            <param name="refreshMessage">The refresh message text </param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperOprSeq(Epicor.Mfg.BO.JobEntryDataSet)">
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperOpsPerPart(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates Estimated Production Hours when the OpsPerPart field changes.
+            This method should run when the JobOper.OpsPerPart field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperOpStdID(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method defaults the new setup and production values when the Operation Standard ID changes.
+            This method should run when the JobOper.OpStdID field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperPartNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobOper.PartNum and defaults fields associated with the partnum.
+            This method should run when the JobOper.PartNum field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperPricePerCode(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates the JobOper Display Extended Price when PricePerCode changes.
+            This method should run when the JobOper.PricePerCode field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperPrimaryProdOpDtl(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method defaults/resets the production standards when selecting Primary
+            Production Operation Detail.
+            This method should run when the JobOper.PrimaryProdOpDtl field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperPrimarySetupOpDtl(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method defaults/resets the setup values when selecting Primary
+            Setup Operation Detail.
+            This method should run when the JobOper.PrimarySetupOpDtl field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperProdStandard(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method recalculates teh Estimated Production Hours when ProdStandard changes.
+            This method should run when the JobOper.ProdStandard field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperPurPoint(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method determines price breaks and check if inspection is required.
+            This method should run when the JobOper.PurPoint field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperQtyPer(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method calculates the production scrap, determines vendor price breaks, and
+            updates the display extended price.
+            This method should run when the JobOper.QtyPer field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperRcvInspection(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to determine if inspection is required.
+            This method should run when the JobOper.RcvInspection field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperSNRequired(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <param name="ipProposedSNRequired">The new proposed JobOper.SNRequiredOpr value</param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperSNRequiredSubConShip(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <param name="ipProposedSNRequiredSubConShip">The new proposed JobOper.SNRequiredOprSubConShip value</param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperStdBasis(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to calculate the estimated production hours.
+            This method should run when the JobOper.StdBasis field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperStdFormat(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to calculate the estimated production hours.
+            This method should run when the JobOper.StdFormat field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperUnitPrice(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to calculate the doc price fields and the display extended price.
+            This method should run when the JobOper.UnitPrice field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOperVendorNumVendorID(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to set the purchase points, calculate the price breaks,
+            and checks to see if inspection is required.
+            This method should run when the JobOper.VendorNumVendorID field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOprRestriction(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when JobOperRestriction.RestrictionTypeID changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobOprSubstance(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods assigns associated fields when JobOperRestrictSubst.SubstanceID changes.
+            </summary>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">JobEntry dataset</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobPartPartNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobPart.PartNum and defaults fields associated with the partnum.
+            This method should run when the JobPart.PartNum field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdMakeToJobQty(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs public method CheckJobProdQtyJob to validate quantities.
+            This method should run when the JobProd.MakeToJobQty field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdMakeToStockQty(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to set the stock and order WIP quantities
+            This method should run when the JobProd.MakeToStockQty field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdMakeToType(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic determine what fields can have value based on the MakeToType
+            and runs logic to set the stock and order WIP quantities.
+            This method should run when the JobProd.MakeToType field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdOrderLine(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs sets the OrderRelNum to zero when OrderLine changes.
+            This method should run when the JobProd.OrderLine field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdOrderNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to numerous associated fields to blank or zero based on a new OrderNum.
+            This method should run when the JobProd.OrderNum field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdOrderRelNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to validate if a link exists, update the Production Quantity,
+            set stock and order WIP quantities, and validate if direct has been selected.
+            This method should run when the JobProd.OrderRelNum field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdOurStockQty(System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs public method CheckJobProdProdQty to validate quantities.
+            This method should run when the JobProd.OurStockQty field changes.
+            </summary>
+            <param name="oMessage">Checking message</param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdProdQty(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs public method CheckJobProdProdQty to validate quantities and
+            set stock and order WIP quantities.
+            This method should run when the JobProd.ProdQty field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdTargetAssemblySeq(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to clear detail sequence and populate the MakeToJobQty field.
+            This method should run when the JobProd.TargetAssemblySeq field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdTargetJobNum(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobProd.TargetJobNum field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeJobProdTargetMtlSeq(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs validation for links, assign values, and populate MakeToJobQty field
+            This method should run when the JobProd.TargetMtlSeq field changes.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChangeResTopics(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should be invoked when the ResTopics changes.
+            Validates and sets the individual ResTopic fields.
+            </summary>
+            <param name="topics">Proposed topics string id</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job Entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckApprovedSupplier(System.String,System.String,System.String,System.String@)">
+            <summary>
+            This method runs logic to verify if supplier is approved. This should be called
+            after adding/updating a demand link or adding/updating a subcontract operation.
+            This method always needs a jobnumber inputted. However, ipJobOperRowid or ipJobProdRowid
+            can either be blank. If ipJobOperRowid has value then this method will ignore any value
+            in ipJobProdRowid. This method will output warning messages that may or may not
+            exist.
+            </summary>
+            <param name="ipJobNum">The job number to check for approved suppliers.</param>
+            <param name="ipJobOperRowid">The rowid of subcontract operation to check.</param>
+            <param name="ipJobProdRowid">The rowid of the demand link to check.</param>
+            <param name="opWarningMsg">The potential warning message.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobAsmblParent(System.Int32,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates validates the new Parent field
+            </summary>
+            <param name="ipNewParent">New Parent value to check against</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobMtlMiscCharge(System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates if transaction exists
+            </summary>
+            <param name="ipMiscCharge">New Misc Charge</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobOperPartNum(System.String,System.String,System.Int32)">
+            <summary>
+            This method validates the JobOper.PartNum
+            This method should run when the JobOper.PartNum field changes.
+            </summary>
+            <param name="ipJobNum">The Job Number</param>
+            <param name="ipPartNum">The New PartNum to validate against.</param>
+            <param name="ipAssemblySeq">The inputted Assembly Sequence to validate</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobProdOrderRelNum(System.Int32,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs logic to validate if a link exists, and validate if direct has been selected.
+            </summary>
+            <param name="ipNewOrderRelNum">New OrderRelNum value to check against</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobProdTargetAssemblySeq(System.Int32,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method checks if a record to make the assembly direct already exists.
+            </summary>
+            <param name="ipNewTargetAssemblySeq">New Target Assembly Number</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobProdTargetJobNum(System.String,System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method checks to see if the target job is closed or not
+            and returns a message if job is closed, also validates the jobnum
+            </summary>
+            <param name="ipNewTargetJobNum">The New TargetJobNum to validate against.</param>
+            <param name="vMessage">The returned message</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckChangeJobProdTargetMtlSeq(System.Int32,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method runs validation for links, assign values, and populate MakeToJobQty field
+            This method should run when the JobProd.TargetMtlSeq field changes.
+            </summary>
+            <param name="ipNewTargetMtlSeq">The New TargetMtlSeq to validate against.</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckConfiguration(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,System.Boolean@,System.Boolean@,System.Boolean@,System.String@,System.String@)">
+            <summary>
+            This method checks if a part must be configured prior to a GetDetails.
+            </summary>
+            <param name="inRelatedToFile">Related To File </param>
+            <param name="inKey1">The job on which the configuration should be saved.</param>
+            <param name="inKey2">The assembly sequence of the configured part.</param>
+            <param name="inKey3">The material sequence of the configured part.</param>
+            <param name="inKey4">The material sequence of the configured part..</param>
+            <param name="inKey5">The material sequence of the configured part..</param>
+            <param name="sourcePart">Part Num to get details from (populated when sourceFile = "Method")</param>
+            <param name="sourceRev">Revision number to get details from (populated when sourceFile = "Method")</param>
+            <param name="targetAssembly">Target Assembly</param>
+            <param name="findRevision">If true the revision number will be looked up rather than using the sourceRev</param>
+            <param name="configurationExists">If true the configurator should be run on the Job for the Part/Rev</param>
+            <param name="canGetDetails">If false, GetDetails will fail for a configuration reason that can't be resolve by reconfiguring now</param>
+            <param name="needsConfiguration">If true the configurator should be run on the Job for the Part/Rev</param>
+            <param name="configureRevision">The revision that should be configured (if configuration is needed) </param>
+            <param name="reasonMessage">The reason or for the failure or need for configuration. This should be displayed to the user.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckExistingConfiguration(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,System.Boolean@,System.String@,System.String@)">
+            <summary>
+            This method will check to see if an existing configuration exists for a configured
+            part. This method should be called prior to calling the CheckConfiguration method.
+            If the configurationExists is set to "true", then the reasonMessage should be displayed
+            to the user.
+            </summary>
+            <param name="inRelatedToFile">Related To File </param>
+            <param name="inKey1">The job on which the configuration should be saved.</param>
+            <param name="inKey2">The assembly sequence of the configured part.</param>
+            <param name="inKey3">The material sequence of the configured part.</param>
+            <param name="inKey4">The material sequence of the configured part..</param>
+            <param name="inKey5">The material sequence of the configured part..</param>
+            <param name="sourcePart">Part Num to get details from (populated when sourceFile = "Method")</param>
+            <param name="sourceRev">Revision number to get details from (populated when sourceFile = "Method")</param>
+            <param name="targetAssembly">Target Assembly</param>
+            <param name="findRevision">If true the revision number will be looked up rather than using the sourceRev</param>
+            <param name="configurationExists">If true the configurator should be run on the Job for the Part/Rev</param>
+            <param name="configureRevision">The revision that should be configured (if configuration is needed) </param>
+            <param name="reasonMessage">The reason or for the failure or need for configuration. This should be displayed to the user.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckForChanges(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean@)">
+            <summary>
+            This method determines if a job audit description needs to be entered into
+            ttjobhead.changedescription to be stored in the jobaudit record. Call this
+            before the update of the JobHead record.
+            </summary>
+            <param name="cCompany">Should the user to be prompted for change description?</param>
+            <param name="cJobNum">Should the user to be prompted for change description?</param>
+            <param name="lJobEng">Should the user to be prompted for change description?</param>
+            <param name="lJobRel">Should the user to be prompted for change description?</param>
+            <param name="lInCopy">Should the user to be prompted for change description?</param>
+            <param name="lSchedL">Should the user to be prompted for change description?</param>
+            <param name="lChkOff1">Should the user to be prompted for change description?</param>
+            <param name="lChkOff2">Should the user to be prompted for change description?</param>
+            <param name="lChkOff3">Should the user to be prompted for change description?</param>
+            <param name="lChkOff4">Should the user to be prompted for change description?</param>
+            <param name="lChkOff5">Should the user to be prompted for change description?</param>
+            <param name="opChangeDescription">Should the user to be prompted for change description?</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobMtlBuyIt(Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method should run when the JobMtl.BuyIt field is changing.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobMtlPartNumFixQty(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the Fixed Qty checkbox control on screen, according to Serial Numbers rules.
+            </summary>
+            <param name="ipProposedMtlPartNum">The new proposed ttJobMtl.PartNum value</param>
+            <param name="ds">The JobEntry DataSet </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobOperOprSeq(System.String,System.Int32,System.Int32,System.String@)">
+            <summary>
+            This method validates for an invalid sequence for Operation of Subcontract
+            </summary>
+            <param name="ipJobNum">The inputted Job Number to validate</param>
+            <param name="ipAssemblySeq">The inputted Assembly Sequence to validate</param>
+            <param name="ipOprSeq">The inputted Operation Sequence to validate</param>
+            <param name="vMessage">The value of the message if invalid subcontract or operation sequence</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobOperPrimaryProdOpDtl(Epicor.Mfg.BO.JobEntryDataSet,System.Int32)">
+            <summary>
+            This method validated the value of Primary Production Operation Detail.
+            This method should run when the JobOper.PrimaryProdOpDtl is changing.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+            <param name="ipPrimaryProdOpDtl">The new PrimaryProdOpDtl value to change to</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobOperPrimarySetupOpDtl(Epicor.Mfg.BO.JobEntryDataSet,System.Int32)">
+            <summary>
+            This method validated the value of Primary Setup Operation Detail.
+            This method should run when the JobOper.PrimarySetupOpDtl is changing.
+            </summary>
+            <param name="ds">The Job entry data set </param>
+            <param name="ipPrimarySetupOpDtl">The new PrimarySetupOpDtl value to change to</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobPartPartNumIsSerTra(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobPart.PartNum is not serial tracked. The rule is that additional JobPart
+            records are not allowed to be serial tracked.
+            </summary>
+            <param name="ipProposedPartNum">The new proposed JobPart.PartNum value</param>
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobProdMakeToType(System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates for an invalid if you can change the JobProd.MakeToType
+            to the provided new value.
+            </summary>
+            <param name="ipChangeToType">The new maketotype value to change to</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobProdProdQty(System.Decimal,System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the JobProd.ProdQty field and returns a message.
+            </summary>
+            <param name="dProposedProdQty">The new proposed JobProd.ProdQty value</param>
+            <param name="vMessage">The returned message</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckJobProdQtyJob(System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method checks the allocated material/assembly to see if short/over requested quantity
+            and returns a message.
+            </summary>
+            <param name="vMessage">The returned message</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckLink(System.String,System.Int32,System.Int32,System.Boolean@)">
+            <summary>
+            </summary>
+            <param name="targetJob"> Target Job Number </param>
+            <param name="targetAsm"> Target Job AssemblySeq </param>
+            <param name="targetMtl"> Target Job Mtl </param>
+            <param name="isEnabled"> Make Direct Is Enabled </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckPrePartInfo(Epicor.Mfg.BO.JobEntryDataSet,System.String@,System.String,System.Boolean,System.String,System.String,System.String@,System.Boolean@,System.String@,System.Boolean@)">
+            <summary>
+            This method checks to see if there are any questions or issues with the part entered
+            and returns a message, a part number and if any substitutes exist.
+            </summary>
+            <param name="ds">JobEntryDataSet</param>
+            <param name="partNum">The input-output part number to validate and it gets returned</param>
+            <param name="sysRowID">SysRowID (used only after multiple match resolved)</param>
+            <param name="skipXRefUpdate">Skip part xref jobhead field update logic (true for asm and mtl)</param>
+            <param name="xrefPartNum">XRef Part Number (used only after multiple match resolved)</param>
+            <param name="xrefPartType">XRef Part Type (used only after multiple match resolved)</param>
+            <param name="vMsgText">Potential message to return, will be blank</param>
+            <param name="vSubAvail">Returned flag stating if substitutes exist for this part</param>
+            <param name="vMsgType">Type of message returned.
+            Values can be; "Question" (asking if they want to use the substitute part)
+            "Warning" (Warns them that a part is onhold or runout).
+            "Error" (Part in Inactive, or Onhold/Runout parts are not accepted in this case) .
+            "Question" is asking if they want to use the substitute part. </param>
+            <param name="multipleMatch">Multiple matches were found. </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckPreProjectID(System.String,System.String@,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This method validates the project id and returns a question if you would like to proceed message.
+            </summary>
+            <param name="ipJobProdRowid">The character rowid value of the JobProd to validate</param>
+            <param name="vMessage">The returned message</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckResourcePlants(System.String,System.String@)">
+            <summary>
+            This method validates that the Plant of the job operation resources
+            are the same as the job
+            Maintenance Jobs are and exception,
+            they can have resources of the Job Plant or Equipments Plant or the Plant Maintenance Plant
+            </summary>
+            <param name="cjobnum">Job number</param>
+            <param name="runOutWarning">
+            Warning Message about RunOut Parts on Job. Client to display this as a warning only
+            </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckToReschedule(System.String,System.String,System.Nullable{System.DateTime},System.Decimal,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Boolean,System.String@)">
+            <summary>
+            This method checks the required due date and production quantity and
+            returns a message asking if you would like to schedule if the conditions are met.
+            </summary>
+            <param name="cCompany">The returned message</param>
+            <param name="cJobNum">The returned message</param>
+            <param name="reqDueDate">The returned message</param>
+            <param name="prodQty">The returned message</param>
+            <param name="dueDate">The returned message</param>
+            <param name="startDate">The returned message</param>
+            <param name="jobEngineered">The returned message</param>
+            <param name="vMessage">The returned message</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CheckTotProdQty(System.String,System.String,System.Decimal,System.String@)">
+            <summary>
+            This method checks the total production quantity and returns messages if conditions exist
+            and the returned message will contain 'do you want to continue?'.
+            Depending on how/where it is called, the ipJobNum may be blank and the ipQuantity may be zero.
+            Job Entry calls this on "changing" of the Engineered flag to true. In this case it passes the ipQuantity is zero since
+            the jobs production demands are already known.
+            During Job Manager, Create Job the ipJobNum is blank, but the ipQuantity of the demand is passed since this demand is yet in the
+            job.
+            </summary>
+            <param name="ipJobNum">The job number to validate</param>
+            <param name="ipPartNum">The part number to validate </param>
+            <param name="ipQuantity">The quantity of the new Demand being added. </param>
+            <param name="vMessage">The returned message</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ChooseUnlink(System.String)">
+            <summary>
+            This method unlinks and deletes a jobprod record and returns the updated dataset
+            </summary>
+            <param name="ipJobProdRowid">The character rowid value of the JobProd to unlink</param>
+            <returns>Results of dataset with the jobprod record removed</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.CreateJobPWB(System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String@,System.String@)">
+            <summary>
+            The method will create a job when properly called from Planning Workbench.
+            </summary>
+            <param name="ipNewJobNum">The next/new job number to use.</param>
+            <param name="ipPartSugRowid">The rowid of the partsug record to create job for.</param>
+            <param name="ipGetDetails">The flag to get details.</param>
+            <param name="ipScheduleAll">The flag to schedule all.</param>
+            <param name="ipReleaseAll">The flag to release all. </param>
+            <param name="ipTravelerReadyToPrint">Indicates if the Traveler can be printed </param>
+            <param name="ipBackground">The flag to send the Job's creation to the background process.</param>
+            <param name="opCreatedJobNum">The value of the created job number.
+            If ipNewJobNum was blank then this would show the value of the generated job number.
+            </param>
+            <param name="opErrMsg">Potential error messages that did not cause processing to terminate. </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.DeleteAll(System.String)">
+            <summary>
+            The method deletes all assemblys and their subassemblys, materials and operations
+            while leaving the base assembly sequence alone however removing the base assembly's material
+            and operations.
+            </summary>
+            <param name="ipJobHeadRowid">The JobHead rowid of to delete all of the assemblies for</param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.DeleteRefDesRange(System.String,System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Deletes JobMtlRefDes records based on the JobMtl dataset fields.
+            </summary>
+            <param name="ipJobNum">The Job Number</param>
+            <param name="ipAsmSeq">The Job Assembly</param>
+            <param name="ipMtlSeq">The Job Material Seq</param>
+            <param name="ipPrefix">The Prefix to be used to delete Reference Designators</param>
+            <param name="ipStartNum">The Starting Number to delete Reference Designators</param>
+            <param name="ipEndNum">The Ending Number to delete Reference Designators</param>
+            <param name="ipSuffix">The Suffix to be used to delete Reference Designators</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.FindAssembly(System.String,System.Int32,System.String,System.Int32@,System.String@)">
+            <summary>
+            This method will locate a JobAsmbl record in the tree based on the inputted parameters.
+            </summary>
+            <param name="ipJobNum">The job number to search from.</param>
+            <param name="ipStartAssemblySeq">The starting assembly sequence to search from.</param>
+            <param name="ipPartNum">The part number or part number string to search for.</param>
+            <param name="opAssemblySeq">The assembly sequence that was located by the search.</param>
+            <param name="opRowid">The character representation of rowid of the JobAsmbl record located.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetAssemblyCosts(System.String,System.Int32)">
+            <summary>
+            Returns the costs of Assemblies and Materials.
+            </summary>
+            <param name="ipJobNum">Job Number of the target Assembly</param>
+            <param name="ipAssemblySeq">Assembly Sequence</param>
+            <returns>Results JobCostsDataSet</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetBasePartForConfig(System.String,System.Int32,System.String,System.String,System.String@,System.String@,System.String@,System.String@,System.Boolean@)">
+            <summary>
+            This method will retrieve the base configured part number to be passed
+            to configuration entry
+            </summary>
+            <param name="targetJobNum">Indicates the target job number </param>
+            <param name="targetAssembly">Indicates the target job assembly sequence </param>
+            <param name="sourcePartNum">Indicates the source part number to get details from </param>
+            <param name="sourceRevisionNum">Indicates the source revision number to get details from </param>
+            <param name="basePartNum"> Returns the Base Part Number to use for configuration </param>
+            <param name="baseRevisionNum"> Returns the Base Revision Number to use for configuration </param>
+            <param name="curPartNum"> Returns the Current Part Number to use for configuration </param>
+            <param name="curRevNum"> Returns the Current Revision Number to use for configuration </param>
+            <param name="siValues"> Returns whether the configuration is set to save input values</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetByIdandJobType(System.String,System.String)">
+            <summary>
+            A variation of the standard GetByID. Besides JobNum also has parameter for JobType(s).
+            Note JobType is a comma separated list of types to be considered valid for this Get.
+            Used as a predecessor to calling GetByID.
+            </summary>
+            <param name="jobNum">
+            JobHead.JobNum
+            </param>
+            <param name="jobType">
+            JobHead.JobType
+            </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetDatasetForTree(System.String,System.Int32,System.Int32,System.Boolean,System.String)">
+            <summary>
+            This methods will return the dataset for Job Entry. The method will return the
+            records related to the assembly provided and the first child level assemblies related to
+            the input inputted assembly.
+            </summary>
+            <param name="ipJobNum">The Job Number to return data for. </param>
+            <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+            <param name="ipJobTypeMode">Job must be one of these types else it is an error. ipJobTypeMode can be blank, no constraint </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetDetails(System.String,System.Int32,System.String,System.Int32,System.Int32,System.String,System.Int32,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            This method retrieves the manufacturing details from a source file. The source file
+            will either be a Quote, a Job, or a Method (Part). The assembly records will
+            be created regardless if the part is in error or not.
+            </summary>
+            <param name="jobNum">Job Number of the target Assembly</param>
+            <param name="targetAsm">Sequence of the target Assembly</param>
+            <param name="sourceFile">Source (Quote, Job, or Method) of the details to copy </param>
+            <param name="sourceQuote">Quote Number to get details from (populated when sourceFile = "Quote")</param>
+            <param name="sourceLine">Quote Line to get details from (populated when sourceFile = "Quote")</param>
+            <param name="sourceJob">Job Number to get details from (populated when sourceFile = "Job")</param>
+            <param name="sourceAsm">Quote Assembly to get details from (populated when sourceFile = "Quote" or "Job")</param>
+            <param name="sourcePart">Part Num to get details from (populated when sourceFile = "Method")</param>
+            <param name="sourceRev">Revision number to get details from (populated when sourceFile = "Method")</param>
+            <param name="sourceAltMethod">Alternate Method to get details from (populated when sourceFile = "Method")</param>
+            <param name="resequence">Indicates if assemblys should be resequenced</param>
+            <param name="useMethodForParts">If true use the method passed in for all parts in assemblies, if false
+            use the assembly part's default method.</param>
+            <returns>Results of the get details</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetJMtlStat(Epicor.Mfg.BO.JMtlStatFiltersDataSet)">
+            <summary>
+            This method returns the JMtlStat dataset. This dataset is used for the
+            Job Material Status view. Prior to running this method, the RowMod field
+            in JMtlStatFilters must be set to U if it does not alreay have this value.
+            </summary>
+            <param name="ds">Job Tracker Material Status filters data set</param>
+            <returns>Job Tracker Material Status data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetJMtlStatFilters(System.String)">
+            <summary>
+            This method returns a record in the JMtlStatFilters dataset. This record
+            is used to capture the filters to retrieve the JMtlStat data for the
+            Job Material Status view.
+            </summary>
+            <param name="jobNum">Job Number for the Job Material Status view</param>
+            <returns>Job Tracker Material Status filters data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetLinkedQuoteLineList(System.String,System.String@)">
+            <summary>
+            This method returns a list of QuoteNum and QuoteLine values for a JobProd record whose
+            OrderNum is greater than 0.
+            </summary>
+            <param name="ipJobNum">The JobNum to return values for</param>
+            <param name="opQuoteLineList">The returned values in list form</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNextJobNum(System.String@)">
+            <summary>
+            This methods generates the next available job number from the JCSyst table.
+            </summary>
+            <param name="opNextJobNum">The outputted string of the next available job number</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNextJobNumOrderRelease(System.String,System.String@)">
+            <summary>
+            This methods generates the job number based off
+            of the OrderRel record related to the input PartSug.
+            </summary>
+            <param name="ipPartSugRowid">The rowid of the partsug record to create job for.</param>
+            <param name="opNextJobNum">The outputted string of the job number</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetNextMntJobNum(System.String@)">
+            <remarks>
+            &amp;QTableName - MANDATORY - Name of table to find
+            &amp;QLock - type of lock to put on record NO-LOCK (default) or EXCLUSIVE-LOCK
+            &amp;QWhere - MANDATORY - criteria to find record
+            &amp;QFind - type of find to perform, unique, first, next or last
+            &amp;Columns - List of columns
+            </remarks>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.GetProjectRoles">
+            <summary>
+            Returns list of Project Roles
+            </summary>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InitJobOperSNReqSubConShip(Epicor.Mfg.BO.JobEntryDataSet)">
+            <param name="ds">The Job entry data set </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertBOMAsm(System.String,System.String,System.Int32,System.String,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+             <summary>
+             This methods allows for the insertion of an engineering assembly for drag/drop functionality,
+             </summary>
+             <param name="ipParentJobAsmblRowid">The rowid of the parent jobasmbl to add to</param>
+             <param name="ipSourceRowid">The rowid of source record could be jobasmbl, jobmtl, or
+             quotemtl to be added to the parent jobasmbl</param>
+             <param name="ipOperSeq">The related operation seq (or 0 if unrelated)</param>
+             <param name="ipDroppedAs">The character value to determine where to drop and to drop as what.
+             valid values: JobAsmbl, JobAsmbl-AsMtl, QuoteAsm, QuoteAsm-AsMtl
+            </param>
+             <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+             <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+             <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+             <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+             <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertBOMMtl(System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            This methods allows for the insertion of an engineering material for drag/drop functionality,
+            </summary>
+            <param name="ipParentJobAsmblRowid">The rowid of the JobAsmbl record to add the material to</param>
+            <param name="ipSourceRowid">The rowid of source record could be jobasmbl, jobmtl, or
+            quotemtl to be added to the parent jobasmbl</param>
+            <param name="ipOperSeq">The related operation seq (or 0 if unrelated)</param>
+            <param name="ipMtlSeq">The material seq to use</param>
+            <param name="ipBeforeMtlRowid">The material rowid to insert material before</param>
+            <param name="ipDroppedAs">The character value to determine where to drop and to drop as what.
+            valid values: PartMtl-AsMtl, PartMtl-AsAsm, JobMtl-AsAsm, JobMtl, QuoteMtl-AsAsm, QuoteMtl
+            </param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertBOMOper(System.String,System.String,System.Int32,System.String,System.String,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            This methods allows for the insertion of an engineering operation for drag/drop functionality,
+            </summary>
+            <param name="ipParentJobAsmblRowid">The rowid of the parent jobasmbl to add to</param>
+            <param name="ipSourceRowid">The rowid of source record could be joboper, partopr, or
+            quoteopr to be added to the parent jobasmbl</param>
+            <param name="ipNewOperSeq">The new operation seq</param>
+            <param name="ipBeforeOperRowid">The operation rowid to insert operation before</param>
+            <param name="ipDroppedAs">The character value to determine where to drop and to drop as what.
+            valid values: PartOpr, JobOper, QuoteOpr
+            </param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertMaterial(System.String,System.String,System.Int32,System.Int32,System.String,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            This methods allows for the insertion on a material for drag/drop functionality,
+            validates a JobAsmbl record exists and the part is valid.
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the material to</param>
+            <param name="ipPartNum">The part number being added</param>
+            <param name="ipOperSeq">The related operation seq (or 0 if unrelated)</param>
+            <param name="ipMtlSeq">The material seq to use</param>
+            <param name="ipBeforeMtlRowid">The material rowid to insert material before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertNewJobAsmbl(Epicor.Mfg.BO.JobEntryDataSet,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This method creates a new Assembly after prompting for the AsemblySeq and BOMLevel
+            as well as the JobNum field. This is to replace the standard GetNewJobAsmbl when
+            needing to insert a new record between two existing records.
+            </summary>
+            <param name="ds">Job Entry data set</param>
+            <param name="jobNum">Assembly's parent Job</param>
+            <param name="assemblySeq">Assembly's parent assembly Seq</param>
+            <param name="bomLevel">Assembly's parent BOMLevel</param>
+            <param name="priorAssemblySeq">If adding a sub-assembly record, this value is 0. If
+            insterting after a specific assembly then use that record's assembly seq (must be different
+            from the parent assembly seq) </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertNewJobMtl(System.String,System.String,System.Int32,System.Int32,System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods allows for the insertion on a material for drag/drop functionality,
+            validates a JobAsmbl record exists and the part is valid.
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the material to</param>
+            <param name="ipPartNum">The part number being added</param>
+            <param name="ipOperSeq">The related operation seq (or 0 if unrelated)</param>
+            <param name="ipMtlSeq">The material seq to use</param>
+            <param name="ipBeforeMtlRowid">The material rowid to insert material before</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertNewJobOper(System.String,System.Int32,System.String,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            This methods allows for the insertion on a new operation between two records
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the operation to</param>
+            <param name="ipNewOprSeq">The new operation seq</param>
+            <param name="ipBeforeOperRowid">The operation rowid to insert operation before</param>
+            <param name="ds">Job Entry data set</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOpDtlCapability(System.String,System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            This method allows for the insertion of Capability on an operation to create
+            operation detail for drag/drop functionality.
+            </summary>
+            <param name="ipJobOperRowID">The rowid of the JobOper record to add the operation detail to</param>
+            <param name="ipCapabilityID">The Capability ID being added</param>
+            <param name="ipNewOpDtlSeq">The new operation detail seq</param>
+            <param name="ipBeforeOpDtlRowid">The operation detail rowid to insert operation detail before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOpDtlResGroup(System.String,System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            This method allows for the insertion of Resource Group on an operation to create
+            operation detail for drag/drop functionality.
+            </summary>
+            <param name="ipJobOperRowID">The rowid of the JobOper record to add the operation detail to</param>
+            <param name="ipResourceGrpID">The Resource Group ID being added</param>
+            <param name="ipNewOpDtlSeq">The new operation detail seq</param>
+            <param name="ipBeforeOpDtlRowid">The operation detail rowid to insert operation detail before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOpDtlResource(System.String,System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            This method allows for the insertion of Resource on an operation to create
+            operation detail for drag/drop functionality.
+            </summary>
+            <param name="ipJobOperRowID">The rowid of the JobOper record to add the operation detail to</param>
+            <param name="ipResourceID">The Resource ID being added</param>
+            <param name="ipNewOpDtlSeq">The new operation detail seq</param>
+            <param name="ipBeforeOpDtlRowid">The operation detail rowid to insert operation detail before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOperationOP(System.String,System.String,System.Int32,System.String,System.Boolean,System.String@)">
+            <summary>
+            This methods allows for the insertion on an operation for drag/drop functionality
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the operation to</param>
+            <param name="ipOpCode">The operation code being added</param>
+            <param name="ipNewOprSeq">The new operation seq</param>
+            <param name="ipBeforeOperRowid">The operation rowid to insert operation before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="opMessage">Warning message to let the user know that a subcontract operation
+            will be created with no vendor information. </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOperCapability(System.String,System.String,System.Int32,System.String,System.Boolean,System.String@)">
+            <summary>
+            This method allows for the insertion of Capability on an assembly to create
+            JobOper/JobOpDtl for drag/drop functionality.
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the operation detail to</param>
+            <param name="ipCapabilityID">The Capability ID being added</param>
+            <param name="ipNewOprSeq">The new operation seq</param>
+            <param name="ipBeforeOprRowid">The operation rowid to insert operation before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="opMessage">Warning message to let the user know that a subcontract operation
+            will be created with no vendor information. </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOperResGroup(System.String,System.String,System.Int32,System.String,System.Boolean,System.String@)">
+            <summary>
+            This method allows for the insertion of ResourceGroup on an assembly to create
+            JobOper/JobOpDtl for drag/drop functionality.
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the operation detail to</param>
+            <param name="ipResourceGrpID">The Resource Group ID being added</param>
+            <param name="ipNewOprSeq">The new operation seq</param>
+            <param name="ipBeforeOprRowid">The operation rowid to insert operation before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="opMessage">Warning message to let the user know that a subcontract operation
+            will be created with no vendor information. </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertOperResource(System.String,System.String,System.Int32,System.String,System.Boolean,System.String@)">
+            <summary>
+            This method allows for the insertion of Resource on an assembly to create
+            JobOper/JobOpDtl for drag/drop functionality.
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the operation detail to</param>
+            <param name="ipResourceID">The Resource ID being added</param>
+            <param name="ipNewOprSeq">The new operation seq</param>
+            <param name="ipBeforeOprRowid">The operation rowid to insert operation before</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="opMessage">Warning message to let the user know that a subcontract operation
+            will be created with no vendor information. </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.InsertSubAssembly(System.String,System.String,System.Int32,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            This methods allows for the insertion of a subassembly for drag/drop functionality,
+            validates the part.
+            </summary>
+            <param name="ipJobAsmblRowID">The rowid of the JobAsmbl record to add the material to</param>
+            <param name="ipPartNum">The part number being added</param>
+            <param name="ipOperSeq">The related operation seq (or 0 if unrelated)</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.JobScheduling(System.String,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Calls jc/jcshded.p and performs the job scheduling without an interface like in Sales Order
+            </summary>
+            <param name="ipJobNum">The Job to schedule</param>
+            <param name="ipReturn">Logical used to determine if you would like the dataset refreshed and brought back.</param>
+            <param name="ipStartAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCurrentAssemblySeq">The Assembly Sequence to return data for. </param>
+            <param name="ipCompleteTree">Would you like to retun a complete dataset for this job number? </param>
+            <returns>Job Entry data set</returns>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.PreCheckNewJobProd(System.String,System.String,System.String)">
+            <summary>
+            This method is ran before GetNewJobProd. It will determine if you can create a
+            demand link with a Make To Type of Stock. It will validate that you aren't creating
+            a Stock demand link with a non-stock part.
+            </summary>
+            <param name="ipJobNum">The job number to create the jobprod for</param>
+            <param name="ipPartNum">The part number to create the jobprod for </param>
+            <param name="ipMakeToType">The new maketotype value to create the jobprod with.
+            Valid Values: STOCK, ORDER, JOB </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.PreGetDetails(System.String,System.String,System.String,System.String,System.Int32,System.String@,System.String@,System.String@)">
+            <summary>
+            This method should be called right before the GetDetails method. It necessasry,
+            it'll return a question on resequencing assembly's while getting details.
+            The answer will be sent as a parameter to the GetDetails method.
+            This method will also return a BasePartNum and BaseRevisionNum. If the BasePartNum
+            isn't null then use this as the default part number for GetDetails.
+            </summary>
+            <param name="sourcePartNum">Indicates the source part number to get details from </param>
+            <param name="sourceRevisionNum">Indicates the source revision number to get details from </param>
+            <param name="sourceFile">Indicates where the details are being appended from. Either Quote,
+            Job or Method</param>
+            <param name="targetJobNum">Target Job Number</param>
+            <param name="targetAsm">Sequence of the target Assembly</param>
+            <param name="vMessage"> Returns resequence question </param>
+            <param name="basePartNum"> Returns the Base Part Number to use for get details </param>
+            <param name="baseRevisionNum"> Returns the Base Revision Number to use for get details </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.PreInsertSubAssembly(System.String,System.String@)">
+            <summary>
+            This method should be called right before the InsertMaterial. It necessasry,
+            it'll return a warning if there is no source method.
+            </summary>
+            <param name="ipPartNum">The inputted part number</param>
+            <param name="vMessage"> Returns warning </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.RemoveFromSchedule(System.String)">
+            <summary>
+            Removes job from schedule
+            </summary>
+            <param name="ipJobNum">Job number</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ValidateInspection(System.String,System.String,System.String,System.Boolean,Epicor.Mfg.BO.JobEntryDataSet)">
+            <summary>
+            Method to validate the Inspection control fields. (EQM)
+            </summary>
+            <param name="ipProposedInspPlan">The new proposed InspPlanPartNum value</param>
+            <param name="ipProposedSpecId">The new proposed SpecID value</param>
+            <param name="iptable">table name</param>
+            <param name="setRev">if set default revision</param>
+            <param name="ds" type="Epicor.Mfg.BO.JobEntryDataSet">The Job entry Dataset.</param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ValidateJobNum(System.String)">
+            <summary>
+            This method will validate that the job number entered not through a search
+            will be a valid job number for the entered plant.
+            </summary>
+            <param name="ipJobNum">The entered job number. </param>
+        </member>
+        <member name="M:Epicor.Mfg.IF.IJobEntry.ValidateRefDes(System.String,System.Int32)">
+            <summary>
+            Check the number of reference designators are equal to
+            the Required Ref Designators defined on JobMtl.
+            </summary>
+            <param name="ipJobNum">Job Number to validate</param>
+            <param name="ipAsmSeq">Assembly Seq of the Job Number to validate or -1 to validate all of them</param>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet.JbMtlAppDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet.JbOprAppDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet.JbMtlAppRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet.JbOprAppRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet.JbMtlAppRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JbAppendDataSet.JbOprAppRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatDataSet.JMtlStatDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatDataSet.JMtlStatRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatDataSet.JMtlStatRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatFiltersDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatFiltersDataSet.JMtlStatFiltersDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatFiltersDataSet.JMtlStatFiltersRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JMtlStatFiltersDataSet.JMtlStatFiltersRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet.AssemblyCostDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet.MaterialCostDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet.AssemblyCostRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet.MaterialCostRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet.AssemblyCostRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobCostsDataSet.MaterialCostRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobHeadListDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobHeadListDataSet.JobHeadListDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobHeadListDataSet.JobHeadListRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.JobHeadListDataSet.JobHeadListRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobHeadDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobHeadAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblInspDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlInspDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRefDesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRestrictionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRestrictSubstDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperAttchDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperInspDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOpDtlDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobResourcesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRestrictionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRestrictSubstDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRestrictionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRestrictSubstDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmRefDesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAuditDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobPartDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobProdDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobHeadRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobHeadAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblInspRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlInspRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRefDesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRestrictionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRestrictSubstRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperAttchRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperInspRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOpDtlRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobResourcesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRestrictionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRestrictSubstRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRestrictionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRestrictSubstRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmRefDesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAuditRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobPartRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobProdRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobHeadRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobHeadAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblInspRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlInspRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRefDesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRestrictionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobMtlRestrictSubstRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperAttchRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperInspRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOpDtlRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobResourcesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRestrictionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobOperRestrictSubstRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRestrictionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmblRestrictSubstRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAsmRefDesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobAuditRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobPartRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:Epicor.Mfg.BO.UpdExtJobEntryDataSet.JobProdRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+    </members>
+</doc>
