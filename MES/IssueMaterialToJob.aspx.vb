@@ -238,7 +238,8 @@ Partial Class MES_NEW_IssueMaterial
         Dim decBinQty As Decimal, decTransQty As Decimal, dsPartBin As New PartBinSearchDataSet, _
             strPlant As String, strWarehouse As String, strBinNum As String, strPartNum As String
         Dim dsJob As New JobEntryDataSet, dsEmpBasic As New EmpBasicDataSet, dsBAQ As New DataSet, _
-            strUser As String, decReqQty As Decimal, decEngYield As Decimal
+            strUser As String, decReqQty As Decimal, decEngYield As Decimal, strUOM As String = "", _
+            output As Integer
 
         'CHECK FOR EMPTY FIELDS
         If txtDept.Text = "" Then
@@ -283,6 +284,7 @@ Partial Class MES_NEW_IssueMaterial
             If row("MtlSeq") = txtMtlNum.Text And row("AssemblySeq") = txtAsm.Text Then
                 strPartNum = row("PartNum")
                 decReqQty = row("RequiredQty")
+                strUOM = row("IUM")
                 Exit For
             End If
         Next
@@ -294,6 +296,15 @@ Partial Class MES_NEW_IssueMaterial
             Return "Please enter a valid mtlseq for this job assembly."
         Else
         End If
+
+        'Check EA for whole number
+        If strUOM = "EA" Then
+            If (Integer.TryParse(decTransQty, output)) Then
+            Else
+                Return "Please issue a whole number."
+            End If
+        End If
+
 
         'Check Bin Qty
         Try
@@ -326,6 +337,11 @@ Partial Class MES_NEW_IssueMaterial
             Return "The maximum engineering yield that can be issued is " & decReqQty & ". The rest must be issued using the other categories below."
         End If
 
+        'Check EA
+        If EA_Check() = False Then
+            Return "Please enter whole numbers in each box."
+        End If
+
         'Check if employee exists
         dsEmpBasic = BO_EmpBasic.Get_By_ID(txtEmpID.Text)
         If dsEmpBasic.Tables("EmpBasic").Rows.Count = 0 Then
@@ -334,7 +350,7 @@ Partial Class MES_NEW_IssueMaterial
             Return "true"
         End If
 
-        
+
 
     End Function
 
@@ -343,6 +359,83 @@ Partial Class MES_NEW_IssueMaterial
         MESTab = Master.FindControl("mestab")
         MESTab.Attributes.Add("class", "active")
     End Sub
+
+    Protected Function EA_Check() As Boolean
+        Dim dsJob As New JobEntryDataSet, strUOM As String = "", output As Integer
+
+        dsJob = BO_JobEntry.Get_By_ID(txtJobNum.Text)
+        For Each row As DataRow In dsJob.Tables("JobMtl").Rows
+            If row("MtlSeq") = txtMtlNum.Text And row("AssemblySeq") = txtAsm.Text Then
+                strUOM = row("IUM")
+                Exit For
+            End If
+        Next
+
+        'Check EA for whole number
+        If strUOM = "EA" Then
+
+            If txtOverProduction.Text = "" Then
+            ElseIf txtOverProduction.Text = 0 Then
+            Else
+                If (Integer.TryParse(txtOverProduction.Text, output)) Then
+                Else
+                    Return False
+                End If
+            End If
+
+            If txtDamagedMtl.Text = "" Then
+            ElseIf txtDamagedMtl.Text = 0 Then
+            Else
+                If (Integer.TryParse(txtDamagedMtl.Text, output)) Then
+                Else
+                    Return False
+                End If
+            End If
+
+            If txtScrap.Text = "" Then
+            ElseIf txtScrap.Text = 0 Then
+            Else
+                If (Integer.TryParse(txtScrap.Text, output)) Then
+                Else
+                    Return False
+                End If
+            End If
+
+            If txtDrop.Text = "" Then
+            ElseIf txtDrop.Text = 0 Then
+            Else
+                If (Integer.TryParse(txtDrop.Text, output)) Then
+                Else
+                    Return False
+                End If
+            End If
+
+            If txtNonUsable.Text = "" Then
+            ElseIf txtNonUsable.Text = 0 Then
+            Else
+                If (Integer.TryParse(txtNonUsable.Text, output)) Then
+                Else
+                    Return False
+                End If
+            End If
+
+            If txtEngYield.Text = "" Then
+            ElseIf txtEngYield.Text = 0 Then
+            Else
+                If (Integer.TryParse(txtEngYield.Text, output)) Then
+                Else
+                    Return False
+                End If
+            End If
+
+
+        Else 'This is not an EACH. Let it go.
+            Return True
+        End If 'IF EA
+
+        Return True
+
+    End Function
 
     Protected Sub btnCheckIssue_Click(sender As Object, e As EventArgs) Handles btnCheckIssue.Click
         Dim dsJob As New JobEntryDataSet
