@@ -749,32 +749,32 @@ Partial Class Import_PPP
 
         'Combine Rows
         For intRowCount = 3 To dtForecast.Rows.Count - 2
-            If dtForecast.Rows(intRowCount)("F6") = dtForecast.Rows(intRowCount + 1)("F6") And _
+            If dtForecast.Rows(intRowCount)("F7") = dtForecast.Rows(intRowCount + 1)("F7") And _
                 dtForecast.Rows(intRowCount)("F2") = dtForecast.Rows(intRowCount + 1)("F2") Then
-                If IsDBNull(dtForecast.Rows(intRowCount + 1)("F7")) Then
+                If IsDBNull(dtForecast.Rows(intRowCount + 1)("F8")) Then
                     intQty1 = 0
                 Else
-                    intQty1 = CInt(dtForecast.Rows(intRowCount + 1)("F7"))
+                    intQty1 = CInt(dtForecast.Rows(intRowCount + 1)("F8"))
                 End If
-                If IsDBNull(dtForecast.Rows(intRowCount)("F7")) Then
+                If IsDBNull(dtForecast.Rows(intRowCount)("F8")) Then
                     intQty2 = 0
                 Else
-                    intQty2 = CInt(dtForecast.Rows(intRowCount)("F7"))
+                    intQty2 = CInt(dtForecast.Rows(intRowCount)("F8"))
                 End If
-                dtForecast.Rows(intRowCount + 1)("F7") = intQty1 + intQty2
-                dtForecast.Rows(intRowCount)("F7") = ""
+                dtForecast.Rows(intRowCount + 1)("F8") = intQty1 + intQty2
+                dtForecast.Rows(intRowCount)("F8") = ""
             End If
         Next
 
         For Each row As DataRow In dtForecast.Rows
             bolTrigger = False
             If i < 3 Then 'skip first two rows
-            ElseIf IsDBNull(row("F6")) = True Then 'skip if null part
-            ElseIf row("F7").ToString = "" Then 'skip if null 
+            ElseIf IsDBNull(row("F7")) = True Then 'skip if null part
+            ElseIf row("F8").ToString = "" Then 'skip if null 
             Else
                 'Grab initial values
-                strCustomerPartNum = row("F6").ToString
-                intOrderQty = CInt(row("F7"))
+                strCustomerPartNum = row("F7").ToString
+                intOrderQty = CInt(row("F8"))
                 dteForecastDate = row("F2")
                 dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
 
@@ -1728,13 +1728,33 @@ Partial Class Import_PPP
         Dim strPlant As String = "", strOurPartNum As String = "", strCustomerPartNum As String = "", _
         dteForecastDate As DateTime, dteCutOffDate As Date = Today.AddDays(21), strForecastDate As String = "", _
         intOrderQty As Integer, i As Integer = 1, strParsedDate As String = "", strErrorLog As String = "", intStatus As Integer = 0, _
-        intMinOrderQty As Integer = 0, intOH As Integer = 0, strLastCustPN As String = ""
+        intMinOrderQty As Integer = 0, intOH As Integer = 0, strLastCustPN As String = "", intOnOrder As Integer = 0
 
         'Import Cross Ref
         Import_CrossRef("Weiler")
 
         'Update status
         Session("Stage") = "Importing Forecasts"
+
+        'Get on order qty
+        Dim sUser As String = "sc"
+        Dim sPass As String = "DEMETER@!"
+        Dim sServer As String = "zeus"
+        Dim sPort As String = "9408"
+        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+        Dim sCompany As String = "RMT"
+        Dim mysession As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+
+        Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
+        Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
+        Dim dsDataSet As DataSet
+        qds = dq.GetByID("RMT-WeilerFirmOrders")
+
+        dsDataSet = dq.Execute(qds)
+
+        connPool.Dispose()
+
 
         For Each row As DataRow In dtForecast.Rows
             If i = 1 Then 'skip first row
@@ -1747,10 +1767,31 @@ Partial Class Import_PPP
                 dteForecastDate = row("F5")
                 dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
 
+                For Each row2 As DataRow In dtCrossRef.Rows
+                    If strCustomerPartNum = row2("F1") Then
+                        strPlant = row2("F3")
+                        strOurPartNum = row2("F2")
+                        intMinOrderQty = CInt(row2("F4"))
+                        Exit For
+                    Else
+                    End If 'If customer part matches in cross ref
+                Next 'For each row in the cross ref table
+
+                intOnOrder = 0
+
+                'Get ON ORDER
+                For Each row2 As DataRow In dsDataSet.Tables(0).Rows
+                    If row2(0) = strOurPartNum Then
+                        intOnOrder = row2(1)
+                        Exit For
+                    Else
+                    End If
+                Next
+
                 'Verify OH qty
                 If strCustomerPartNum = strLastCustPN Then
                 Else
-                    intOH = CInt(row("F6"))
+                    intOH = CInt(row("F6")) + intOnOrder
                 End If
 
                 If intOH >= intOrderQty Then
@@ -1774,15 +1815,7 @@ Partial Class Import_PPP
                 'Skip dates that are before the cutoff date or if it is not a forecast
                 If dteForecastDate < dteCutOffDate Then 'do nothing
                 Else
-                    For Each row2 As DataRow In dtCrossRef.Rows
-                        If strCustomerPartNum = row2("F1") Then
-                            strPlant = row2("F3")
-                            strOurPartNum = row2("F2")
-                            intMinOrderQty = CInt(row2("F4"))
-                            Exit For
-                        Else
-                        End If 'If customer part matches in cross ref
-                    Next 'For each row in the cross ref table
+
 
                     'Check for blank plant
                     If strPlant = "" Then
