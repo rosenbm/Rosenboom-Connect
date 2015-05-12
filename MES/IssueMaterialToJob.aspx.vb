@@ -354,7 +354,7 @@ Partial Class MES_NEW_IssueMaterial
 
     End Function
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs)
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim MESTab As System.Web.UI.HtmlControls.HtmlGenericControl
         MESTab = Master.FindControl("mestab")
         MESTab.Attributes.Add("class", "active")

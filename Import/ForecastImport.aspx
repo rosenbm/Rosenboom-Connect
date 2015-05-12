@@ -34,6 +34,7 @@
                 <asp:ListItem>CNH Burlington</asp:ListItem>
                 <asp:ListItem>CNH Calhoun</asp:ListItem>
                 <asp:ListItem>CNH Canada</asp:ListItem>
+                <asp:ListItem>CNH Cordoba</asp:ListItem>
                 <asp:ListItem>CNH Curitiba</asp:ListItem>
                 <asp:ListItem>CNH Italia</asp:ListItem>
                 <asp:ListItem>CNH Parts</asp:ListItem>

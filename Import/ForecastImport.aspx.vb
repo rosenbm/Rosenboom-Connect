@@ -110,6 +110,8 @@ Partial Class Import_PPP
                 CNH(Get_Cust_Num)
             Case "CNH Calhoun"
                 CNH(Get_Cust_Num)
+            Case "CNH Cordoba"
+                CNH(Get_Cust_Num)
             Case "CNH Curitiba"
                 CNH(Get_Cust_Num)
             Case "CNH Italia"
@@ -207,6 +209,8 @@ Partial Class Import_PPP
                 Return 809
             Case "CNH Calhoun"
                 Return 828
+            Case "CNH Cordoba"
+                Return 836
             Case "CNH Curitiba"
                 Return 699
             Case "CNH Italia"
@@ -727,7 +731,8 @@ Partial Class Import_PPP
         Dim strPlant As String = "", strOurPartNum As String = "", strCustomerPartNum As String, strErrorLog As String = "", _
         dteForecastDate As DateTime, dteCutOffDate As Date = Today.AddDays(21), strForecastDate As String = "", _
         intOrderQty As Integer, i As Integer = 1, intCrossRefRowCount As Integer, strParsedDate As String = "", _
-        intStatus As Integer = 0, dteCompareDate As Date = Today(), bolTrigger As Boolean = False, intQty1 As Integer, intQty2 As Integer
+        intStatus As Integer = 0, dteCompareDate As Date = Today(), bolTrigger As Boolean = False, intQty1 As Integer, intQty2 As Integer, _
+        dteThisRow As Date = Today(), dteNextRow As Date = Today()
 
         'Set Trigger Parts
         Dim strTriggerPart(8) As String
@@ -747,102 +752,146 @@ Partial Class Import_PPP
         'Update status
         Session("Stage") = "Importing Forecasts"
 
+
+        'Get Dates in one column
+        'For intRowCount = 3 To dtForecast.Rows.Count
+        '    Try
+        '        If IsDBNull(dtForecast.Rows(intRowCount)("F2")) Then
+        '            dtForecast.Rows(intRowCount)("F2") = dtForecast.Rows(intRowCount)("F3")
+        '        End If
+        '    Catch ex As Exception
+        '    End Try
+        'Next
+        
+        'dtForecast.AcceptChanges()
+
         'Combine Rows
-        For intRowCount = 3 To dtForecast.Rows.Count - 2
-            If dtForecast.Rows(intRowCount)("F7") = dtForecast.Rows(intRowCount + 1)("F7") And _
-                dtForecast.Rows(intRowCount)("F2") = dtForecast.Rows(intRowCount + 1)("F2") Then
-                If IsDBNull(dtForecast.Rows(intRowCount + 1)("F8")) Then
-                    intQty1 = 0
+        For intRowCount = 3 To dtForecast.Rows.Count - 1
+
+            'Get Dates
+            Try
+                If IsDBNull(dtForecast.Rows(intRowCount)("F3")) Then
+                    dteThisRow = dtForecast.Rows(intRowCount)("F2")
                 Else
-                    intQty1 = CInt(dtForecast.Rows(intRowCount + 1)("F8"))
+                    dteThisRow = dtForecast.Rows(intRowCount)("F3")
                 End If
-                If IsDBNull(dtForecast.Rows(intRowCount)("F8")) Then
-                    intQty2 = 0
+            Catch ex As Exception
+                dteThisRow = Today
+            End Try
+            Try
+                If IsDBNull(dtForecast.Rows(intRowCount + 1)("F3")) Then
+                    dteNextRow = dtForecast.Rows(intRowCount + 1)("F2")
                 Else
-                    intQty2 = CInt(dtForecast.Rows(intRowCount)("F8"))
+                    dteNextRow = dtForecast.Rows(intRowCount + 1)("F3")
                 End If
-                dtForecast.Rows(intRowCount + 1)("F8") = intQty1 + intQty2
-                dtForecast.Rows(intRowCount)("F8") = ""
-            End If
+            Catch ex As Exception
+                dteNextRow = Today
+            End Try
+
+            Try
+                If dtForecast.Rows(intRowCount)("F7") = dtForecast.Rows(intRowCount + 1)("F7") And _
+                    dteThisRow = dteNextRow Then
+                    If IsDBNull(dtForecast.Rows(intRowCount + 1)("F8")) Then
+                        intQty1 = 0
+                    Else
+                        intQty1 = CInt(dtForecast.Rows(intRowCount + 1)("F8"))
+                    End If
+                    If IsDBNull(dtForecast.Rows(intRowCount)("F8")) Then
+                        intQty2 = 0
+                    Else
+                        intQty2 = CInt(dtForecast.Rows(intRowCount)("F8"))
+                    End If
+                    dtForecast.Rows(intRowCount + 1)("F8") = intQty1 + intQty2
+                    dtForecast.Rows(intRowCount)("F8") = ""
+                End If
+            Catch ex As Exception
+            End Try
+
         Next
 
-        For Each row As DataRow In dtForecast.Rows
-            bolTrigger = False
-            If i < 3 Then 'skip first two rows
-            ElseIf IsDBNull(row("F7")) = True Then 'skip if null part
-            ElseIf row("F8").ToString = "" Then 'skip if null 
-            Else
-                'Grab initial values
-                strCustomerPartNum = row("F7").ToString
-                intOrderQty = CInt(row("F8"))
-                dteForecastDate = row("F2")
-                dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
-
-                'Skip dates that are before the cutoff date or if it is not a forecast
-                For Each row2 As DataRow In dtCrossRef.Rows
-                    If strCustomerPartNum = row2("F1") Then
-                        strPlant = row2("F3")
-                        strOurPartNum = row2("F2")
-                        Exit For
-                    Else
-                    End If 'If customer part matches in cross ref
-                Next 'For each row in the cross ref table
-
-                For arr As Integer = 0 To 8
-                    If strOurPartNum = strTriggerPart(arr) Then
-                        bolTrigger = True
-                        Exit For
-                    End If
-                Next
-
-                If bolTrigger = True Then
-                    dteCompareDate = Today.AddDays(5)
+            For Each row As DataRow In dtForecast.Rows
+                bolTrigger = False
+                If i < 3 Then 'skip first two rows
+                ElseIf IsDBNull(row("F7")) = True Then 'skip if null part
+                ElseIf row("F8").ToString = "" Then 'skip if null 
                 Else
-                    dteCompareDate = dteCutOffDate
+                    'Grab initial values
+                    strCustomerPartNum = row("F7").ToString
+                    intOrderQty = CInt(row("F8"))
+
+                If IsDBNull(row("F3")) Then
+                    dteForecastDate = row("F2")
+                Else
+                    dteForecastDate = row("F3")
                 End If
 
+                    dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
 
-                If dteForecastDate < dteCompareDate Then 'do nothing
-                    'Check for blank plant
-                ElseIf strPlant = "" Then
-                    'strOurPartNum = InputBox("Please enter the RMT part for AGCO part #" & strCustomerPartNum)
-                    'strPlant = InputBox("Please enter plant for " & strOurPartNum & vbCrLf & vbCrLf & _
-                    '                        "Sheldon = MfgSys" & vbCrLf & "Spirit Lake = SPIRITLA" & vbCrLf & _
-                    '                        "Ohio = GMI")
-                    'dteForecastDate = dteForecastDate.AddDays(-7)
-                    'dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
-                    If strErrorLog = "" Then
-                        strErrorLog = "The following customer parts had errors:" & vbCrLf
+                    'Skip dates that are before the cutoff date or if it is not a forecast
+                    For Each row2 As DataRow In dtCrossRef.Rows
+                        If strCustomerPartNum = row2("F1") Then
+                            strPlant = row2("F3")
+                            strOurPartNum = row2("F2")
+                            Exit For
+                        Else
+                        End If 'If customer part matches in cross ref
+                    Next 'For each row in the cross ref table
+
+                    For arr As Integer = 0 To 8
+                        If strOurPartNum = strTriggerPart(arr) Then
+                            bolTrigger = True
+                            Exit For
+                        End If
+                    Next
+
+                    If bolTrigger = True Then
+                        dteCompareDate = Today.AddDays(5)
+                    Else
+                        dteCompareDate = dteCutOffDate
                     End If
-                    strErrorLog &= strCustomerPartNum & vbCrLf
-                    'Check for OHIO
-                ElseIf strPlant = "GMI" Then
-                Else
-                    'Create Forecast
-                    Try
-                        Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustomerNum)
-                    Catch ex As Exception
+
+
+                    If dteForecastDate < dteCompareDate Then 'do nothing
+                        'Check for blank plant
+                    ElseIf strPlant = "" Then
+                        'strOurPartNum = InputBox("Please enter the RMT part for AGCO part #" & strCustomerPartNum)
+                        'strPlant = InputBox("Please enter plant for " & strOurPartNum & vbCrLf & vbCrLf & _
+                        '                        "Sheldon = MfgSys" & vbCrLf & "Spirit Lake = SPIRITLA" & vbCrLf & _
+                        '                        "Ohio = GMI")
+                        'dteForecastDate = dteForecastDate.AddDays(-7)
+                        'dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
                         If strErrorLog = "" Then
                             strErrorLog = "The following customer parts had errors:" & vbCrLf
                         End If
                         strErrorLog &= strCustomerPartNum & vbCrLf
-                    End Try
-                End If 'Plant Check
+                        'Check for OHIO
+                    ElseIf strPlant = "GMI" Then
+                    Else
+                        'Create Forecast
+                        Try
+                            Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustomerNum)
+                        Catch ex As Exception
+                            If strErrorLog = "" Then
+                                strErrorLog = "The following customer parts had errors:" & vbCrLf
+                            End If
+                            strErrorLog &= strCustomerPartNum & vbCrLf
+                        End Try
+                    End If 'Plant Check
 
 
-            End If 'If first row
+                End If 'If first row
 
-            'VARIABLE CLEAN UP
-            strPlant = ""
-            i += 1
-            intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
-            If intStatus = 100 Then
-                intStatus = 99
-            End If
-            Session("Progress") = intStatus
-        Next
-        Session("Progress") = 100
-        Session("Stage") = strErrorLog
+                'VARIABLE CLEAN UP
+                strPlant = ""
+                i += 1
+                intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
+                If intStatus = 100 Then
+                    intStatus = 99
+                End If
+                Session("Progress") = intStatus
+            Next
+            Session("Progress") = 100
+            Session("Stage") = strErrorLog
     End Sub
 
     Private Sub Gehl_Madison(intCustNum As Integer)
