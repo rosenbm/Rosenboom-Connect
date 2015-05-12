@@ -615,3 +615,6 @@ div #progressdiv {
     z-index:1000;
     opacity: .85;
 }
+div.col3 div#intro {
+    height: auto;
+}
