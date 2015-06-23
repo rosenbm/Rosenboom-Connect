@@ -140,8 +140,12 @@ Partial Class Import_PPP
                 OTC(intCustNum)
             Case "John Deere"
                 DEERE(Get_Cust_Num)
+            Case "Lift Tek"
+                LiftTek(Get_Cust_Num)
             Case "McNeilus"
                 OTC(intCustNum)
+            Case "OshKosh Mexico"
+                OshKosh_Mexico(Get_Cust_Num)
             Case "OTC"
                 OTC(intCustNum)
             Case "Pierce"
@@ -233,8 +237,12 @@ Partial Class Import_PPP
                 Return 225
             Case "John Deere"
                 Return 390
+            Case "Lift Tek"
+                Return 430
             Case "McNeilus"
                 Return 337
+            Case "OshKosh Mexico"
+                Return 839
             Case "OTC"
                 Return 332
             Case "Pierce"
@@ -1329,6 +1337,174 @@ Partial Class Import_PPP
         Session("Stage") = strErrorLog
     End Sub
 
+    Private Sub LiftTek(intCustNum As Integer)
+        Dim strPlant As String = "", strOurPartNum As String = "", strXPartNum As String, _
+             dteForecastDate As DateTime, dteCutOffDate As Date = Today.AddDays(21), strErrorLog As String = "", _
+             intOrderQty As Integer, intMonthlyQty As Integer = 0, bolCrossRef As Boolean = False, i As Integer = 0, _
+             bolIsNumeric As Boolean = False, dteEndDate As Date = Today.AddDays(365), intOnHandQty As Integer = 0
+
+        'Import Cross Ref
+        Import_CrossRef(ddlCustomer.Text)
+        Session("Stage") = "Importing Forecasts"
+        Session("Progress") = 0
+
+        'Start Generating Forecast
+        For Each dgvrow As DataRow In dtForecast.Rows
+            If i < 8 Then
+            ElseIf IsNumeric(dgvrow(8)) = False Then
+            Else
+                'Get Customer PartNumber
+                strXPartNum = dgvrow(2)
+                intMonthlyQty = dgvrow(8)
+                intOnHandQty = dgvrow(7)
+
+                'Check monthly qty
+                If intMonthlyQty < 1 Then
+                Else
+                    'Find Reference in Cross Reference File
+                    For Each row As DataRow In dtCrossRef.Rows
+                        If strXPartNum = row(0) Then
+                            Try
+                                strPlant = row(2)
+                                strOurPartNum = row(1)
+                                bolCrossRef = True
+                                Exit For
+                            Catch ex As Exception
+                            End Try
+
+                        End If
+                    Next 'Row in Cross Ref
+
+                    'Set Starting Forecast Date
+                    dteForecastDate = Find_Weekday(Today.AddDays(30), 2)
+
+                    'Cylce through until the end date
+                    Do Until dteForecastDate > dteEndDate
+                        If intOnHandQty > intMonthlyQty Then
+                            intOnHandQty -= intMonthlyQty
+                            intOrderQty = 0
+                        Else
+                            intOrderQty = intMonthlyQty - intOnHandQty
+                            intOnHandQty = 0
+                        End If
+
+                        If intOrderQty = 0 Then
+                        ElseIf bolCrossRef = False Then
+                            If strErrorLog = "" Then
+                                strErrorLog = "The following customer parts had errors:" & vbCrLf
+                            End If
+                            strErrorLog &= strXPartNum & vbCrLf
+                        Else
+                            Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustNum)
+                        End If
+
+                        'Add days
+                        dteForecastDate = Find_Weekday(dteForecastDate.AddDays(30), 2)
+                    Loop
+
+                End If 'Check monthly qty
+            End If 'Check for first 8 rows
+            'Cleanup Variables
+            bolCrossRef = False
+            i += 1
+            'UPDATE STATUS
+            Session("Progress") = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
+            strPlant = ""
+        Next 'Row in Datagridview
+
+        Session("Progress") = 100
+        Session("Stage") = strErrorLog
+
+    End Sub
+
+    Private Sub OshKosh_Mexico(ByVal intCustNum As Integer)
+        Dim strPlant As String = "", strOurPartNum As String, strCustomerPartNum As String, _
+             dteForecastDate As DateTime, dteCutOffDate As Date = Today.AddDays(21), _
+             intOrderQty As Integer, dteColumnDate As Date, intRowCount As Integer, i As Integer = 0, intMax As Integer, _
+             intStatus As Integer = 0, strErrorLog As String = ""
+
+        'Import Cross Ref
+        Import_CrossRef(ddlCustomer.Text)
+        'Update Status
+        Session("Stage") = "Importing Forecasts"
+        Session("Progress") = 0
+
+        'Start Generating Forecast
+        intMax = dtForecast.Rows.Count * 50
+        'Go through all the rows for each column
+        For colDates As Integer = 9 To 43
+            intRowCount = 1
+            For Each row As DataRow In dtForecast.Rows
+                If intRowCount < 4 Then
+                ElseIf intRowCount = 4 Then
+                    dteColumnDate = row("F" & colDates)
+                Else
+                    If IsDBNull(row("F1")) = True Then
+                    Else
+                        strCustomerPartNum = row("F1")
+                        dteForecastDate = dteColumnDate
+                        intOrderQty = row(colDates - 1)
+
+                        'Skip dates that are before the cutoff date or if it is not a forecast
+                        If dteForecastDate < dteCutOffDate Or intOrderQty = 0 Then
+                        Else
+                            For Each row2 As DataRow In dtCrossRef.Rows
+                                If strCustomerPartNum = row2("F1") Then
+                                    strPlant = row2("F3")
+                                    strOurPartNum = row2("F2")
+                                    dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                                    Exit For
+                                Else
+                                End If 'If customer part matches in cross ref
+
+                            Next 'For each row in the cross ref table
+
+                            'Check for blank plant
+                            If strPlant = "" Then
+                                'strOurPartNum = InputBox("Please enter the RMT part for AGCO part #" & strCustomerPartNum)
+                                'strPlant = InputBox("Please enter plant for " & strOurPartNum & vbCrLf & vbCrLf & _
+                                '                        "Sheldon = MfgSys" & vbCrLf & "Spirit Lake = SPIRITLA" & vbCrLf & _
+                                '                        "Ohio = GMI")
+                                'dteForecastDate = dteForecastDate.AddDays(-7)
+                                'dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                                If strErrorLog = "" Then
+                                    strErrorLog = "The following customer parts had errors:" & vbCrLf
+                                End If
+                                strErrorLog &= strCustomerPartNum & vbCrLf
+                                'Check for OHIO
+                            ElseIf strPlant = "GMI" Then
+                            Else
+                                Try
+                                    'Create Forecast
+                                    Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustNum)
+                                Catch ex As Exception
+                                    If strErrorLog = "" Then
+                                        strErrorLog = "The following customer parts had errors:" & vbCrLf
+                                    End If
+                                    strErrorLog &= strCustomerPartNum & vbCrLf
+                                End Try
+
+                            End If 'Plant Check
+
+                        End If 'If the forecast date is before the cutoff or no qty
+                    End If 'If there is no part number in the forecast row
+                End If 'If 1st row
+                strPlant = ""
+                intRowCount += 1
+                i += 1
+                intStatus = Math.Round((i / intMax) * 100, 0)
+                If intStatus = 100 Then
+                    intStatus = 99
+                End If
+                Session("Progress") = intStatus
+            Next 'For each row in the forecast
+        Next 'for each column in the dates portion
+
+
+        Session("Progress") = 100
+        Session("Stage") = strErrorLog
+    End Sub
+
     Private Sub OTC(ByVal intCustNum As Integer)
         Dim strPlant As String = "", strOurPartNum As String, strCustomerPartNum As String, _
              dteForecastDate As DateTime, dteCutOffDate As Date = Today.AddDays(21), _
@@ -1569,6 +1745,7 @@ Partial Class Import_PPP
                 strType = row("F7")
                 dteForecastDate = row("F5")
                 dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                dteForecastDate = dteForecastDate.AddDays(-7)
 
                 'Skip dates that are before the cutoff date or if it is not a forecast
                 If dteForecastDate < dteCutOffDate Then 'do nothing

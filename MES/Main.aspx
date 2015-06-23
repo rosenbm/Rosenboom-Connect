@@ -146,6 +146,10 @@
     Protected Sub btnmoverequest_Click(sender As Object, e As EventArgs)
         Response.Redirect("MoveRequest.aspx")
     End Sub
+
+    Protected Sub btnFixture_Click(sender As Object, e As EventArgs)
+        Response.Redirect("FixtureLookup.aspx")
+    End Sub
 </script>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -172,6 +176,8 @@
         Width="150px" Font-Size="Large" onclick="btnflip_Click" /></li>
 <li><asp:Button ID="btnmoverequest" runat="server" Text="Move Request" Height="150px" 
         Width="150px" Font-Size="Large" OnClick="btnmoverequest_Click" /></li>
+<li><asp:Button ID="btnFixture" runat="server" Text="Fixture Lookup" Height="150px" 
+        Width="150px" Font-Size="Large" OnClick="btnFixture_Click" /></li>
 </ul>
 </div>
 

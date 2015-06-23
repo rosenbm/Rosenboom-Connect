@@ -62,6 +62,7 @@
                         <ul><li><a href="/Import/ForecastImport.aspx">Customer Forecast</a></li>
                             <li><a href="/Import/PartPlantParameters.aspx">Part Plant Parameters</a></li>
                             <li><a href="/Import/PartsRoomShortages.aspx">Parts Room Shortages</a></li>
+                            <li><a href="/Import/NonConf.aspx">Non-Conformance</a></li>
                         </ul>
                     </li>
                     <li id="admintab" runat="server"><a href="#">Admin</a>

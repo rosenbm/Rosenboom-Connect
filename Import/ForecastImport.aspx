@@ -46,7 +46,9 @@
                 <asp:ListItem>Heil</asp:ListItem>
                 <asp:ListItem>JLG</asp:ListItem>
                 <asp:ListItem>John Deere</asp:ListItem>
+                <asp:ListItem>Lift Tek</asp:ListItem>
                 <asp:ListItem>McNeilus</asp:ListItem>
+                <asp:ListItem>OshKosh Mexico</asp:ListItem>
                 <asp:ListItem>OTC</asp:ListItem>
                 <asp:ListItem>Pierce</asp:ListItem>
                 <asp:ListItem>Scranton</asp:ListItem>
