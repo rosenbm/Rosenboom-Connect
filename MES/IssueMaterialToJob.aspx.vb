@@ -179,7 +179,7 @@ Partial Class MES_NEW_IssueMaterial
         'Get New Issue Return
         dsIssueReturn = BO_IssueReturn.GetNewIssueReturnToJob(strUser, txtJobNum.Text, txtAsm.Text)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn1.xml")
-
+        decTranQty = Math.Round(decTranQty, 2)
         'On Change To Job Seq
         dsIssueReturn.Tables(0).Rows(0)("ToJobSeq") = txtMtlNum.Text
         dsIssueReturn.Tables(0).Rows(0)("RowMod") = "U"
@@ -438,18 +438,47 @@ Partial Class MES_NEW_IssueMaterial
     End Function
 
     Protected Sub btnCheckIssue_Click(sender As Object, e As EventArgs) Handles btnCheckIssue.Click
-        Dim dsJob As New JobEntryDataSet
+        Dim dsJob As New JobEntryDataSet, strPN As String = "", myPartDS As New PartBinSearchDataSet, bolFOundOne As Boolean = False, strWhse As String = "", _
+            strPlant As String = ""
         Try
             dsJob = BO_JobEntry.Get_By_ID(txtJobNum.Text)
+            strPlant = dsJob.Tables("JobHead").Rows(0)("Plant")
             For Each row As DataRow In dsJob.Tables("JobMtl").Rows
                 If row("AssemblySeq") = txtAsm.Text And row("MtlSeq") = txtMtlNum.Text Then
-                    lblMessage.Text = row("PartNum") & " - Previously Issued: " & row("IssuedQty")
-                    Exit Sub
+                    lblMessage.Text = row("PartNum") & " - Previously Issued: " & row("IssuedQty") & vbCrLf & " --- Bin Contains: "
+                    strPN = row("PartNum")
+                    bolFOundOne = True
+                    Exit For
                 End If
             Next
-            lblMessage.Text = "Please enter a correct job, assembly, and material sequence."
+            If bolFOundOne = False Then
+                lblMessage.Text = "Please enter a correct job, assembly, and material sequence."
+            End If
         Catch ex As Exception
             lblMessage.Text = "Please enter a correct job, assembly, and material sequence."
+        End Try
+
+        Try
+            If strPlant = "MfgSys" Then
+                strWhse = "SHE"
+            Else
+                strWhse = "SPL"
+            End If
+
+            myPartDS = BO_PartBin.Get_Part_Bin_Search(strPN, strWhse)
+            bolFOundOne = False
+            For Each row As DataRow In myPartDS.Tables(0).Rows
+                If row("BinNum") = txtFromBin.Text Then
+                    bolFOundOne = True
+                    lblMessage.Text &= Math.Round(row("QtyOnHand"), 2)
+                    Exit For
+                End If
+            Next
+            If bolFOundOne = False Then
+                lblMessage.Text &= 0
+            End If
+        Catch ex As Exception
+            lblMessage.Text &= 0
         End Try
     End Sub
 End Class

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <div class="wrapper col3 covergolden">
+    <div class="wrapper col3">
 <div id="intro">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
@@ -265,8 +265,34 @@
                     <tr><td>11"</td><td>.92</td></tr>
                 </table>
             </div>
-    
-    
+    <br />
+    <br />
+                
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EnableModelValidation="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+        <Columns>
+            <asp:BoundField DataField="TranDate" HeaderText="TranDate" SortExpression="TranDate" DataFormatString="{0:d}" />
+            <asp:BoundField DataField="PartNum" HeaderText="PartNum" SortExpression="PartNum" />
+            <asp:BoundField DataField="TranQty" HeaderText="TranQty" SortExpression="TranQty" DataFormatString="{0:f2}" />
+            <asp:BoundField DataField="TranReference" HeaderText="TranReference" SortExpression="TranReference" />
+        </Columns>
+                    <EditRowStyle BackColor="#999999" />
+                    <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+    </asp:GridView>
+                
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Epicor9RU %>" ProviderName="<%$ ConnectionStrings:Epicor9RU.ProviderName %>" SelectCommand="SELECT TranDate, PartNum, TranQty, TranReference
+FROM MFGSYS.PUB.PartTran
+WHERE Company = 'RMT' AND TranType = 'STK-MTL' AND JobNum = ? AND AssemblySeq = ? AND JobSeq = ?">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="txtJobNum" Name="?" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAsm" Name="?" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="txtMtlNum" Name="?" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
             </div>
             </div>
            
