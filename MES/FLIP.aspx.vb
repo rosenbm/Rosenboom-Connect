@@ -98,6 +98,10 @@ Partial Class MES_FLIP
         'Update
         dsUD01 = BO_UD01.Update(dsUD01)
     End Sub
+
+    Protected Sub btnRefreshOps_Click(sender As Object, e As EventArgs) Handles btnRefreshOps.Click
+
+    End Sub
 End Class
 Public Class BO_UD01
     Public Shared Function Get_New() As UD01DataSet
