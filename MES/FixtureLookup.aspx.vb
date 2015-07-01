@@ -17,11 +17,19 @@ Partial Class MES_FLIP
         Dim MESTab As System.Web.UI.HtmlControls.HtmlGenericControl
         MESTab = Master.FindControl("mestab")
         MESTab.Attributes.Add("class", "active")
+
     End Sub
 
 
 
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+
+    End Sub
+
+
+    Protected Sub gvwJobOpers_RowDataBound(sender As Object, e As GridViewRowEventArgs)
+        e.Row.Attributes("onmouseover") = "onMouseOver('" & (e.Row.RowIndex + 1) & "')"
+        'e.Row.Attributes("onmouseout") = "onMouseOut('" & (e.Row.RowIndex + 1) & "')"
 
     End Sub
 End Class
