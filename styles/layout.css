@@ -172,7 +172,7 @@ color:#3A6C86;	background-color:#E3F1F9;
 	font-family:Georgia, "Times New Roman", Times, serif;
 	top: 0px;
 	left: 0px;
-	height: 550px;
+	/*height: 550px;*/
 }
 
 #intro .fl_left{
@@ -614,7 +614,4 @@ div #progressdiv {
     color: white;
     z-index:1000;
     opacity: .85;
-}
-div.col3 div#intro {
-    height: auto;
 }
