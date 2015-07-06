@@ -226,9 +226,9 @@ Partial Class Import_PPP
             Case "CNH Wichita"
                 Return 826
             Case "Gehl Madison"
-                Return 82
+                Return 842
             Case "Gehl Yankton"
-                Return 82
+                Return 841
             Case "Hagie"
                 Return 334
             Case "Heil"
