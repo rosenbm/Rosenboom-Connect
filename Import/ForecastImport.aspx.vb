@@ -1894,6 +1894,7 @@ Partial Class Import_PPP
                 intOrderQty = CInt(row("F10"))
                 dteForecastDate = row("F13")
                 dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                dteForecastDate = dteForecastDate.AddDays(-7)
 
                 'Skip dates that are before the cutoff date or if it is not a forecast
                 If dteForecastDate < dteCutOffDate Then 'do nothing
