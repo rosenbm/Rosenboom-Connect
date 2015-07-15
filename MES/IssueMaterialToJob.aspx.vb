@@ -468,7 +468,7 @@ Partial Class MES_NEW_IssueMaterial
             myPartDS = BO_PartBin.Get_Part_Bin_Search(strPN, strWhse)
             bolFOundOne = False
             For Each row As DataRow In myPartDS.Tables(0).Rows
-                If row("BinNum") = txtFromBin.Text Then
+                If row("BinNum").ToString.ToUpper = txtFromBin.Text.ToUpper Then
                     bolFOundOne = True
                     lblMessage.Text &= Math.Round(row("QtyOnHand"), 2)
                     Exit For
