@@ -239,7 +239,7 @@ Partial Class MES_NEW_IssueMaterial
             strPlant As String, strWarehouse As String, strBinNum As String, strPartNum As String
         Dim dsJob As New JobEntryDataSet, dsEmpBasic As New EmpBasicDataSet, dsBAQ As New DataSet, _
             strUser As String, decReqQty As Decimal, decEngYield As Decimal, strUOM As String = "", _
-            output As Integer
+            output As Integer, bolBackflush As Boolean = False
 
         'CHECK FOR EMPTY FIELDS
         If txtDept.Text = "" Then
@@ -285,6 +285,7 @@ Partial Class MES_NEW_IssueMaterial
                 strPartNum = row("PartNum")
                 decReqQty = row("RequiredQty")
                 strUOM = row("IUM")
+                bolBackflush = row("Backflush")
                 Exit For
             End If
         Next
@@ -295,6 +296,11 @@ Partial Class MES_NEW_IssueMaterial
         If strPartNum = "false" Then
             Return "Please enter a valid mtlseq for this job assembly."
         Else
+        End If
+
+        'Check if backflushed
+        If bolBackflush = True Then
+            Return "This is a backflushed material. This is issued by claiming."
         End If
 
         'Check EA for whole number
