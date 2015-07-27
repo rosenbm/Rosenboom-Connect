@@ -445,7 +445,7 @@ Partial Class MES_NEW_IssueMaterial
 
     Protected Sub btnCheckIssue_Click(sender As Object, e As EventArgs) Handles btnCheckIssue.Click
         Dim dsJob As New JobEntryDataSet, strPN As String = "", myPartDS As New PartBinSearchDataSet, bolFOundOne As Boolean = False, strWhse As String = "", _
-            strPlant As String = ""
+            strPlant As String = "", strFromBin As String
         Try
             dsJob = BO_JobEntry.Get_By_ID(txtJobNum.Text)
             strPlant = dsJob.Tables("JobHead").Rows(0)("Plant")
@@ -473,8 +473,13 @@ Partial Class MES_NEW_IssueMaterial
 
             myPartDS = BO_PartBin.Get_Part_Bin_Search(strPN, strWhse)
             bolFOundOne = False
+            If txtDept.Text = "" Then
+                strFromBin = txtFromBin.Text
+            Else
+                strFromBin = txtDept.Text
+            End If
             For Each row As DataRow In myPartDS.Tables(0).Rows
-                If row("BinNum").ToString.ToUpper = txtFromBin.Text.ToUpper Then
+                If row("BinNum").ToString.ToUpper = strFromBin.ToUpper Then
                     bolFOundOne = True
                     lblMessage.Text &= Math.Round(row("QtyOnHand"), 2)
                     Exit For

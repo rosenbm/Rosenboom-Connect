@@ -239,7 +239,7 @@
             <br /><br />
 
 <asp:Button ID="btnSubmit" runat="server" Text="Submit Ticket"  /> &nbsp;&nbsp;
-<asp:Button ID="btnCheckIssue" runat="server" Text="Check Qty Issued"  />&nbsp;&nbsp;
+<asp:Button ID="btnCheckIssue" runat="server" Text="Check Qty Issued" style="height: 26px"  />&nbsp;&nbsp;
 <asp:Button ID="btnClear" runat="server" Text="Clear" onclick="btnClear_Click" />
                 </div>
                                                
