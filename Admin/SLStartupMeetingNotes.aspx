@@ -17,7 +17,7 @@
         <asp:ListItem Value="HR">Human Resources</asp:ListItem>
         <asp:ListItem Value="SL Maintenance">Maintenance</asp:ListItem>
         <asp:ListItem Value="SL Weld Support">Mfg Eng / Weld Support</asp:ListItem>
-        <asp:ListItem Value="SL Preventable Damage">Preventable Damage</asp:ListItem>
+        <asp:ListItem Value="SL Lathe Support">Preventable Damage</asp:ListItem>
         <asp:ListItem Value="SL Plant Manager">Plant Manager</asp:ListItem>
         <asp:ListItem Value="SL Production TM1">Production TM1</asp:ListItem>
         <asp:ListItem Value="SL Production TM2">Production TM2</asp:ListItem>
