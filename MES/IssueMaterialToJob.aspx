@@ -267,7 +267,6 @@
             </div>
     <br />
     <br />
-                
                 <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EnableModelValidation="True" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
@@ -293,6 +292,19 @@ WHERE Company = 'RMT' AND TranType = 'STK-MTL' AND JobNum = ? AND AssemblySeq = 
             <asp:ControlParameter ControlID="txtMtlNum" Name="?" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <br />
+        <table>
+        <tR><td>Reason Code</td><td>Abbreviation</td>           </tR>
+        <tr><td>Non-Usable Material</td><td>numtl</td></tr>
+        <tr><td>Scrap</td><td>Scrap</td></tr>
+        <tr><td>Drop</td><td>Drop</td></tr>
+        <tr><td>Damaged Material</td><td>dammtl</td></tr>
+        <tr><td>Overproduction</td><td>overpro</td></tr>
+        <tr><td>Short Ends</td><td>ser</td></tr>
+        <tr><td>Engineering Yield</td><td>PO - HT</td></tr>
+
+    </table>
+                <br />
             </div>
             </div>
            
