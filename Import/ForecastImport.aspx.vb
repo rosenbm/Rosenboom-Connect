@@ -130,6 +130,8 @@ Partial Class Import_PPP
                 CNH(Get_Cust_Num)
             Case "Gehl Madison"
                 Gehl_Madison(Get_Cust_Num)
+            Case "Gehl Waco"
+                Gehl_Waco(Get_Cust_Num)
             Case "Gehl Yankton"
                 Gehl_Yankton(Get_Cust_Num)
             Case "Hagie"
@@ -227,6 +229,8 @@ Partial Class Import_PPP
                 Return 826
             Case "Gehl Madison"
                 Return 842
+            Case "Gehl Waco"
+                Return 844
             Case "Gehl Yankton"
                 Return 841
             Case "Hagie"
@@ -915,6 +919,83 @@ Partial Class Import_PPP
 
         For Each row As DataRow In dtForecast.Rows
             If i = 1 Then 'skip first row
+            ElseIf IsDBNull(row("F1")) = True Then 'skip if null part
+            ElseIf row("F1").ToString = "" Then 'skip if null 
+            Else
+                'Grab initial values
+                strCustomerPartNum = row("F1").ToString
+                intOrderQty = CInt(row("F6"))
+                dteForecastDate = row("F8")
+                dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+
+                'Skip dates that are before the cutoff date or if it is not a forecast
+                If dteForecastDate < dteCutOffDate Then 'do nothing
+                Else
+                    For Each row2 As DataRow In dtCrossRef.Rows
+                        If strCustomerPartNum = row2("F1") Then
+                            strPlant = row2("F3")
+                            strOurPartNum = row2("F2")
+                            Exit For
+                        Else
+                        End If 'If customer part matches in cross ref
+                    Next 'For each row in the cross ref table
+
+                    'Check for blank plant
+                    If strPlant = "" Then
+                        'strOurPartNum = InputBox("Please enter the RMT part for AGCO part #" & strCustomerPartNum)
+                        'strPlant = InputBox("Please enter plant for " & strOurPartNum & vbCrLf & vbCrLf & _
+                        '                        "Sheldon = MfgSys" & vbCrLf & "Spirit Lake = SPIRITLA" & vbCrLf & _
+                        '                        "Ohio = GMI")
+                        'dteForecastDate = dteForecastDate.AddDays(-7)
+                        'dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                        If strErrorLog = "" Then
+                            strErrorLog = "The following customer parts had errors:" & vbCrLf
+                        End If
+                        strErrorLog &= strCustomerPartNum & vbCrLf
+                        'Check for OHIO
+                    ElseIf strPlant = "GMI" Then
+                    Else
+                        'Create Forecast
+                        Try
+                            Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustNum)
+                        Catch ex As Exception
+                            If strErrorLog = "" Then
+                                strErrorLog = "The following customer parts had errors:" & vbCrLf
+                            End If
+                            strErrorLog &= strCustomerPartNum & vbCrLf
+                        End Try
+                    End If 'Plant Check
+
+
+                End If 'Cutoff date
+            End If 'If first row
+
+            'VARIABLE CLEAN UP
+            strPlant = ""
+            i += 1
+            intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
+            If intStatus = 100 Then
+                intStatus = 99
+            End If
+            Session("Progress") = intStatus
+        Next
+        Session("Progress") = 100
+        Session("Stage") = strErrorLog
+    End Sub
+
+    Private Sub Gehl_Waco(intCustNum As Integer)
+        Dim strPlant As String = "", strOurPartNum As String = "", strCustomerPartNum As String, _
+        dteForecastDate As DateTime, dteCutOffDate As Date = Today.AddDays(21), strForecastDate As String = "", _
+        intOrderQty As Integer, i As Integer = 1, strParsedDate As String = "", strErrorLog As String = "", intStatus As Integer = 0
+
+        'Import Cross Ref
+        Import_CrossRef("Gehl")
+
+        'Update status
+        Session("Stage") = "Importing Forecasts"
+
+        For Each row As DataRow In dtForecast.Rows
+            If i <= 2 Then 'skip first row
             ElseIf IsDBNull(row("F1")) = True Then 'skip if null part
             ElseIf row("F1").ToString = "" Then 'skip if null 
             Else

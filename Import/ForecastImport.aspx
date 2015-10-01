@@ -39,6 +39,7 @@
                 <asp:ListItem>CNH Piracicaba</asp:ListItem>
                 <asp:ListItem>CNH Wichita</asp:ListItem>
                 <asp:ListItem>Gehl Madison</asp:ListItem>
+                <asp:ListItem>Gehl Waco</asp:ListItem>
                 <asp:ListItem>Gehl Yankton</asp:ListItem>
                 <asp:ListItem>Hagie</asp:ListItem>
                 <asp:ListItem>Heil</asp:ListItem>
