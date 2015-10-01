@@ -1,7 +1,6 @@
-﻿Imports Epicor.Mfg.Core
-Imports Epicor.Mfg.Shared
-Imports Epicor.Mfg.UI
-Imports Epicor.Mfg.BO
+﻿Imports Ice.Core.Session
+Imports Ice.Lib.Framework
+Imports Ice.Proxy.BO
 Imports System.Configuration
 Imports System.Xml
 Imports System.IO
@@ -22,10 +21,15 @@ Partial Class EFS_material_admin_new_
     End Sub
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-        Dim dsUD02 As New UD02DataSet
+        Dim sUser As String = "sc"
+        Dim sPass As String = "DEMETER@!"
+        Dim session As Object = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
+        Dim iLaunch As New Ice.Lib.Framework.ILauncher(session)
+        Dim sessionMod As Ice.Proxy.BO.UD02Impl = WCFServiceSupport.CreateImpl(Of UD02Impl)(session, UD02Impl.UriPath)
+        Dim dsUD02 As New Ice.BO.UD02DataSet
 
         'Get dataset
-        dsUD02 = BO_UD02_MtlAdmin.Get_By_ID(grdvOpenIssues.SelectedDataKey.Value, grdvOpenIssues.SelectedRow.Cells(3).Text, _
+        dsUD02 = sessionMod.GetByID(grdvOpenIssues.SelectedDataKey.Value, grdvOpenIssues.SelectedRow.Cells(3).Text, _
                             grdvOpenIssues.SelectedRow.Cells(4).Text, grdvOpenIssues.SelectedRow.Cells(5).Text, _
                             grdvOpenIssues.SelectedRow.Cells(7).Text)
         'Update Values
@@ -39,72 +43,15 @@ Partial Class EFS_material_admin_new_
         Else 'Not Complete
         End If
         'Update
-        dsUD02 = BO_UD02_MtlAdmin.Update(dsUD02)
+        sessionMod.Update(dsUD02)
         'Tell the user
         lblMessage.Text = "Update Successful."
         'Clear boxes
         txtCommunicatedWith.Text = ""
         txtReason.Text = ""
         chkComplete.Checked = False
+        sessionMod.Close()
         'Refresh
         grdvOpenIssues.DataBind()
     End Sub
-End Class
-Public Class BO_UD02_MtlAdmin
-    Public Shared Function Get_New() As UD02DataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myUD02 As New UD02(connPool)
-        Dim myUD02DS As New UD02DataSet
-
-        myUD02.GetaNewUD02(myUD02DS)
-
-        connPool.Dispose()
-
-        Return myUD02DS
-    End Function
-    Public Shared Function Get_By_ID(strKey1 As String, strKey2 As String, strKey3 As String, strKey4 As String, strKey5 As String) As UD02DataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim dsUD02 As New UD02DataSet
-        Dim myUD02 As New UD02(connPool)
-
-        dsUD02 = myUD02.GetByID(strKey1, strKey2, strKey3, strKey4, strKey5)
-
-        connPool.Dispose()
-
-        Return dsUD02
-    End Function
-    Public Shared Function Update(dsUD02 As UD02DataSet) As UD02DataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myUD02 As New UD02(connPool)
-
-        myUD02.Update(dsUD02)
-
-        connPool.Dispose()
-
-        Return dsUD02
-    End Function
 End Class

@@ -1,19 +1,17 @@
-﻿Imports System.Data
-Imports System.Data.OleDb
-Imports System.Data.Odbc
-Imports Epicor.Mfg.Core
-Imports Epicor.Mfg.Shared
-Imports Epicor.Mfg.UI
-Imports Epicor.Mfg.BO
+﻿Imports Ice.Core.Session
+Imports Ice.Lib.Framework
+Imports Ice.Proxy.BO
 Imports System.Configuration
 Imports System.Xml
 Imports System.IO
 Imports System.Text
+Imports Erp.Proxy.BO
+Imports System.Data
+Imports Erp.BO
+Imports System.Data.OleDb
 
 Partial Class Import_PPP
     Inherits System.Web.UI.Page
-
-    Dim dtForecast As New DataTable, dtCrossRef As New DataTable
 
     Protected Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         Dim strFileType As String = ""
@@ -61,30 +59,40 @@ Partial Class Import_PPP
             progresspanel.Visible = False
             lblImportComplete.Text = "Import Complete!"
             txtErrorLog.Text = Session("Stage").ToString
+            'sessionForecast.Close()
         End If
     End Sub
 
     Public Sub DO_WORK()
         Dim intCustNum As Integer = Get_Cust_Num(), dsForecastsToDelete As New ForecastDataSet, i As Integer = 0, _
             intStatus As Integer
+        Dim dtForecast As New DataTable, dtCrossRef As New DataTable
+        Dim sUser As String = "sc"
+        Dim sPass As String = "DEMETER@!"
+        Dim E10session As Object = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
+        Dim iLaunch As New Ice.Lib.Framework.ILauncher(E10session)
+        Dim sessionForecast As ForecastImpl = WCFServiceSupport.CreateImpl(Of ForecastImpl)(E10session, ForecastImpl.UriPath)
 
         'Delete the old forecasts if clear and reload
 
         If rbClearReload.Checked = True Then
-            Session("Stage") = "Deleting Old Forecasts"
-            dsForecastsToDelete = BO_Forecast.Get_Rows("CustNum = " & intCustNum & " AND Checkbox01 = false")
+            session("Stage") = "Deleting Old Forecasts"
+            dsForecastsToDelete = sessionForecast.GetRows("CustNum = " & intCustNum & " AND Checkbox01 = false", "", 0, 0, False)
+
             'Go through each row and delete
             For Each row As DataRow In dsForecastsToDelete.Tables("Forecast").Rows
-                BO_Forecast.Delete_By_ID(row("PartNum"), row("Plant"), row("CustNum"), row("ForeDate"))
+                sessionForecast.DeleteByID(row("PartNum"), row("Plant"), row("CustNum"), row("ForeDate"), "")
                 intStatus = Math.Round(((i + 1) / dsForecastsToDelete.Tables("Forecast").Rows.Count) * 100, 0)
                 If intStatus = 100 Then
                     intStatus = 99
                 End If
-                Session("Progress") = intStatus
+                session("Progress") = intStatus
                 i += 1
             Next
         Else
         End If
+
+
 
         'Load new forecasts
         Select Case ddlCustomer.Text
@@ -368,12 +376,12 @@ Partial Class Import_PPP
              dblOnHand As Double = 0, intDayMod As Integer = 0, strLastPN As String = "", dblMinOrder As Double = 0, _
              dblRemOrd As Double = 0, intMoveUp As Integer = 0
 
-            'Import Cross Ref
-            Import_CrossRef(ddlCustomer.Text)
+        'Import Cross Ref
+        Import_CrossRef(ddlCustomer.Text)
 
-            Session("Stage") = "Importing Forecasts"
+        Session("Stage") = "Importing Forecasts"
 
-            'Combine Rows
+        'Combine Rows
         'For intRowCount = 2 To dtForecast.Rows.Count - 2
         'If dtForecast.Rows(intRowCount)("F1") = dtForecast.Rows(intRowCount + 1)("F1") Then
         '    For intCols As Integer = 5 To 7
@@ -770,7 +778,7 @@ Partial Class Import_PPP
         '    Catch ex As Exception
         '    End Try
         'Next
-        
+
         'dtForecast.AcceptChanges()
 
         'Combine Rows
@@ -817,15 +825,15 @@ Partial Class Import_PPP
 
         Next
 
-            For Each row As DataRow In dtForecast.Rows
-                bolTrigger = False
-                If i < 3 Then 'skip first two rows
-                ElseIf IsDBNull(row("F7")) = True Then 'skip if null part
-                ElseIf row("F8").ToString = "" Then 'skip if null 
-                Else
-                    'Grab initial values
-                    strCustomerPartNum = row("F7").ToString
-                    intOrderQty = CInt(row("F8"))
+        For Each row As DataRow In dtForecast.Rows
+            bolTrigger = False
+            If i < 3 Then 'skip first two rows
+            ElseIf IsDBNull(row("F7")) = True Then 'skip if null part
+            ElseIf row("F8").ToString = "" Then 'skip if null 
+            Else
+                'Grab initial values
+                strCustomerPartNum = row("F7").ToString
+                intOrderQty = CInt(row("F8"))
 
                 If IsDBNull(row("F3")) Then
                     dteForecastDate = row("F2")
@@ -833,73 +841,73 @@ Partial Class Import_PPP
                     dteForecastDate = row("F3")
                 End If
 
-                    dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
 
-                    'Skip dates that are before the cutoff date or if it is not a forecast
-                    For Each row2 As DataRow In dtCrossRef.Rows
-                        If strCustomerPartNum = row2("F1") Then
-                            strPlant = row2("F3")
-                            strOurPartNum = row2("F2")
-                            Exit For
-                        Else
-                        End If 'If customer part matches in cross ref
-                    Next 'For each row in the cross ref table
-
-                    For arr As Integer = 0 To 8
-                        If strOurPartNum = strTriggerPart(arr) Then
-                            bolTrigger = True
-                            Exit For
-                        End If
-                    Next
-
-                    If bolTrigger = True Then
-                        dteCompareDate = Today.AddDays(5)
+                'Skip dates that are before the cutoff date or if it is not a forecast
+                For Each row2 As DataRow In dtCrossRef.Rows
+                    If strCustomerPartNum = row2("F1") Then
+                        strPlant = row2("F3")
+                        strOurPartNum = row2("F2")
+                        Exit For
                     Else
-                        dteCompareDate = dteCutOffDate
+                    End If 'If customer part matches in cross ref
+                Next 'For each row in the cross ref table
+
+                For arr As Integer = 0 To 8
+                    If strOurPartNum = strTriggerPart(arr) Then
+                        bolTrigger = True
+                        Exit For
                     End If
+                Next
+
+                If bolTrigger = True Then
+                    dteCompareDate = Today.AddDays(5)
+                Else
+                    dteCompareDate = dteCutOffDate
+                End If
 
 
-                    If dteForecastDate < dteCompareDate Then 'do nothing
-                        'Check for blank plant
-                    ElseIf strPlant = "" Then
-                        'strOurPartNum = InputBox("Please enter the RMT part for AGCO part #" & strCustomerPartNum)
-                        'strPlant = InputBox("Please enter plant for " & strOurPartNum & vbCrLf & vbCrLf & _
-                        '                        "Sheldon = MfgSys" & vbCrLf & "Spirit Lake = SPIRITLA" & vbCrLf & _
-                        '                        "Ohio = GMI")
-                        'dteForecastDate = dteForecastDate.AddDays(-7)
-                        'dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                If dteForecastDate < dteCompareDate Then 'do nothing
+                    'Check for blank plant
+                ElseIf strPlant = "" Then
+                    'strOurPartNum = InputBox("Please enter the RMT part for AGCO part #" & strCustomerPartNum)
+                    'strPlant = InputBox("Please enter plant for " & strOurPartNum & vbCrLf & vbCrLf & _
+                    '                        "Sheldon = MfgSys" & vbCrLf & "Spirit Lake = SPIRITLA" & vbCrLf & _
+                    '                        "Ohio = GMI")
+                    'dteForecastDate = dteForecastDate.AddDays(-7)
+                    'dteForecastDate = FormatDateTime(dteForecastDate, DateFormat.ShortDate)
+                    If strErrorLog = "" Then
+                        strErrorLog = "The following customer parts had errors:" & vbCrLf
+                    End If
+                    strErrorLog &= strCustomerPartNum & vbCrLf
+                    'Check for OHIO
+                ElseIf strPlant = "GMI" Then
+                Else
+                    'Create Forecast
+                    Try
+                        Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustomerNum)
+                    Catch ex As Exception
                         If strErrorLog = "" Then
                             strErrorLog = "The following customer parts had errors:" & vbCrLf
                         End If
                         strErrorLog &= strCustomerPartNum & vbCrLf
-                        'Check for OHIO
-                    ElseIf strPlant = "GMI" Then
-                    Else
-                        'Create Forecast
-                        Try
-                            Create_Forecast(strPlant, strOurPartNum, dteForecastDate, intOrderQty, intCustomerNum)
-                        Catch ex As Exception
-                            If strErrorLog = "" Then
-                                strErrorLog = "The following customer parts had errors:" & vbCrLf
-                            End If
-                            strErrorLog &= strCustomerPartNum & vbCrLf
-                        End Try
-                    End If 'Plant Check
+                    End Try
+                End If 'Plant Check
 
 
-                End If 'If first row
+            End If 'If first row
 
-                'VARIABLE CLEAN UP
-                strPlant = ""
-                i += 1
-                intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
-                If intStatus = 100 Then
-                    intStatus = 99
-                End If
-                Session("Progress") = intStatus
-            Next
-            Session("Progress") = 100
-            Session("Stage") = strErrorLog
+            'VARIABLE CLEAN UP
+            strPlant = ""
+            i += 1
+            intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
+            If intStatus = 100 Then
+                intStatus = 99
+            End If
+            Session("Progress") = intStatus
+        Next
+        Session("Progress") = 100
+        Session("Stage") = strErrorLog
     End Sub
 
     Private Sub Gehl_Madison(intCustNum As Integer)
@@ -1574,7 +1582,7 @@ Partial Class Import_PPP
                                     End If
                                     strErrorLog &= strCustomerPartNum & vbCrLf
                                 End Try
-                                
+
                             End If 'Plant Check
 
                         End If 'If the forecast date is before the cutoff or no qty
@@ -1851,7 +1859,7 @@ Partial Class Import_PPP
 
                     End If
 
-                    
+
 
 
 
@@ -1964,24 +1972,15 @@ Partial Class Import_PPP
         Session("Stage") = "Importing Forecasts"
 
         'Get on order qty
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim mysession As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
-        Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
+        Dim sessionDQ As DynamicQueryImpl = WCFServiceSupport.CreateImpl(Of DynamicQueryImpl)(E10session, DynamicQueryImpl.UriPath)
+        Dim qds As New Ice.BO.DynamicQueryDataSet, dsSettings As New Ice.BO.QueryExecutionDataSet
         Dim dsDataSet As DataSet
-        qds = dq.GetByID("RMT-WeilerFirmOrders")
+        qds = sessionDQ.GetByID("RMT-WeilerFirmOrders")
+        dsSettings = sessionDQ.GetQueryExecutionParameters(qds)
 
-        dsDataSet = dq.Execute(qds)
+        dsDataSet = sessionDQ.Execute(qds, dsSettings)
 
-        connPool.Dispose()
-
+        sessionDQ.Close()
 
         For Each row As DataRow In dtForecast.Rows
             If i = 1 Then 'skip first row
@@ -2075,17 +2074,17 @@ Partial Class Import_PPP
 
 
                 End If 'Cutoff date
-                End If 'If first row
+            End If 'If first row
 
-                'VARIABLE CLEAN UP
-                strLastCustPN = strCustomerPartNum
-                strPlant = ""
-                i += 1
-                intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
-                If intStatus = 100 Then
-                    intStatus = 99
-                End If
-                Session("Progress") = intStatus
+            'VARIABLE CLEAN UP
+            strLastCustPN = strCustomerPartNum
+            strPlant = ""
+            i += 1
+            intStatus = Math.Round(((i + 1) / dtForecast.Rows.Count) * 100, 0)
+            If intStatus = 100 Then
+                intStatus = 99
+            End If
+            Session("Progress") = intStatus
         Next
         Session("Progress") = 100
         Session("Stage") = strErrorLog
@@ -2289,7 +2288,7 @@ Partial Class Import_PPP
     Private Sub Create_Forecast(strPlant As String, strPartNum As String, dteForecastDate As Date, intOrderQty As Integer, intCustNum As Integer)
         Dim dsForecast As New ForecastDataSet
         'Get New
-        dsForecast = BO_Forecast.Get_New(strPartNum, strPlant, intCustNum, dteForecastDate)
+        sessionForecast.GetNewForecast(dsForecast, strPartNum, strPlant, intCustNum, dteForecastDate)
         'Set fields
         dsForecast.Tables(0).Rows(0)("ForeDate") = dteForecastDate
         dsForecast.Tables(0).Rows(0)("ForeQty") = intOrderQty
@@ -2297,7 +2296,7 @@ Partial Class Import_PPP
         dsForecast.Tables(0).Rows(0)("RowMod") = "A"
         'Update
         Try
-            dsForecast = BO_Forecast.Update(dsForecast)
+            sessionForecast.Update(dsForecast)
         Catch ex As Exception
         End Try
         'Clear the temp ds
@@ -2385,175 +2384,175 @@ Public Class Excel_2007_File_Reader
     End Function
 
 End Class
-Public Class Update_Vantage
-    Public Shared Sub Update_Database(ByVal Query As String)
-        Dim cn As OdbcConnection, cmd As OdbcCommand
+'Public Class Update_Vantage
+'    Public Shared Sub Update_Database(ByVal Query As String)
+'        Dim cn As OdbcConnection, cmd As OdbcCommand
 
-        'Set cn
-        cn = New OdbcConnection("DSN=Epicor9RC;UID=SYSPROGRESS;PWD=report;host=ZEUS;port=9450;db=mfgsys")
+'        'Set cn
+'        cn = New OdbcConnection("DSN=Epicor9RC;UID=SYSPROGRESS;PWD=report;host=ZEUS;port=9450;db=mfgsys")
 
-        'Open Connection
-        cn.Open()
+'        'Open Connection
+'        cn.Open()
 
-        cmd = New OdbcCommand
+'        cmd = New OdbcCommand
 
-        Try
-            With cmd
-                .CommandText = Query
-                .CommandType = CommandType.Text
-                .Connection = cn
-            End With
+'        Try
+'            With cmd
+'                .CommandText = Query
+'                .CommandType = CommandType.Text
+'                .Connection = cn
+'            End With
 
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            cn.Close()
-        End Try
-    End Sub
-    Public Shared Sub Update_Test_Database(ByVal Query As String)
-        Dim cn As OdbcConnection, cmd As OdbcCommand
+'            cmd.ExecuteNonQuery()
+'        Catch ex As Exception
+'            MsgBox(ex.Message)
+'        Finally
+'            cn.Close()
+'        End Try
+'    End Sub
+'    Public Shared Sub Update_Test_Database(ByVal Query As String)
+'        Dim cn As OdbcConnection, cmd As OdbcCommand
 
-        'Set cn
-        cn = New OdbcConnection("DSN=mfgsys803400TRAIN;UID=SYSPROGRESS;PWD=report;host=zeus22;port=8360;db=mfgsys")
+'        'Set cn
+'        cn = New OdbcConnection("DSN=mfgsys803400TRAIN;UID=SYSPROGRESS;PWD=report;host=zeus22;port=8360;db=mfgsys")
 
-        'Open Connection
-        cn.Open()
+'        'Open Connection
+'        cn.Open()
 
-        cmd = New OdbcCommand
+'        cmd = New OdbcCommand
 
-        Try
-            With cmd
-                .CommandText = Query
-                .CommandType = CommandType.Text
-                .Connection = cn
-            End With
+'        Try
+'            With cmd
+'                .CommandText = Query
+'                .CommandType = CommandType.Text
+'                .Connection = cn
+'            End With
 
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            cn.Close()
-        End Try
-    End Sub
-    Public Shared Sub Update_Stds_Database(ByVal Query As String)
-        Dim cn As OdbcConnection, cmd As OdbcCommand
+'            cmd.ExecuteNonQuery()
+'        Catch ex As Exception
+'            MsgBox(ex.Message)
+'        Finally
+'            cn.Close()
+'        End Try
+'    End Sub
+'    Public Shared Sub Update_Stds_Database(ByVal Query As String)
+'        Dim cn As OdbcConnection, cmd As OdbcCommand
 
-        'Set cn
-        cn = New OdbcConnection("DSN=mfgsys803400TRAIN2;UID=SYSPROGRESS;PWD=report;host=zeus22;port=9350;db=mfgsys")
+'        'Set cn
+'        cn = New OdbcConnection("DSN=mfgsys803400TRAIN2;UID=SYSPROGRESS;PWD=report;host=zeus22;port=9350;db=mfgsys")
 
-        'Open Connection
-        cn.Open()
+'        'Open Connection
+'        cn.Open()
 
-        cmd = New OdbcCommand
+'        cmd = New OdbcCommand
 
-        Try
-            With cmd
-                .CommandText = Query
-                .CommandType = CommandType.Text
-                .Connection = cn
-            End With
+'        Try
+'            With cmd
+'                .CommandText = Query
+'                .CommandType = CommandType.Text
+'                .Connection = cn
+'            End With
 
-            cmd.ExecuteNonQuery()
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            cn.Close()
-        End Try
-    End Sub
-End Class
-Public Class BO_Forecast
-    Public Shared Function Get_New(strPartNum As String, strPlant As String, intCustNum As Integer, dteForecastDate As Date) As ForecastDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+'            cmd.ExecuteNonQuery()
+'        Catch ex As Exception
+'            MsgBox(ex.Message)
+'        Finally
+'            cn.Close()
+'        End Try
+'    End Sub
+'End Class
+'Public Class BO_Forecast
+'    Public Shared Function Get_New(strPartNum As String, strPlant As String, intCustNum As Integer, dteForecastDate As Date) As ForecastDataSet
+'        Dim sUser As String = "sc"
+'        Dim sPass As String = "DEMETER@!"
+'        Dim sServer As String = "zeus"
+'        Dim sPort As String = "9408"
+'        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+'        Dim sCompany As String = "RMT"
+'        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+'        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myForecast As New Forecast(connPool)
-        Dim myForecastDS As New ForecastDataSet
+'        Dim myForecast As New Forecast(connPool)
+'        Dim myForecastDS As New ForecastDataSet
 
-        myForecast.GetNewForecast(myForecastDS, strPartNum, strPlant, intCustNum, dteForecastDate)
+'        myForecast.GetNewForecast(myForecastDS, strPartNum, strPlant, intCustNum, dteForecastDate)
 
-        connPool.Dispose()
+'        connPool.Dispose()
 
-        Return myForecastDS
-    End Function
-    Public Shared Function Get_By_ID(strPartNum As String, strPlant As String, intCustNum As Integer, _
-                                     dteForecastDate As Date) As ForecastDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+'        Return myForecastDS
+'    End Function
+'    Public Shared Function Get_By_ID(strPartNum As String, strPlant As String, intCustNum As Integer, _
+'                                     dteForecastDate As Date) As ForecastDataSet
+'        Dim sUser As String = "sc"
+'        Dim sPass As String = "DEMETER@!"
+'        Dim sServer As String = "zeus"
+'        Dim sPort As String = "9408"
+'        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+'        Dim sCompany As String = "RMT"
+'        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+'        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myForecast As New Forecast(connPool)
-        Dim myForecastDS As New ForecastDataSet
+'        Dim myForecast As New Forecast(connPool)
+'        Dim myForecastDS As New ForecastDataSet
 
-        myForecast.GetByID(strPartNum, strPlant, intCustNum, dteForecastDate, "")
+'        myForecast.GetByID(strPartNum, strPlant, intCustNum, dteForecastDate, "")
 
-        connPool.Dispose()
+'        connPool.Dispose()
 
-        Return myForecastDS
-    End Function
-    Public Shared Function Get_Rows(strFilter As String) As ForecastDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+'        Return myForecastDS
+'    End Function
+'    Public Shared Function Get_Rows(strFilter As String) As ForecastDataSet
+'        Dim sUser As String = "sc"
+'        Dim sPass As String = "DEMETER@!"
+'        Dim sServer As String = "zeus"
+'        Dim sPort As String = "9408"
+'        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+'        Dim sCompany As String = "RMT"
+'        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+'        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myForecast As New Forecast(connPool)
-        Dim myForecastDS As New ForecastDataSet
+'        Dim myForecast As New Forecast(connPool)
+'        Dim myForecastDS As New ForecastDataSet
 
-        myForecastDS = myForecast.GetRows(strFilter, "", 0, 0, False)
+'        myForecastDS = myForecast.GetRows(strFilter, "", 0, 0, False)
 
-        connPool.Dispose()
+'        connPool.Dispose()
 
-        Return myForecastDS
-    End Function
-    Public Shared Sub Delete_By_ID(strPartNum As String, strPlant As String, intCustNum As Integer, dteForecastDate As Date)
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+'        Return myForecastDS
+'    End Function
+'    Public Shared Sub Delete_By_ID(strPartNum As String, strPlant As String, intCustNum As Integer, dteForecastDate As Date)
+'        Dim sUser As String = "sc"
+'        Dim sPass As String = "DEMETER@!"
+'        Dim sServer As String = "zeus"
+'        Dim sPort As String = "9408"
+'        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+'        Dim sCompany As String = "RMT"
+'        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+'        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myForecast As New Forecast(connPool)
+'        Dim myForecast As New Forecast(connPool)
 
-        myForecast.DeleteByID(strPartNum, strPlant, intCustNum, dteForecastDate, "")
+'        myForecast.DeleteByID(strPartNum, strPlant, intCustNum, dteForecastDate, "")
 
-        connPool.Dispose()
+'        connPool.Dispose()
 
-    End Sub
-    Public Shared Function Update(dsForecast As ForecastDataSet) As ForecastDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+'    End Sub
+'    Public Shared Function Update(dsForecast As ForecastDataSet) As ForecastDataSet
+'        Dim sUser As String = "sc"
+'        Dim sPass As String = "DEMETER@!"
+'        Dim sServer As String = "zeus"
+'        Dim sPort As String = "9408"
+'        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+'        Dim sCompany As String = "RMT"
+'        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+'        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myForecast As New Forecast(connPool)
+'        Dim myForecast As New Forecast(connPool)
 
-        myForecast.Update(dsForecast)
+'        myForecast.Update(dsForecast)
 
-        connPool.Dispose()
+'        connPool.Dispose()
 
-        Return dsForecast
-    End Function
-End Class
+'        Return dsForecast
+'    End Function
+'End Class
