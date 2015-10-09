@@ -13,6 +13,10 @@ Imports System.Data.OleDb
 Partial Class Import_PPP
     Inherits System.Web.UI.Page
 
+    Public Shared Function E10_Connection()
+
+    End Function
+
     Protected Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         Dim strFileType As String = ""
         'Clear "Import Complete"
@@ -71,13 +75,15 @@ Partial Class Import_PPP
         Dim sPass As String = "DEMETER@!"
         Dim E10session As Object = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
         Dim iLaunch As New Ice.Lib.Framework.ILauncher(E10session)
-        Dim sessionForecast As ForecastImpl = WCFServiceSupport.CreateImpl(Of ForecastImpl)(E10session, ForecastImpl.UriPath)
+        'Dim sessionForecast As ForecastImpl = WCFServiceSupport.CreateImpl(Of ForecastImpl)(E10session, ForecastImpl.UriPath)
+        Dim ForecastAdapater As New Erp.Adapters.ForecastAdapter(iLaunch)
+        ForecastAdapater.BOConnect()
 
         'Delete the old forecasts if clear and reload
 
         If rbClearReload.Checked = True Then
             session("Stage") = "Deleting Old Forecasts"
-            dsForecastsToDelete = sessionForecast.GetRows("CustNum = " & intCustNum & " AND Checkbox01 = false", "", 0, 0, False)
+            dsForecastsToDelete = ForecastAdapater.GetRows("CustNum = " & intCustNum & " AND Checkbox01 = false", "", 0, 0, False)
 
             'Go through each row and delete
             For Each row As DataRow In dsForecastsToDelete.Tables("Forecast").Rows
