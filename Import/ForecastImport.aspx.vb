@@ -10,12 +10,14 @@ Imports System.Data
 Imports Erp.BO
 Imports System.Data.OleDb
 
+
+
 Partial Class Import_PPP
     Inherits System.Web.UI.Page
-
-    Public Shared Function E10_Connection()
-
-    End Function
+    Dim dtForecast As New DataTable, dtCrossref As New DataTable
+    Dim E10session As Ice.Core.Session
+    Dim iLaunch As Ice.Lib.Framework.ILauncher
+    Dim sessionForecast As ForecastImpl
 
     Protected Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         Dim strFileType As String = ""
@@ -63,27 +65,25 @@ Partial Class Import_PPP
             progresspanel.Visible = False
             lblImportComplete.Text = "Import Complete!"
             txtErrorLog.Text = Session("Stage").ToString
-            'sessionForecast.Close()
+            sessionForecast.Close()
+            E10session.Dispose()
         End If
     End Sub
 
     Public Sub DO_WORK()
         Dim intCustNum As Integer = Get_Cust_Num(), dsForecastsToDelete As New ForecastDataSet, i As Integer = 0, _
             intStatus As Integer
-        Dim dtForecast As New DataTable, dtCrossRef As New DataTable
         Dim sUser As String = "sc"
         Dim sPass As String = "DEMETER@!"
-        Dim E10session As Object = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
-        Dim iLaunch As New Ice.Lib.Framework.ILauncher(E10session)
-        'Dim sessionForecast As ForecastImpl = WCFServiceSupport.CreateImpl(Of ForecastImpl)(E10session, ForecastImpl.UriPath)
-        Dim ForecastAdapater As New Erp.Adapters.ForecastAdapter(iLaunch)
-        ForecastAdapater.BOConnect()
+        E10session = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
+        iLaunch = New Ice.Lib.Framework.ILauncher(E10session)
+        sessionForecast = WCFServiceSupport.CreateImpl(Of ForecastImpl)(E10session, ForecastImpl.UriPath)
 
         'Delete the old forecasts if clear and reload
 
         If rbClearReload.Checked = True Then
             session("Stage") = "Deleting Old Forecasts"
-            dsForecastsToDelete = ForecastAdapater.GetRows("CustNum = " & intCustNum & " AND Checkbox01 = false", "", 0, 0, False)
+            dsForecastsToDelete = sessionForecast.GetRows("CustNum = " & intCustNum & " AND Checkbox01 = false", "", 0, 0, False)
 
             'Go through each row and delete
             For Each row As DataRow In dsForecastsToDelete.Tables("Forecast").Rows
@@ -97,8 +97,6 @@ Partial Class Import_PPP
             Next
         Else
         End If
-
-
 
         'Load new forecasts
         Select Case ddlCustomer.Text
@@ -1984,7 +1982,7 @@ Partial Class Import_PPP
         qds = sessionDQ.GetByID("RMT-WeilerFirmOrders")
         dsSettings = sessionDQ.GetQueryExecutionParameters(qds)
 
-        dsDataSet = sessionDQ.Execute(qds, dsSettings)
+        dsDataSet = sessionDQ.ExecuteByID("RMT-WeilerFirmOrders", dsSettings)
 
         sessionDQ.Close()
 

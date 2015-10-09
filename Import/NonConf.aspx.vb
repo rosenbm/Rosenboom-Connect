@@ -35,57 +35,61 @@ Partial Class Import_PPP
         End If
     End Sub
 
-    Public Shared Function GetClassDesc(strClassID As String) As String
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+    'Public Shared Function GetClassDesc(strClassID As String) As String
+    '    Dim sUser As String = "sc"
+    '    Dim sPass As String = "DEMETER@!"
+    '    Dim sServer As String = "zeus"
+    '    Dim sPort As String = "9408"
+    '    Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+    '    Dim sCompany As String = "RMT"
+    '    Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+    '    Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
 
-        Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
-        Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
-        Dim dsDataSet As DataSet
+    '    Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
+    '    Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
+    '    Dim dsDataSet As DataSet
 
-        qds = dq.GetByID("RMT-GetPartClass")
-        qds.QueryWhereItem(0).RValue = strClassID
-        dsDataSet = dq.Execute(qds)
+    '    qds = dq.GetByID("RMT-GetPartClass")
+    '    qds.QueryWhereItem(0).RValue = strClassID
+    '    dsDataSet = dq.Execute(qds)
 
-        connPool.Dispose()
-        Return dsDataSet.Tables(0).Rows(0)(0)
-    End Function
-    Public Shared Function GetProdCodeDesc(strProdCode As String) As String
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+    '    connPool.Dispose()
+    '    Return dsDataSet.Tables(0).Rows(0)(0)
+    'End Function
+    'Public Shared Function GetProdCodeDesc(strProdCode As String) As String
+    '    Dim sUser As String = "sc"
+    '    Dim sPass As String = "DEMETER@!"
+    '    Dim sServer As String = "zeus"
+    '    Dim sPort As String = "9408"
+    '    Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
+    '    Dim sCompany As String = "RMT"
+    '    Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
+    '    Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
 
-        Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
-        Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
-        Dim dsDataSet As DataSet
+    '    Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
+    '    Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
+    '    Dim dsDataSet As DataSet
 
-        qds = dq.GetByID("RMT-GetProdCode")
-        qds.QueryWhereItem(0).RValue = strProdCode
-        dsDataSet = dq.Execute(qds)
+    '    qds = dq.GetByID("RMT-GetProdCode")
+    '    qds.QueryWhereItem(0).RValue = strProdCode
+    '    dsDataSet = dq.Execute(qds)
 
-        connPool.Dispose()
-        Return dsDataSet.Tables(0).Rows(0)(0)
-    End Function
+    '    connPool.Dispose()
+    '    Return dsDataSet.Tables(0).Rows(0)(0)
+    'End Function
 
     Protected Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
-        Update_Vantage.Update_Database("UPDATE PUB.NonConf SET InspectionPending = '1' WHERE Company='RMT' AND TranID='" & txtTranID.Text & "'")
+        Update_Vantage.Update_Database("UPDATE ERP.NonConf SET InspectionPending = '1' WHERE Company='RMT' AND TranID='" & txtTranID.Text & "'")
     End Sub
 
     Protected Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Update_Vantage.Update_Database("UPDATE PUB.NonConf SET InspectionPending = '0' WHERE Company='RMT' AND TranID='" & txtTranID.Text & "'")
+        Update_Vantage.Update_Database("UPDATE ERP.NonConf SET InspectionPending = '0' WHERE Company='RMT' AND TranID='" & txtTranID.Text & "'")
+    End Sub
+
+    Protected Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
     End Sub
 End Class
 Public Class Update_Vantage
@@ -93,7 +97,7 @@ Public Class Update_Vantage
         Dim cn As OdbcConnection, cmd As OdbcCommand
 
         'Set cn
-        cn = New OdbcConnection("DSN=Epicor9RC;UID=SYSPROGRESS;PWD=report;host=ZEUS;port=9450;db=mfgsys")
+        cn = New OdbcConnection("DSN=ERP10RC;Driver={SQL Server};Server=olympus;Database=ERP10;Uid=ERP10;Pwd=ERP10;")
 
         'Open Connection
         cn.Open()

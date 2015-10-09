@@ -1,22 +1,37 @@
 ﻿Imports System.Data
 Imports System.Data.OleDb
 Imports System.Data.Odbc
-Imports Epicor.Mfg.Core
-Imports Epicor.Mfg.Shared
-Imports Epicor.Mfg.UI
-Imports Epicor.Mfg.BO
 Imports System.Configuration
 Imports System.Xml
 Imports System.IO
 Imports System.Text
+Imports Erp.BO
+Imports Erp.Proxy.BO
+Imports Ice.Core.Session
+Imports Ice.Lib.Framework
+Imports Ice.Proxy.BO
+
 Partial Class Import_PPP
     Inherits System.Web.UI.Page
 
     Dim dtImportList As New DataTable, strErrorLog As String = ""
+    Dim E10session As Ice.Core.Session
+    Dim iLaunch As Ice.Lib.Framework.ILauncher
+    Dim PartBO As PartImpl
+    Dim DynamicQueryBO As DynamicQueryImpl
 
-
+    Protected Sub Start_E10_Session()
+        Dim sUser As String = "sc"
+        Dim sPass As String = "DEMETER@!"
+        E10session = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
+        iLaunch = New Ice.Lib.Framework.ILauncher(E10session)
+        PartBO = WCFServiceSupport.CreateImpl(Of PartImpl)(E10session, PartImpl.UriPath)
+        DynamicQueryBO = WCFServiceSupport.CreateImpl(Of DynamicQueryImpl)(E10session, DynamicQueryImpl.UriPath)
+    End Sub
 
     Protected Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+
+        Start_E10_Session()
 
         'Clear "Import Complete"
         lblImportComplete.Text = ""
@@ -120,7 +135,7 @@ Partial Class Import_PPP
         For Each row As DataRow In dtImportList.Rows
 
             'Get Data
-            dsPart = BO_Part.GetByID(row(0))
+            dsPart = Part_GetByID(row(0))
 
             'Update Plant Parameters
             For Each row2 As DataRow In dsPart.Tables("PartPlant").Rows
@@ -147,7 +162,7 @@ Partial Class Import_PPP
                     row2("DaysOfSupply") = row(15)
 
                     'UPDATE SOURCE TYPE
-                    BO_Part.ChangePartPlantSourceType(dsPart, row(18))
+                    Part_ChangePartPlantSourceType(dsPart, row(18))
                     row2("SourceType") = row(18)
                     If row(18) = "T" Then
                         If row(3) = "MfgSys" Then
@@ -163,7 +178,7 @@ Partial Class Import_PPP
                     If IsDBNull(row(16)) Then
                     Else
                         row2("VendorNumVendorID") = row(16)
-                        dsPart = BO_Part.ChangePartPlantVendorID(row(16), dsPart)
+                        dsPart = Part_ChangePartPlantVendorID(row(16), dsPart)
                         Try
                             If IsDBNull(row(17)) Then
                             Else
@@ -182,7 +197,7 @@ Partial Class Import_PPP
             'UPDATE PLANT
             Try
                 'Update the file
-                dsPart = BO_Part.Update(dsPart)
+                dsPart = Part_Update(dsPart)
             Catch ex As Exception
                 strErrorLog &= dsPart.Tables(0).Rows(0)("PartNum") & " - " & ex.Message & vbCrLf
             End Try
@@ -199,7 +214,7 @@ Partial Class Import_PPP
                 End Try
             End If
             'TypeCode
-            dsPart = BO_Part.ChangePartTypeCode(dsPart, row(2))
+            dsPart = Part_ChangePartTypeCode(dsPart, row(2))
             dsPart.Tables("Part").Rows(0)("UpdatePartPlant") = False
             'ProdCode
             If IsDBNull(row(20)) Then
@@ -207,7 +222,7 @@ Partial Class Import_PPP
 
                 dsPart.Tables("Part").Rows(0)("ProdCode") = row(20)
                 dsPart.Tables("Part").Rows(0)("ProdCodeDescription") = row(20)
-                dsPart = BO_Part.ChangePartProdCode(dsPart, row(20))
+                dsPart = Part_ChangePartProdCode(dsPart, row(20))
             End If
             'Outsourced
             dsPart.Tables("Part").Rows(0)("Checkbox03") = Check_Boolean(row(19))
@@ -219,7 +234,7 @@ Partial Class Import_PPP
 
             Try
                 'Update the file
-                dsPart = BO_Part.Update(dsPart)
+                dsPart = Part_Update(dsPart)
             Catch ex As Exception
                 strErrorLog &= dsPart.Tables(0).Rows(0)("PartNum") & " - " & ex.Message & vbCrLf
             End Try
@@ -303,166 +318,51 @@ Partial Class Import_PPP
         End If
     End Sub
 
-    Public Shared Function GetClassDesc(strClassID As String) As String
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+    Public Function GetClassDesc(strClassID As String) As String
+        Dim _dqDS As New Ice.BO.QueryExecutionDataSet()
+        _dqDS.ExecutionParameter.AddExecutionParameterRow("xClassID", "002", "nvarchar", False, Guid.NewGuid(), "A")
 
+        Dim dsDataSet As DataSet = DynamicQueryBO.ExecuteByID("RMT-GetPartClass", _dqDS)
 
-        Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
-        Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
-        Dim dsDataSet As DataSet
-
-        qds = dq.GetByID("RMT-GetPartClass")
-        qds.QueryWhereItem(0).RValue = strClassID
-        dsDataSet = dq.Execute(qds)
-
-        connPool.Dispose()
         Return dsDataSet.Tables(0).Rows(0)(0)
     End Function
-    Public Shared Function GetProdCodeDesc(strProdCode As String) As String
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+    Public Function GetProdCodeDesc(strProdCode As String) As String
+        Dim _dqDS As New Ice.BO.QueryExecutionDataSet()
+        _dqDS.ExecutionParameter.AddExecutionParameterRow("xProdCode", strProdCode, "nvarchar", False, Guid.NewGuid(), "A")
 
+        Dim dsDataSet As DataSet = DynamicQueryBO.ExecuteByID("RMT-GetProdCode", _dqDS)
 
-        Dim dq As New Epicor.Mfg.BO.DynamicQuery(connPool)
-        Dim qds As New Epicor.Mfg.BO.QueryDesignDataSet
-        Dim dsDataSet As DataSet
-
-        qds = dq.GetByID("RMT-GetProdCode")
-        qds.QueryWhereItem(0).RValue = strProdCode
-        dsDataSet = dq.Execute(qds)
-
-        connPool.Dispose()
         Return dsDataSet.Tables(0).Rows(0)(0)
     End Function
-End Class
-Public Class BO_Part
-    Public Shared Function GetByID(strPartNum As String) As PartDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myPart As New Part(connPool)
+
+    Public Function Part_GetByID(strPartNum As String) As PartDataSet
         Dim myPartDS As New PartDataSet
-
-        myPartDS = myPart.GetByID(strPartNum)
-
-        connPool.Dispose()
-
-        Return mypartDS
+        myPartDS = PartBO.GetByID(strPartNum)
+        Return myPartDS
     End Function
-    Public Shared Function ChangePartPlantVendorID(strVendorID As String, dsPart As PartDataSet) As PartDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myPart As New Part(connPool)
-
-        myPart.ChangePartPlantVendorID(strVendorID, dsPart)
-
-        connPool.Dispose()
-
+    Public Function Part_ChangePartPlantVendorID(strVendorID As String, dsPart As PartDataSet) As PartDataSet
+        PartBO.ChangePartPlantVendorID(strVendorID, dsPart)
         Return dsPart
     End Function
-    Public Shared Function Update(dsPart As PartDataSet) As PartDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myPart As New Part(connPool)
-
-        myPart.Update(dsPart)
-
-        connPool.Dispose()
-
+    Public Function Part_Update(dsPart As PartDataSet) As PartDataSet
+        PartBO.Update(dsPart)
         Return dsPart
     End Function
-    Public Shared Function ChangePartPlantSourceType(dsPart As PartDataSet, strType As String) As PartDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myPart As New Part(connPool)
-
-        myPart.ChangePartPlantSourceType(strType, "", "", dsPart)
-
-        connPool.Dispose()
-
+    Public Function Part_ChangePartPlantSourceType(dsPart As PartDataSet, strType As String) As PartDataSet
+        PartBO.ChangePartPlantSourceType(strType, "", "", dsPart)
         Return dsPart
     End Function
-    Public Shared Function ChangePartTypeCode(dsPart As PartDataSet, strType As String) As PartDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myPart As New Part(connPool)
-
-        myPart.ChangePartTypeCode(strType, dsPart)
-
-        connPool.Dispose()
-
+    Public Function Part_ChangePartTypeCode(dsPart As PartDataSet, strType As String) As PartDataSet
+        PartBO.ChangePartTypeCode(strType, dsPart)
         Return dsPart
     End Function
-    Public Shared Function ChangePartProdCode(dsPart As PartDataSet, strProdCode As String) As PartDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myPart As New Part(connPool)
-
-        myPart.ChangePartProdCode(strProdCode, dsPart)
-
-        connPool.Dispose()
-
+    Public Function Part_ChangePartProdCode(dsPart As PartDataSet, strProdCode As String) As PartDataSet
+        PartBO.ChangePartProdCode(strProdCode, dsPart)
         Return dsPart
     End Function
 End Class
 
-Public Class BO_PartClass
-    
-End Class
 Public Class CSV_File_Reader
     Public Shared Function Import_CSV_Data(ByVal strQuery As String, ByVal strTable As String, _
     ByVal strDatabaseFilePath As String) As DataTable

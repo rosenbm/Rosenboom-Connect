@@ -1,14 +1,30 @@
-﻿Imports Epicor.Mfg.Core
-Imports Epicor.Mfg.Shared
-Imports Epicor.Mfg.UI
-Imports Epicor.Mfg.BO
-Imports System.Configuration
+﻿Imports System.Configuration
 Imports System.Xml
 Imports System.IO
 Imports System.Text
 Imports System.Data
+Imports Ice.Lib.Framework
+Imports Erp.Proxy.BO
+Imports Ice.Core.Session
+Imports Erp.BO
+Imports Ice.Proxy.BO
+Imports Ice.BO
+
 Partial Class MES_FLIP
     Inherits System.Web.UI.Page
+    Dim E10session As Ice.Core.Session
+    Dim iLaunch As Ice.Lib.Framework.ILauncher
+    Dim EmpBasicBO As EmpBasicImpl
+    Dim UD01BO As UD01Impl
+
+    Protected Sub Start_E10_Session()
+        Dim sUser As String = "sc"
+        Dim sPass As String = "DEMETER@!"
+        E10session = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
+        iLaunch = New Ice.Lib.Framework.ILauncher(E10session)
+        EmpBasicBO = WCFServiceSupport.CreateImpl(Of EmpBasicImpl)(E10session, EmpBasicImpl.UriPath)
+        UD01BO = WCFServiceSupport.CreateImpl(Of UD01Impl)(E10session, UD01Impl.UriPath)
+    End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Set the auto tab
@@ -23,9 +39,13 @@ Partial Class MES_FLIP
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         Dim dsEmpBasic As New EmpBasicDataSet, intAsm As Integer, intOprSeq As Integer, strOpDesc As String = "", strOpCode As String = "", _
             ds As New DataSet, strInspectorName As String = ""
+
+        'CREATE EPICOR CONNECTION
+        Start_E10_Session()
+
         'Check for valid employee
         Try
-            dsEmpBasic = BO_EmpBasic_FLIP.Get_By_ID(txtEmpID.Text.ToLower)
+            dsEmpBasic = EmpBasic_GetByID(txtEmpID.Text.ToLower)
             If dsEmpBasic.Tables(0).Rows(0)("Number01") < 1 Then
                 lblMessage.ForeColor = Drawing.Color.Red
                 lblMessage.Font.Bold = False
@@ -79,7 +99,7 @@ Partial Class MES_FLIP
 
         Dim dsUD01 As New UD01DataSet
         'Get new data set
-        dsUD01 = BO_UD01.Get_New
+        dsUD01 = UD01_GetNew()
         'Change values
         dsUD01.Tables(0).Rows(0)("Key1") = txtJobNum.Text
         dsUD01.Tables(0).Rows(0)("Key2") = intAsm
@@ -96,93 +116,37 @@ Partial Class MES_FLIP
         dsUD01.Tables(0).Rows(0)("Number01") = intAsm
         dsUD01.Tables(0).Rows(0)("Number02") = intOprSeq
         'Update
-        dsUD01 = BO_UD01.Update(dsUD01)
+        dsUD01 = UD01_Update(dsUD01)
     End Sub
 
     Protected Sub btnRefreshOps_Click(sender As Object, e As EventArgs) Handles btnRefreshOps.Click
 
     End Sub
-End Class
-Public Class BO_UD01
-    Public Shared Function Get_New() As UD01DataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myUD01 As New UD01(connPool)
-        Dim myUD01DS As New UD01DataSet
 
-        myUD01.GetaNewUD01(myUD01DS)
-
-        connPool.Dispose()
-
-        Return myUD01DS
+    Function UD01_GetNew() As UD01DataSet
+        Dim UD01BODS As New UD01DataSet
+        UD01BO.GetaNewUD01(UD01BODS)
+        Return UD01BODS
     End Function
-    Public Shared Function Get_Rows(strUD01Filter As String) As UD01DataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myUD01 As New UD01(connPool)
-        Dim myUD01DS As New UD01DataSet
-
-        myUD01.GetRows(strUD01Filter, "", 0, 0, True)
-
-        connPool.Dispose()
-
-        Return myUD01DS
+    Function UD01_GetRows(strUD01Filter As String) As UD01DataSet
+        Dim UD01BODS As New UD01DataSet
+        UD01BO.GetRows(strUD01Filter, "", 0, 0, True)
+        Return UD01BODS
     End Function
-    Public Shared Function Update(dsUD01 As UD01DataSet) As UD01DataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myUD01 As New UD01(connPool)
-
-        myUD01.Update(dsUD01)
-
-        connPool.Dispose()
-
+    Function UD01_Update(dsUD01 As UD01DataSet) As UD01DataSet
+        UD01BO.Update(dsUD01)
         Return dsUD01
     End Function
-End Class
-Public Class BO_EmpBasic_FLIP
-    Public Shared Function Get_By_ID(strEmpID As String) As EmpBasicDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
 
-        Dim myEmpBasic As New EmpBasic(connPool)
+    Function EmpBasic_GetByID(strEmpID As String) As EmpBasicDataSet
         Dim myEmpBasicDS As New EmpBasicDataSet
-
         Dim strNewID As String
         strNewID = Left(strEmpID, 3)
         strNewID = LCase(strNewID)
         strNewID &= Right(strEmpID, 2)
 
-        myEmpBasicDS = myEmpBasic.GetByID(strNewID)
-
-        connPool.Dispose()
+        myEmpBasicDS = EmpBasicBO.GetByID(strNewID)
 
         Return myEmpBasicDS
     End Function

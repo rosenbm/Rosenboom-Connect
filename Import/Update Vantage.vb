@@ -6,7 +6,7 @@ Public Class Update_Vantage
         Dim cn As OdbcConnection, cmd As OdbcCommand
 
         'Set cn
-        cn = New OdbcConnection("DSN=Epicor9RC;UID=SYSPROGRESS;PWD=report;host=ZEUS;port=9450;db=mfgsys")
+        cn = New OdbcConnection("DSN=ERP10RC;Driver={SQL Server};Server=olympus;Database=ERP10;Uid=ERP10;Pwd=ERP10;")
 
         'Open Connection
         cn.Open()
