@@ -267,12 +267,12 @@
             </div>
     <br />
     <br />
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EnableModelValidation="True" CellPadding="4" ForeColor="#333333" GridLines="None">
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="TranDate" HeaderText="TranDate" SortExpression="TranDate" DataFormatString="{0:d}" />
             <asp:BoundField DataField="PartNum" HeaderText="PartNum" SortExpression="PartNum" />
-            <asp:BoundField DataField="TranQty" HeaderText="TranQty" SortExpression="TranQty" DataFormatString="{0:f2}" />
+            <asp:BoundField DataField="TranQty" HeaderText="TranQty" SortExpression="TranQty" />
             <asp:BoundField DataField="TranReference" HeaderText="TranReference" SortExpression="TranReference" />
         </Columns>
                     <EditRowStyle BackColor="#999999" />
@@ -283,13 +283,13 @@
                     <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
     </asp:GridView>
                 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Epicor9RU %>" ProviderName="<%$ ConnectionStrings:Epicor9RU.ProviderName %>" SelectCommand="SELECT TranDate, PartNum, TranQty, TranReference
-FROM MFGSYS.PUB.PartTran
-WHERE Company = 'RMT' AND TranType = 'STK-MTL' AND JobNum = ? AND AssemblySeq = ? AND JobSeq = ?">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ERP10ConnectionString %>" SelectCommand="SELECT TranDate, PartNum, TranQty, TranReference
+FROM ERP10.ERP.PartTran
+WHERE Company = 'RMT' AND TranType = 'STK-MTL' AND JobNum =@JobNum AND AssemblySeq =@Asm AND JobSeq =@MtlSeq">
         <SelectParameters>
-            <asp:ControlParameter ControlID="txtJobNum" Name="?" PropertyName="Text" />
-            <asp:ControlParameter ControlID="txtAsm" Name="?" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="txtMtlNum" Name="?" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="txtJobNum" Name="JobNum" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAsm" Name="Asm" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtMtlNum" Name="MtlSeq" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
     <br />

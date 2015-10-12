@@ -35,6 +35,16 @@
                 SortExpression="OpCode" />
             <asp:BoundField DataField="OpDesc" HeaderText="OpDesc" SortExpression="OpDesc" />
             <asp:BoundField DataField="RG" HeaderText="RG" SortExpression="RG" />
+            <asp:TemplateField HeaderText="FirstPart">
+                <ItemTemplate>
+                    <asp:CheckBox ID="CheckBox1" runat="server" />
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="LastPart">
+                <ItemTemplate>
+                    <asp:CheckBox ID="CheckBox2" runat="server" />
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
          <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
     </asp:GridView>

@@ -1,18 +1,38 @@
-﻿Imports Epicor.Mfg.Core
-Imports Epicor.Mfg.Shared
-Imports Epicor.Mfg.UI
-Imports Epicor.Mfg.BO
-Imports System.Configuration
+﻿Imports System.Configuration
 Imports System.Xml
 Imports System.IO
 Imports System.Text
 Imports System.Data
+Imports Ice.Lib.Framework
+Imports Erp.Proxy.BO
+Imports Ice.Core.Session
+Imports Erp.BO
+Imports Ice.Proxy.BO
+Imports Ice.BO
 
 Partial Class MES_NEW_IssueMaterial
     Inherits System.Web.UI.Page
+    Dim E10session As Ice.Core.Session
+    Dim iLaunch As Ice.Lib.Framework.ILauncher
+    Dim PartBinSearchBO As PartBinSearchImpl
+    Dim JobEntryBO As JobEntryImpl
+    Dim EmpBasicBO As EmpBasicImpl
+    Dim IssueReturnBO As IssueReturnImpl
+
+
+    Protected Sub Start_E10_Session(sUser As String)
+        Dim sPass As String = "DEMETER@!"
+        E10session = New Ice.Core.Session(sUser, sPass, LicenseType.Default, "\\olympus\ERP10\ERP10.0.700\ClientDeployment\Client\Config\RMT-SHIA-APP03.sysconfig")
+        iLaunch = New Ice.Lib.Framework.ILauncher(E10session)
+        PartBinSearchBO = WCFServiceSupport.CreateImpl(Of PartBinSearchImpl)(E10session, PartBinSearchImpl.UriPath)
+        JobEntryBO = WCFServiceSupport.CreateImpl(Of JobEntryImpl)(E10session, JobEntryImpl.UriPath)
+        EmpBasicBO = WCFServiceSupport.CreateImpl(Of EmpBasicImpl)(E10session, EmpBasicImpl.UriPath)
+        IssueReturnBO = WCFServiceSupport.CreateImpl(Of IssueReturnImpl)(E10session, IssueReturnImpl.UriPath)
+    End Sub
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         Dim strWarehouse As String, strPlant As String, strBinNum As String, strUser As String
+
         'Check to see if this is a good ticket
         If Good_Ticket() = "true" Then
         Else
@@ -20,6 +40,7 @@ Partial Class MES_NEW_IssueMaterial
             lblMessage.Text = Good_Ticket()
             Exit Sub
         End If
+
         'Determine plant and warehouse code
         If txtDept.Text.Substring(0, 1) = "S" Or txtDept.Text.Substring(0, 1) = "s" Then
             strPlant = "SPIRITLA"
@@ -30,6 +51,11 @@ Partial Class MES_NEW_IssueMaterial
             strWarehouse = "SHE"
             strUser = "shsc"
         End If
+
+        If E10session.PlantID <> strPlant Then
+            Start_E10_Session(strUser)
+        End If
+        
         'Determine from bin
         If txtFromBin.Text = "" Then
             strBinNum = txtDept.Text
@@ -177,37 +203,45 @@ Partial Class MES_NEW_IssueMaterial
     Protected Sub IssueMaterial(strReference As String, strUser As String, decTranQty As Decimal, strWarehouse As String, strBinNum As String)
         Dim dsIssueReturn As New IssueReturnDataSet
         'Get New Issue Return
-        dsIssueReturn = BO_IssueReturn.GetNewIssueReturnToJob(strUser, txtJobNum.Text, txtAsm.Text)
-        'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn1.xml")
+        dsIssueReturn = IssueReturn_GetNewIssueReturnToJob(strUser, txtJobNum.Text, txtAsm.Text)
+
+        'Change Job
+        dsIssueReturn.Tables(0).Rows(0)("ToJobNum") = txtJobNum.Text
+        IssueReturnBO.OnChangeToJobNum(dsIssueReturn, "IssueMaterial", "")
+
+        'Change Asm
+        dsIssueReturn.Tables(0).Rows(0)("ToAssemblySeq") = txtAsm.Text
+        IssueReturnBO.OnChangeToAssemblySeq(dsIssueReturn, "IssueMaterial")
+
         decTranQty = Math.Round(decTranQty, 2)
         'On Change To Job Seq
         dsIssueReturn.Tables(0).Rows(0)("ToJobSeq") = txtMtlNum.Text
         dsIssueReturn.Tables(0).Rows(0)("RowMod") = "U"
-        dsIssueReturn = BO_IssueReturn.OnChangeToJobSeq(strUser, dsIssueReturn)
+        dsIssueReturn = IssueReturn_OnChangeToJobSeq(strUser, dsIssueReturn)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn2.xml")
 
         'On Change Tran Qty
         dsIssueReturn.Tables(0).Rows(0)("TranQty") = decTranQty
         dsIssueReturn.Tables(0).Rows(0)("TranReference") = strReference & "-" & txtEmpID.Text
-        dsIssueReturn = BO_IssueReturn.OnChangeTranQty(strUser, dsIssueReturn, decTranQty)
+        dsIssueReturn = IssueReturn_OnChangeTranQty(strUser, dsIssueReturn, decTranQty)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn3.xml")
 
         'On Change From Warehouse
         dsIssueReturn.Tables(0).Rows(0)("FromWarehouseCode") = strWarehouse
-        dsIssueReturn = BO_IssueReturn.OnChangeFromWarehouse(strUser, dsIssueReturn, strWarehouse)
+        dsIssueReturn = IssueReturn_OnChangeFromWarehouse(strUser, dsIssueReturn, strWarehouse)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn4.xml")
 
         'On Change From BinNum
         dsIssueReturn.Tables(0).Rows(0)("FromBinNum") = strBinNum
-        dsIssueReturn = BO_IssueReturn.OnChangeFromBinNum(strUser, dsIssueReturn, strBinNum)
+        dsIssueReturn = IssueReturn_OnChangeFromBinNum(strUser, dsIssueReturn, strBinNum)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn5.xml")
 
         'PrePerform Material Movement
-        dsIssueReturn = BO_IssueReturn.PrePerformMaterialMovement(strUser, dsIssueReturn)
+        dsIssueReturn = IssueReturn_PrePerformMaterialMovement(strUser, dsIssueReturn)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn6.xml")
 
         'Perform Material Movement
-        dsIssueReturn = BO_IssueReturn.PerformMaterialMovement(strUser, dsIssueReturn)
+        dsIssueReturn = IssueReturn_PerformMaterialMovement(strUser, dsIssueReturn)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn7.xml")
 
     End Sub
@@ -279,7 +313,7 @@ Partial Class MES_NEW_IssueMaterial
         End If
 
         'Determine part number
-        dsJob = BO_JobEntry.Get_By_ID(txtJobNum.Text)
+        dsJob = JobEntry_GetByID(txtJobNum.Text)
         For Each row As DataRow In dsJob.Tables("JobMtl").Rows
             If row("MtlSeq") = txtMtlNum.Text And row("AssemblySeq") = txtAsm.Text Then
                 strPartNum = row("PartNum")
@@ -314,7 +348,7 @@ Partial Class MES_NEW_IssueMaterial
 
         'Check Bin Qty
         Try
-            dsPartBin = BO_PartBin.Get_Part_Bin_Search(strPartNum, strWarehouse)
+            dsPartBin = PartBinSearch_GetPartBinSearch(strPartNum, strWarehouse)
             For Each row As DataRow In dsPartBin.Tables(0).Rows
                 If row("BinNum").ToString.ToUpper = strBinNum.ToUpper Then
                     decBinQty = row("QtyOnHand")
@@ -349,7 +383,7 @@ Partial Class MES_NEW_IssueMaterial
         End If
 
         'Check if employee exists
-        dsEmpBasic = BO_EmpBasic.Get_By_ID(txtEmpID.Text)
+        dsEmpBasic = EmpBasic_GetByID(txtEmpID.Text)
         If dsEmpBasic.Tables("EmpBasic").Rows.Count = 0 Then
             Return "Employee is not valid."
         Else
@@ -364,12 +398,13 @@ Partial Class MES_NEW_IssueMaterial
         Dim MESTab As System.Web.UI.HtmlControls.HtmlGenericControl
         MESTab = Master.FindControl("mestab")
         MESTab.Attributes.Add("class", "active")
+        Start_E10_Session("sc")
     End Sub
 
     Protected Function EA_Check() As Boolean
         Dim dsJob As New JobEntryDataSet, strUOM As String = "", output As Integer
 
-        dsJob = BO_JobEntry.Get_By_ID(txtJobNum.Text)
+        dsJob = JobEntry_GetByID(txtJobNum.Text)
         For Each row As DataRow In dsJob.Tables("JobMtl").Rows
             If row("MtlSeq") = txtMtlNum.Text And row("AssemblySeq") = txtAsm.Text Then
                 strUOM = row("IUM")
@@ -447,7 +482,7 @@ Partial Class MES_NEW_IssueMaterial
         Dim dsJob As New JobEntryDataSet, strPN As String = "", myPartDS As New PartBinSearchDataSet, bolFOundOne As Boolean = False, strWhse As String = "", _
             strPlant As String = "", strFromBin As String
         Try
-            dsJob = BO_JobEntry.Get_By_ID(txtJobNum.Text)
+            dsJob = JobEntry_GetByID(txtJobNum.Text)
             strPlant = dsJob.Tables("JobHead").Rows(0)("Plant")
             For Each row As DataRow In dsJob.Tables("JobMtl").Rows
                 If row("AssemblySeq") = txtAsm.Text And row("MtlSeq") = txtMtlNum.Text Then
@@ -471,12 +506,12 @@ Partial Class MES_NEW_IssueMaterial
                 strWhse = "SPL"
             End If
 
-            myPartDS = BO_PartBin.Get_Part_Bin_Search(strPN, strWhse)
+            myPartDS = PartBinSearch_GetPartBinSearch(strPN, strWhse)
             bolFOundOne = False
-            If txtDept.Text = "" Then
-                strFromBin = txtFromBin.Text
-            Else
+            If txtFromBin.Text = "" Then
                 strFromBin = txtDept.Text
+            Else
+                strFromBin = txtFromBin.Text
             End If
             For Each row As DataRow In myPartDS.Tables(0).Rows
                 If row("BinNum").ToString.ToUpper = strFromBin.ToUpper Then
@@ -492,206 +527,69 @@ Partial Class MES_NEW_IssueMaterial
             lblMessage.Text &= 0
         End Try
     End Sub
-End Class
 
-Public Class BO_PartBin
-    Public Shared Function Get_Part_Bin_Search(strPartNum As String, strWarehouse As String) As PartBinSearchDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myPart As New PartBinSearch(connPool)
+    Function PartBinSearch_GetPartBinSearch(strPartNum As String, strWarehouse As String) As PartBinSearchDataSet
         Dim myPartDS As New PartBinSearchDataSet
-
-        myPartDS = myPart.GetPartBinSearch(strPartNum, strWarehouse, "", "", False, "", "", 0, 0, 0, False)
-
-        connPool.Dispose()
-
+        myPartDS = PartBinSearchBO.GetPartBinSearch(0, 0, "WarehouseCode='" & strWarehouse & "' AND PartNum='" & strPartNum & "'", False)
         Return myPartDS
     End Function
-End Class
 
-Public Class BO_JobEntry
-    Public Shared Function Get_By_ID(strJobNum As String) As JobEntryDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myJob As New JobEntry(connPool)
+    Function JobEntry_GetByID(strJobNum As String) As JobEntryDataSet
         Dim myJobDS As New JobEntryDataSet
-
-        myJobDS = myJob.GetByID(strJobNum)
-
-        connPool.Dispose()
-
+        myJobDS = JobEntryBO.GetByID(strJobNum)
         Return myJobDS
     End Function
-End Class
 
-Public Class BO_EmpBasic
-    Public Shared Function Get_By_ID(strEmpID As String) As EmpBasicDataSet
-        Dim sUser As String = "sc"
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myEmpBasic As New EmpBasic(connPool)
+    Function EmpBasic_GetByID(strEmpID As String) As EmpBasicDataSet
         Dim myEmpBasicDS As New EmpBasicDataSet
-
-        myEmpBasicDS = myEmpBasic.GetByID(strEmpID)
-
-        connPool.Dispose()
-
+        myEmpBasicDS = EmpBasicBO.GetByID(strEmpID)
         Return myEmpBasicDS
     End Function
-End Class
 
-Public Class BO_IssueReturn
-    Public Shared Function GetNewIssueReturnToJob(strUser As String, strJobNum As String, intAsmSeq As Integer) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
+    Function IssueReturn_GetNewIssueReturnToJob(strUser As String, strJobNum As String, intAsmSeq As Integer) As IssueReturnDataSet
+        Dim myIssueReturnDS As New IssueReturnDataSet, dsSelectedJobAsmbl As New SelectedJobAsmblDataSet
 
-        Dim myIssueReturn As New IssueReturn(connPool)
-        Dim myIssueReturnDS As New IssueReturnDataSet
+        Dim NewRow As DataRow = dsSelectedJobAsmbl.Tables("SelectedJobAsmbl").NewRow
+        NewRow("Company") = "RMT"
+        NewRow("JobNum") = strJobNum
+        NewRow("AssemblySeq") = intAsmSeq
+        dsSelectedJobAsmbl.Tables("SelectedJobAsmbl").Rows.Add(NewRow)
 
-        myIssueReturn.GetNewIssueReturnToJob(strJobNum, intAsmSeq, "STK-MTL", "?", "", myIssueReturnDS)
 
-        connPool.Dispose()
+        'IssueReturnBO.GetNewIssueReturnToJob(strJobNum, intAsmSeq, "STK-MTL", Guid.NewGuid, "", myIssueReturnDS)
+        myIssueReturnDS = IssueReturnBO.GetNewJobAsmblMultiple("STK-MTL", Guid.NewGuid(), "IssueMaterial", dsSelectedJobAsmbl, "")
+
 
         Return myIssueReturnDS
     End Function
 
-    Public Shared Function OnChangeToJobSeq(strUser As String, dsIssueReturn As IssueReturnDataSet) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myIssueReturn As New IssueReturn(connPool)
-
-        myIssueReturn.OnChangeToJobSeq(dsIssueReturn, "", "")
-
-        connPool.Dispose()
-
+    Function IssueReturn_OnChangeToJobSeq(strUser As String, dsIssueReturn As IssueReturnDataSet) As IssueReturnDataSet
+        IssueReturnBO.OnChangeToJobSeq(dsIssueReturn, "", "")
         Return dsIssueReturn
     End Function
 
-    Public Shared Function OnChangeTranQty(strUser As String, dsIssueReturn As IssueReturnDataSet, decTranQty As Decimal) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myIssueReturn As New IssueReturn(connPool)
-
-        myIssueReturn.OnChangeTranQty(decTranQty, dsIssueReturn)
-
-        connPool.Dispose()
-
+    Function IssueReturn_OnChangeTranQty(strUser As String, dsIssueReturn As IssueReturnDataSet, decTranQty As Decimal) As IssueReturnDataSet
+        IssueReturnBO.OnChangeTranQty(decTranQty, dsIssueReturn)
         Return dsIssueReturn
     End Function
 
-    Public Shared Function OnChangeFromWarehouse(strUser As String, dsIssueReturn As IssueReturnDataSet, strWarehouse As String) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myIssueReturn As New IssueReturn(connPool)
-
-        myIssueReturn.onChangeFromWarehouse(dsIssueReturn, "")
-
-        connPool.Dispose()
-
+    Function IssueReturn_OnChangeFromWarehouse(strUser As String, dsIssueReturn As IssueReturnDataSet, strWarehouse As String) As IssueReturnDataSet
+        IssueReturnBO.OnChangeFromWarehouse(dsIssueReturn, "")
         Return dsIssueReturn
     End Function
 
-    Public Shared Function OnChangeFromBinNum(strUser As String, dsIssueReturn As IssueReturnDataSet, strBinNum As String) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myIssueReturn As New IssueReturn(connPool)
-
-        myIssueReturn.OnChangeFromBinNum(True, dsIssueReturn)
-
-        connPool.Dispose()
-
+    Function IssueReturn_OnChangeFromBinNum(strUser As String, dsIssueReturn As IssueReturnDataSet, strBinNum As String) As IssueReturnDataSet
+        IssueReturnBO.OnChangeFromBinNum(True, dsIssueReturn)
         Return dsIssueReturn
     End Function
 
-    Public Shared Function PrePerformMaterialMovement(strUser As String, dsIssueReturn As IssueReturnDataSet) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myIssueReturn As New IssueReturn(connPool)
-
-        myIssueReturn.PrePerformMaterialMovement(dsIssueReturn, False)
-
-        connPool.Dispose()
-
+    Function IssueReturn_PrePerformMaterialMovement(strUser As String, dsIssueReturn As IssueReturnDataSet) As IssueReturnDataSet
+        IssueReturnBO.PrePerformMaterialMovement(dsIssueReturn, False)
         Return dsIssueReturn
     End Function
 
-    Public Shared Function PerformMaterialMovement(strUser As String, dsIssueReturn As IssueReturnDataSet) As IssueReturnDataSet
-        Dim sUser As String = strUser
-        Dim sPass As String = "DEMETER@!"
-        Dim sServer As String = "zeus"
-        Dim sPort As String = "9408"
-        Dim sAppServer As String = String.Format("AppServerDC://{0}:{1}", sServer, sPort)
-        Dim sCompany As String = "RMT"
-        Dim session As Object = New Epicor.Mfg.Core.Session(sUser, sPass, sAppServer, Epicor.Mfg.Core.Session.LicenseType.Default)
-        Dim connPool As New Epicor.Mfg.Core.BLConnectionPool(sUser, sPass, sAppServer)
-
-        Dim myIssueReturn As New IssueReturn(connPool)
-
-        myIssueReturn.PerformMaterialMovement(False, dsIssueReturn, "", "")
-
-        connPool.Dispose()
-
+    Function IssueReturn_PerformMaterialMovement(strUser As String, dsIssueReturn As IssueReturnDataSet) As IssueReturnDataSet
+        IssueReturnBO.PerformMaterialMovement(False, dsIssueReturn, "", "")
         Return dsIssueReturn
     End Function
 End Class
