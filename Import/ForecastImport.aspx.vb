@@ -1218,7 +1218,8 @@ Partial Class Import_PPP
         Dim dblStartRow As Double = 0, strCustomerPN As String = "", strOurPartNum As String = "", dblQOH As Double = 0, dblPFEP As Double = 0
         Dim dblBlankRow As Double = 0, strPlant As String = "", intCol As Integer = 1, dblPFEPOrig As Double, _
             dblForecastQty As Double = 0, dblPFEP_RT As Double = 0, dteForecastDate As Date, _
-            intCustomerID As Integer = 375, dblMonthly As Double = 0, strErrorLog As String = "", intStatus As Integer = 0, dblQOHRem As Double = 0
+            intCustomerID As Integer = 375, dblMonthly As Double = 0, strErrorLog As String = "", intStatus As Integer = 0, dblQOHRem As Double = 0, _
+            intHeaderRow As Integer = 14
 
         'Import Cross Ref
         Import_CrossRef("Heil")
@@ -1375,9 +1376,30 @@ Partial Class Import_PPP
                     Next
 
                     'GO UNTIL 1 YR
+                    Dim intMyMonth As Integer = 42
                     dblForecastQty = 0
                     Do Until dteForecastDate > Today.AddDays(365)
-                        dblForecastQty += dblMonthly
+                        intMyMonth = 42
+                        'dblForecastQty += dblMonthly
+                        Do Until intMyMonth > 53
+
+                            If Month(dteForecastDate) = Month(CDate(dtForecast.Rows(intHeaderRow)("F" & intMyMonth))) Then
+                                If IsNumeric(dtForecast.Rows(i)("F" & intMyMonth)) = False Then
+                                    dblForecastQty += 0
+                                    Exit Do
+                                Else
+                                    dblForecastQty += Math.Round(dtForecast.Rows(i)("F" & intMyMonth) / 4, 0)
+                                    Exit Do
+                                End If 'if numeric
+
+
+                            End If 'if month
+
+                            intMyMonth += 1
+                        Loop
+
+
+
 
                         If dblForecastQty < 1 Then
                         Else
