@@ -63,13 +63,14 @@ Partial Class MES_NEW_IssueMaterial
             strBinNum = txtFromBin.Text
         End If
         'Set File Path
-        Dim rand As New Random, letter As String = "", n As Integer, strFilePath As String = _
-            "\\pithos\Company\Service Connect\Rosenboom Connect\Issue Material\", strIssuedComplete As String, strReference As String
+        Dim strIssuedComplete As String, strReference As String
+        ' Dim rand As New Random, letter As String = "", n As Integer, strFilePath As String = _
+        '    "\\pithos\Company\Service Connect\Rosenboom Connect\Issue Material\"
         'Get random file name
-        For n = 0 To 8
-            letter &= ChrW(rand.Next(Asc("A"), Asc("Z") + 1))
-        Next
-        strFilePath &= letter & ".csv"
+        'For n = 0 To 8
+        'letter &= ChrW(rand.Next(Asc("A"), Asc("Z") + 1))
+        'Next
+        'strFilePath &= letter & ".csv"
 
 
         'Determine if it is issued complete or not
@@ -79,49 +80,18 @@ Partial Class MES_NEW_IssueMaterial
             strIssuedComplete = "false"
         End If
 
-        'Dim CSVFile As New IO.StreamWriter(strFilePath)
-        'CSVFile.WriteLine("PartNum,TranQty,WarehouseCode,BinNum,IssuedComplete,JobNum,AssemblySeq,MtlSeq,Plant,EmpID,ResourceGroup,Reference")
-
-        'Check each box for zeros
-        'If txtShortEnds.Text = "" Then
-        'ElseIf txtShortEnds.Text = 0 Then
-        'Else
-        '    strReference = "ser"
-        '    'CSVFile.WriteLine(txtMtlNum.Text & "," & txtShortEnds.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-        '    'txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-        '    'txtEmpID.Text & "," & txtDept.Text & "," & strReference)
-
-        '    IssueMaterial(strReference, strUser, txtShortEnds.Text, strWarehouse, strBinNum)
-
-
-        'End If
         If txtOverProduction.Text = "" Then
         ElseIf txtOverProduction.Text = 0 Then
         Else
             strReference = "overpro"
-            'CSVFile.WriteLine(txtMtlNum.Text & "," & txtOverProduction.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-            '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-            '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
             IssueMaterial(strReference, strUser, txtOverProduction.Text, strWarehouse, strBinNum)
 
         End If
-        'If txtMaterialSub.Text = "" Then
-        'ElseIf txtMaterialSub.Text = 0 Then
-        'Else
-        '    strReference = "matsub"
-        '    'CSVFile.WriteLine(txtMtlNum.Text & "," & txtMaterialSub.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-        '    '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-        '    '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
-        '    IssueMaterial(strReference, strUser, txtMaterialSub.Text, strWarehouse, strBinNum)
 
-        'End If
         If txtDamagedMtl.Text = "" Then
         ElseIf txtDamagedMtl.Text = 0 Then
         Else
             strReference = "dammat"
-            'CSVFile.WriteLine(txtMtlNum.Text & "," & txtDamagedMtl.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-            '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-            '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
             IssueMaterial(strReference, strUser, txtDamagedMtl.Text, strWarehouse, strBinNum)
 
         End If
@@ -129,9 +99,6 @@ Partial Class MES_NEW_IssueMaterial
         ElseIf txtScrap.Text = 0 Then
         Else
             strReference = "scrap"
-            'CSVFile.WriteLine(txtMtlNum.Text & "," & txtScrap.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-            '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-            '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
             IssueMaterial(strReference, strUser, txtScrap.Text, strWarehouse, strBinNum)
 
         End If
@@ -139,9 +106,6 @@ Partial Class MES_NEW_IssueMaterial
         ElseIf txtDrop.Text = 0 Then
         Else
             strReference = "drop"
-            'CSVFile.WriteLine(txtMtlNum.Text & "," & txtDrop.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-            '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-            '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
             IssueMaterial(strReference, strUser, txtDrop.Text, strWarehouse, strBinNum)
 
         End If
@@ -149,9 +113,6 @@ Partial Class MES_NEW_IssueMaterial
         ElseIf txtNonUsable.Text = 0 Then
         Else
             strReference = "numtl"
-            'CSVFile.WriteLine(txtMtlNum.Text & "," & txtNonUsable.Text & "," & strWarehouse & "," & strBinNum & ",false," & _
-            '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-            '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
             IssueMaterial(strReference, strUser, txtNonUsable.Text, strWarehouse, strBinNum)
 
         End If
@@ -159,15 +120,8 @@ Partial Class MES_NEW_IssueMaterial
         ElseIf txtEngYield.Text = 0 Then
         Else
             strReference = "PO#" & txtPONum.Text.Replace(",", "/") & "HT#" & txtHeatNum.Text.Replace(",", "/")
-            'CSVFile.WriteLine(txtMtlNum.Text & "," & txtEngYield.Text & "," & strWarehouse & "," & strBinNum & "," & _
-            '                  strIssuedComplete & "," & _
-            '                  txtJobNum.Text & "," & txtAsm.Text & "," & txtMtlNum.Text & "," & strPlant & "," & _
-            '                  txtEmpID.Text & "," & txtDept.Text & "," & strReference)
             IssueMaterial(strReference, strUser, txtEngYield.Text, strWarehouse, strBinNum)
         End If
-
-        'CSVFile.Close()
-
 
         'Clear Form
         Clear_Textboxes()
@@ -228,11 +182,13 @@ Partial Class MES_NEW_IssueMaterial
 
         'On Change From Warehouse
         dsIssueReturn.Tables(0).Rows(0)("FromWarehouseCode") = strWarehouse
+        dsIssueReturn.Tables(0).Rows(0)("ToWarehouseCode") = strWarehouse
         dsIssueReturn = IssueReturn_OnChangeFromWarehouse(strUser, dsIssueReturn, strWarehouse)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn4.xml")
 
         'On Change From BinNum
         dsIssueReturn.Tables(0).Rows(0)("FromBinNum") = strBinNum
+        dsIssueReturn.Tables(0).Rows(0)("ToBinNum") = strBinNum
         dsIssueReturn = IssueReturn_OnChangeFromBinNum(strUser, dsIssueReturn, strBinNum)
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn5.xml")
 
@@ -241,8 +197,9 @@ Partial Class MES_NEW_IssueMaterial
         'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn6.xml")
 
         'Perform Material Movement
+        dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn7.xml")
         dsIssueReturn = IssueReturn_PerformMaterialMovement(strUser, dsIssueReturn)
-        'dsIssueReturn.WriteXml("Y:\_PCB Transfer\Austin\IssueReturn7.xml")
+
 
     End Sub
 
