@@ -160,15 +160,6 @@
     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>
 <ul class="mes">
     
-<li><asp:Button ID="btnclockin" runat="server" Text="Clock In" Height="150px" 
-        Width="150px" Font-Size="Large" onclick="btnclockin_Click" /></li>
-<li><asp:Button ID="btnclockout" runat="server" Text="Clock Out" Height="150px" 
-        Width="150px" Font-Size="Large" onclick="btnclockout_Click" /></li>
-<li><asp:Button ID="btnstartactivity" runat="server" Text="Start Activity" 
-        Height="150px" Width="150px" Font-Size="Large" 
-        onclick="btnstartactivity_Click" /></li>
-<li><asp:Button ID="btnendactivity" runat="server" Text="End Activity" 
-        Height="150px" Width="150px" Font-Size="Large" onclick="btnendactivity_Click" /></li>
 <li><asp:Button ID="btnissuematerial" runat="server" Text="Issue Material" 
         Height="150px" Width="150px" Font-Size="Large" 
         onclick="btnissuematerial_Click" /></li>
@@ -178,6 +169,15 @@
         Width="150px" Font-Size="Large" OnClick="btnmoverequest_Click" /></li>
 <li><asp:Button ID="btnFixture" runat="server" Text="Fixture Lookup" Height="150px" 
         Width="150px" Font-Size="Large" OnClick="btnFixture_Click" /></li>
+<li><asp:Button ID="btnclockin" runat="server" Text="Clock In" Height="150px" 
+        Width="150px" Font-Size="Large" onclick="btnclockin_Click" Enabled="False" Visible="False" /></li>
+<li><asp:Button ID="btnclockout" runat="server" Text="Clock Out" Height="150px" 
+        Width="150px" Font-Size="Large" onclick="btnclockout_Click" Enabled="False" Visible="False" /></li>
+<li><asp:Button ID="btnstartactivity" runat="server" Text="Start Activity" 
+        Height="150px" Width="150px" Font-Size="Large" 
+        onclick="btnstartactivity_Click" Enabled="False" Visible="False" /></li>
+<li><asp:Button ID="btnendactivity" runat="server" Text="End Activity" 
+        Height="150px" Width="150px" Font-Size="Large" onclick="btnendactivity_Click" Enabled="False" Visible="False" /></li>
 </ul>
 </div>
 
