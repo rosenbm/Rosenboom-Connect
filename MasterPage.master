@@ -41,14 +41,7 @@
             <div id="topnav">
                 <ul>
                     <li id="hometab" runat=server><a href="/Default.aspx">Home</a></li>         
-                    <li id="reportstab" runat=server><a href="/Reports/Main.aspx">Reports</a>
-                        <ul>
-                            <li><a href="/Reports/viewreport.aspx?folder=mtlandpur&report=SEOI.rpt">Short End Index</a></li>
-                            <li><a href="/Reports/Main.aspx?folder=earnedhours">Earned Hours Report</a></li>
-                            <li><a href="/Reports/viewreport.aspx?folder=production&report=Updated Throughput Units v1.rpt">Supervisor Report</a></li>
-                            <li><a href="/Reports/viewreport.aspx?folder=production&report=Priority Dispatch - Mtls Available.rpt">Priority Dispatch</a></li>
-                            </ul>
-                    </li>
+                    <li id="reportstab" runat=server><a href="http://olympus/Reports/Pages/Folder.aspx?ItemPath=%2fRosenboom+Reports&ViewMode=List">Reports</a></li>
                     <li id="dashboardstab" runat="server"><a href="http://rosenboomdashboards:8080/idashboards/">Dashboards</a></li>
                     <li id="mestab" runat="server"><a href="/MES/main.aspx">MES</a></li>
                     <li id="feedbacktab" runat="server"><a href="/EFS/main.aspx">Feedback</a><ul>
