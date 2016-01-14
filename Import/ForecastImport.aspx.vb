@@ -599,6 +599,7 @@ Partial Class Import_PPP
         For Each row As DataRow In dtForecast.Rows
             If i = 1 Then 'skip first row
             ElseIf IsDBNull(row("F1")) = True Then 'skip if null part
+            ElseIf row("F9") = "Firm" Then
             Else
                 'Grab initial values
                 strCustomerPartNum = row("F1")
