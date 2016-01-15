@@ -1216,11 +1216,9 @@ Partial Class Import_PPP
     End Sub
 
     Private Sub Heil(intCustNum As Integer)
-        Dim dblStartRow As Double = 0, strCustomerPN As String = "", strOurPartNum As String = "", dblQOH As Double = 0, dblPFEP As Double = 0
-        Dim dblBlankRow As Double = 0, strPlant As String = "", intCol As Integer = 1, dblPFEPOrig As Double, _
-            dblForecastQty As Double = 0, dblPFEP_RT As Double = 0, dteForecastDate As Date, _
-            intCustomerID As Integer = 375, dblMonthly As Double = 0, strErrorLog As String = "", intStatus As Integer = 0, dblQOHRem As Double = 0, _
-            intHeaderRow As Integer = 14
+        Dim dblStartRow As Double = 0, strCustomerPN As String = "", strOurPartNum As String = "", dblBlankRow As Double = 0, _
+            strPlant As String = "", intCol As Integer = 1, dblForecastQty As Double = 0, dteForecastDate As Date, _
+            intCustomerID As Integer = 375, dblMonthly As Double = 0, strErrorLog As String = "", intStatus As Integer = 0, intHeaderRow As Integer = 14
 
         'Import Cross Ref
         Import_CrossRef("Heil")
@@ -1250,35 +1248,9 @@ Partial Class Import_PPP
             Else 'This row has a real part number on it
                 dblBlankRow = 0
                 intCol = 1
-                dblPFEP_RT = 0
 
-                'GET CUST PN, QOH
+                'GET CUST PN
                 strCustomerPN = dtForecast.Rows(i)("F30")
-                Try
-                    dblQOH = CDbl(dtForecast.Rows(i)("F20"))
-                Catch ex As Exception
-                    dblQOH = 0
-                End Try
-
-                Try
-                    dblPFEP = CDbl(dtForecast.Rows(i)("F23"))
-                Catch ex As Exception
-                    dblPFEP = 0
-                End Try
-                Try
-                    dblMonthly = CDbl(dtForecast.Rows(i)("F16"))
-                Catch ex As Exception
-                    dblMonthly = 0
-                End Try
-                dblPFEPOrig = dblPFEP
-                If dblQOH >= dblPFEP Then
-                    dblPFEP = 0
-                    dblQOHRem = dblQOH - dblPFEPOrig
-                Else
-                    dblPFEP = dblPFEP - dblQOH
-                    dblQOHRem = 0
-                End If
-
 
                 'CROSS REF
                 For Each row2 As DataRow In dtCrossRef.Rows
@@ -1313,18 +1285,13 @@ Partial Class Import_PPP
 
                     End Try
 
-                    If dblForecastQty > 0 And dblForecastQty > dblQOHRem Then
-                        dblForecastQty = dblForecastQty - dblQOHRem
-                        dblQOHRem = 0
-                        If dblPFEP_RT >= dblPFEP Or dblPFEP = 0 Then
-                        Else
-                            dblForecastQty += Math.Round(dblPFEP / 4)
-                            dblPFEP_RT += Math.Round(dblPFEP / 4)
-                        End If 'PFEP CHECK
+                    dteForecastDate = Today.AddDays(21)
+
+                    If dblForecastQty > 0 Then
 
                         'Create Forecast
                         Try
-                            Create_Forecast(strPlant, strOurPartNum, Today, dblForecastQty, intCustNum)
+                            Create_Forecast(strPlant, strOurPartNum, dteForecastDate, dblForecastQty, intCustNum)
                         Catch ex As Exception
                             If strErrorLog = "" Then
                                 strErrorLog = "The following customer parts had errors:" & vbCrLf
@@ -1332,12 +1299,11 @@ Partial Class Import_PPP
                             strErrorLog &= strCustomerPN & vbCrLf
                         End Try
                     Else
-                        dblQOHRem = dblQOHRem - dblForecastQty
                     End If 'FORECAST > 0
                     intCol += 1
 
                     'GO THROUGH EACH WEEKLY DATE COL
-                    dteForecastDate = Today
+                    dteForecastDate = Today.AddDays(21)
                     If Weekday(dteForecastDate) = 2 Then
                         dteForecastDate = dteForecastDate.AddDays(7)
                     Else
@@ -1350,15 +1316,7 @@ Partial Class Import_PPP
                             dblForecastQty = 0
                         End Try
 
-                        If dblForecastQty > 0 And dblForecastQty > dblQOHRem Then
-                            dblForecastQty = dblForecastQty - dblQOHRem
-                            dblQOHRem = 0
-                            If dblPFEP_RT >= dblPFEP Or dblPFEP = 0 Then
-
-                            Else
-                                dblForecastQty += Math.Round(dblPFEP / 4)
-                                dblPFEP_RT += Math.Round(dblPFEP / 4)
-                            End If 'PFEP CHECK
+                        If dblForecastQty > 0 Then
 
                             'Create Forecast
                             Try
@@ -1370,9 +1328,7 @@ Partial Class Import_PPP
                                 strErrorLog &= strCustomerPN & vbCrLf
                             End Try
                         Else
-                            dblQOHRem = dblQOHRem - dblForecastQty
                         End If 'FORECAST > 0
-
                         dteForecastDate = dteForecastDate.AddDays(7)
                     Next
 
@@ -1392,15 +1348,10 @@ Partial Class Import_PPP
                                     dblForecastQty += Math.Round(dtForecast.Rows(i)("F" & intMyMonth) / 4, 0)
                                     Exit Do
                                 End If 'if numeric
-
-
                             End If 'if month
 
                             intMyMonth += 1
                         Loop
-
-
-
 
                         If dblForecastQty < 1 Then
                         Else
@@ -1419,7 +1370,6 @@ Partial Class Import_PPP
                                 strErrorLog &= strCustomerPN & vbCrLf
                             End Try
                         End If
-
                         dteForecastDate = dteForecastDate.AddDays(7)
                     Loop
 
