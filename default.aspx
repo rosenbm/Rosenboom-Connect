@@ -16,8 +16,8 @@
 
       
     <div class="fl_left">
-      <h2><%Response.WriteFile("\\pithos\company\Service Connect\Rosenboom Connect\Text Files\Default Page\Main Title.txt")%></h2>
-      <p><%Response.WriteFile("\\pithos\company\Service Connect\Rosenboom Connect\Text Files\Default Page\Main Subtext.txt")%></p>
+      <h2></h2>
+      <p></p>
       <p class="readmore"><a href="#">Learn More</a></p>
     </div>
     <div class="fl_right"><img src="images/main.jpg" alt="" /></div>
