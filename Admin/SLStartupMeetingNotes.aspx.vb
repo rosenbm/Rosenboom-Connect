@@ -7,6 +7,7 @@ Imports System.Xml
 Imports System.IO
 Imports System.Text
 Imports System.Data
+Imports System.Data.Odbc
 
 Partial Class MES_NEW_IssueMaterial
     Inherits System.Web.UI.Page
@@ -21,29 +22,54 @@ Partial Class MES_NEW_IssueMaterial
 
 
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        'CHECK THE LENGTH
-        If txtNotes.Text.Length > 470 Then
-            lblMessage.Text = "Your notes are too long. Please reduce to 470 characters."
-        Else
-            'UPDATE NOTES
-            Dim MyNotes As New IO.StreamWriter("\\pithos\company\Startup Meeting Notes\" & DropDownList1.SelectedValue.ToString & ".txt", False, Encoding.ASCII)
-            MyNotes.WriteLine(txtNotes.Text.Replace("'", ""))
-            MyNotes.Close()
-            MyNotes.Dispose()
 
-            lblMessage.Text = "Update Complete!"
-            txtNotes.Text = ""
-        End If
+        'UPDATE NOTES
+        Update_Database("UPDATE Rosenboom.dbo.StartupBlog SET Message='" & txtNotes.Text.ToString & "' WHERE Department='" & DropDownList1.SelectedValue.ToString & "' AND Plant='SPIRITLA'")
+
+        lblMessage.Text = "Update Complete!"
+        txtNotes.Text = ""
+
     End Sub
 
     Protected Sub btnLoadCurrent_Click(sender As Object, e As EventArgs) Handles btnLoadCurrent.Click
-        Dim txtFile As New IO.StreamReader("\\pithos\company\Startup Meeting Notes\" & DropDownList1.SelectedValue.ToString & ".txt")
-        txtNotes.Text = txtFile.ReadToEnd
-        txtFile.Close()
-        lblMessage.Text = ""
+        
+        Dim dv As DataView = DirectCast(Notes.Select(DataSourceSelectArguments.Empty), DataView)
+        For Each drv As DataRowView In dv
+            txtNotes.Text = drv("Message").ToString()
+        Next
+
     End Sub
 
     Protected Sub btnCharCount_Click(sender As Object, e As EventArgs) Handles btnCharCount.Click
         txtCharCount.Text = txtNotes.Text.Length
+    End Sub
+    Protected Sub Update_Database(ByVal Query As String)
+        Dim cn As OdbcConnection, cmd As OdbcCommand
+
+        'Set cn
+        cn = New OdbcConnection("DSN=Rosenboom;Driver={SQL Server};Server=olympus;Database=Rosenboom;Uid=ERP10;Pwd=ERP10;")
+
+        'Open Connection
+        cn.Open()
+
+        cmd = New OdbcCommand
+
+        Try
+            With cmd
+                .CommandText = Query
+                .CommandType = CommandType.Text
+                .Connection = cn
+            End With
+
+            cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            cn.Close()
+        End Try
+    End Sub
+
+    Protected Sub DropDownList1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DropDownList1.SelectedIndexChanged
+        txtNotes.Text = DropDownList1.SelectedValue.ToString
     End Sub
 End Class

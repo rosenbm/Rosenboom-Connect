@@ -11,7 +11,7 @@
     <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label><br />
                 <br />
               
-    <asp:DropDownList ID="DropDownList1" runat="server">
+    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="DeptList" DataTextField="Label" DataValueField="Department">
         <asp:ListItem>CI</asp:ListItem>
         <asp:ListItem Value="SL CS">Customer Service</asp:ListItem>
         <asp:ListItem Value="HR">Human Resources</asp:ListItem>
@@ -31,9 +31,15 @@
             <asp:TextBox ID="txtNotes" runat="server" MaxLength="450" Height="200px" Width="300px" TextMode="MultiLine"></asp:TextBox><br /><br />
             <asp:Button ID="btnUpdate" runat="server" Text="Update" />&nbsp
     <asp:Button ID="btnLoadCurrent" runat="server" Text="Load Current" />&nbsp
-    <asp:Button ID="btnCharCount" runat="server" Text="Character Count" /><asp:TextBox ID="txtCharCount" runat="server" Enabled="false"></asp:TextBox>
+    <asp:Button ID="btnCharCount" runat="server" Text="Character Count" Visible="False" /><asp:TextBox ID="txtCharCount" runat="server" Enabled="false" Visible="False"></asp:TextBox>
             </div>
             </div>
            
-    
+    <asp:SqlDataSource ID="DeptList" runat="server" ConnectionString="<%$ ConnectionStrings:RosenboomConnectionString %>" SelectCommand="SELECT [Department], [Label] FROM [StartupBlog]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="Notes" runat="server" ConnectionString="<%$ ConnectionStrings:RosenboomConnectionString %>" SelectCommand="SELECT [Message] FROM [StartupBlog] WHERE ([Department] = @Department)">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="DropDownList1" Name="Department" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
 </asp:Content>
