@@ -24,9 +24,11 @@ Partial Class MES_NEW_IssueMaterial
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
         'UPDATE NOTES
-        Update_Database("UPDATE Rosenboom.dbo.StartupBlog SET Message='" & txtNotes.Text.ToString & "' WHERE Department='" & DropDownList1.SelectedValue.ToString & "' AND Plant='SPIRITLA'")
+        Update_Database("UPDATE Rosenboom.dbo.StartupBlog SET Message='" & Replace(txtNotes.Text.ToString, "'", "") & "' WHERE Department='" & DropDownList1.SelectedValue.ToString & "' AND Plant='SPIRITLA'")
 
-        lblMessage.Text = "Update Complete!"
+        If lblMessage.Text = "" Then
+            lblMessage.Text = "Update Complete!"
+        End If
         txtNotes.Text = ""
 
     End Sub
@@ -62,8 +64,10 @@ Partial Class MES_NEW_IssueMaterial
             End With
 
             cmd.ExecuteNonQuery()
+            lblMessage.Text = ""
         Catch ex As Exception
-            MsgBox(ex.Message)
+            'MsgBox(ex.Message)
+            lblMessage.Text = ex.Message
         Finally
             cn.Close()
         End Try
